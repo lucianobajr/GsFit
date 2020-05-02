@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gsfit/view/adoption_screen.dart';
+import 'package:gsfit/view/main_screen.dart';
 
-class AnimalDetailScreen extends StatelessWidget {
-  final Animal animal;
+class PeopleDetailScreen extends StatelessWidget {
+  final People people;
 
-  AnimalDetailScreen({@required this.animal});
+  PeopleDetailScreen({@required this.people});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class AnimalDetailScreen extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     height: screenHeight * 0.5,
-                    color: animal.backgroungColor,
+                    color:  Color(0xffa54657),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 60.0),
@@ -55,9 +55,9 @@ class AnimalDetailScreen extends StatelessWidget {
                   Container(
                     height: screenHeight * 0.35,
                     child: Hero(
-                      tag: animal.name,
+                      tag: people.name,
                       child: Image(
-                        image: AssetImage(animal.imageUrl),
+                        image: AssetImage(people.imageUrl),
                         fit: BoxFit.fitHeight,
                       ),
                     ),
@@ -205,13 +205,13 @@ class AnimalDetailScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        Text(animal.name,
+                        Text(people.name,
                             style: TextStyle(
                                 fontSize: 26.0,
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold)),
                         Icon(
-                          animal.isFemale
+                          people.isFemale
                               ? FontAwesomeIcons.venus
                               : FontAwesomeIcons.mars,
                           color: Colors.grey,
@@ -225,12 +225,7 @@ class AnimalDetailScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text(animal.scientificName,
-                            style: TextStyle(
-                                fontSize: 16.0,
-                                color: Theme.of(context).primaryColor,
-                                fontWeight: FontWeight.w500)),
-                        Text('${animal.age} years old',
+                        Text('${people.age} years old',
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w600)),

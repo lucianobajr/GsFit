@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gsfit/view/appointments.dart';
 import 'package:gsfit/view/new_client.dart';
 import 'package:gsfit/view/menu_screen.dart';
-import 'adoption_screen.dart';
+import 'main_screen.dart';
 
 class MenuFrame extends StatefulWidget {
   @override
@@ -39,7 +39,7 @@ class _MenuFrameState extends State<MenuFrame>
 
 
   Map<int, Widget> screens = {
-    0: AdoptionScreen(
+    0: MainScreen(
       menuCallback: () {},
     ),
     1: NewClient(

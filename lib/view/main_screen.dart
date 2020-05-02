@@ -1,74 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gsfit/main.dart';
-import 'package:gsfit/view/animal_detail_screen.dart';
+import 'package:gsfit/view/person_detail_screen.dart';
 
-class Animal {
+class People {
   String name;
-  String scientificName;
-  double age;
-  String distanceToUser;
+  int age;
+  String adress;
   bool isFemale;
   String imageUrl;
   Color backgroungColor;
 
-  Animal(
+  People(
       {this.name,
-      this.scientificName,
       this.age,
-      this.distanceToUser,
+      this.adress,
       this.isFemale,
       this.imageUrl,
       this.backgroungColor});
 }
 
-class AdoptionScreen extends StatefulWidget {
+class MainScreen extends StatefulWidget {
   final Function menuCallback;
-  AdoptionScreen({@required this.menuCallback});
+  MainScreen({@required this.menuCallback});
 
   @override
-  _AdoptionScreenState createState() => _AdoptionScreenState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _AdoptionScreenState extends State<AdoptionScreen> {
-  int selectAnimalIconIndex = 0;
+class _MainScreenState extends State<MainScreen> {
+  int selectPeopleIconIndex = 0;
 
-  final List<Animal> man = [
-      Animal(
+  final List<People> man = [
+    People(
       name: 'Guilherme',
-      scientificName: 'Abyssinian cat',
       age: 19,
-      distanceToUser: '7.8 km',
+      adress: '7.8 km',
       isFemale: false,
       imageUrl: 'assets/gato2.png',
-      backgroungColor: mainColor.withOpacity(0.5),
+      backgroungColor: Color(0xffa54657),
     ),
-        Animal(
+    People(
       name: 'Bordoni',
-      scientificName: 'Abyssinian cat',
       age: 20,
-      distanceToUser: '20 km',
+      adress: '20 km',
       isFemale: false,
       imageUrl: 'assets/gato2.png',
       backgroungColor: Color.fromRGBO(237, 213, 216, 1.0),
     ),
   ];
 
-  final List<Animal> animals = [
-    Animal(
+  final List<People> woman = [
+    People(
       name: 'Sola',
-      scientificName: 'Abyssinian cat',
-      age: 2.0,
-      distanceToUser: '3.6 km',
+      age: 20,
+      adress: '3.6 km',
       isFemale: true,
       imageUrl: 'assets/gato1.png',
       backgroungColor: Color.fromRGBO(203, 213, 216, 1.0),
     ),
-    Animal(
+    People(
       name: 'Sola',
-      scientificName: 'Abyssinian cat',
-      age: 2.0,
-      distanceToUser: '3.6 km',
+      age: 20,
+      adress: '3.6 km',
       isFemale: true,
       imageUrl: 'assets/gato1.png',
       backgroungColor: Color.fromRGBO(203, 213, 216, 1.0),
@@ -87,17 +80,17 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
 
   Widget buildPeopleIcon(int index) {
     return Padding(
-      padding: const EdgeInsets.only(left:60.0,right: 30.0),
+      padding: const EdgeInsets.only(left: 60.0, right: 30.0),
       child: Column(
         children: <Widget>[
           InkWell(
             onTap: () {
               setState(() {
-                selectAnimalIconIndex = index;
+                selectPeopleIconIndex = index;
               });
             },
             child: Material(
-              color: selectAnimalIconIndex == index
+              color: selectPeopleIconIndex == index
                   ? Theme.of(context).primaryColor
                   : Colors.white,
               elevation: 8.0,
@@ -107,7 +100,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                 child: Icon(
                   peopleIcons[index],
                   size: 30.0,
-                  color: selectAnimalIconIndex == index
+                  color: selectPeopleIconIndex == index
                       ? Colors.white
                       : Theme.of(context).primaryColor,
                 ),
@@ -145,21 +138,21 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   //InkWell(
-                    /*child:*/ Icon(
-                      FontAwesomeIcons.bars,
-                    ),
-                    //onTap: widget.menuCallback,
+                  /*child:*/ Icon(
+                    FontAwesomeIcons.bars,
+                  ),
+                  //onTap: widget.menuCallback,
                   //),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical:15.0),
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
                     child: Column(
                       children: <Widget>[
-                         Text(
+                        Text(
                           'Studio GS Fit',
                           style: TextStyle(
                             fontFamily: 'Ultra',
                             fontSize: 25.0,
-                            color:Colors.black,
+                            color: Colors.black,
                           ),
                         ),
                         SizedBox(
@@ -192,11 +185,8 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                       ],
                     ),
                   ),
-                  Icon(
-                    FontAwesomeIcons.dumbbell,
-                    size: 40,
-                    color: Theme.of(context).primaryColor
-                  )
+                  Icon(FontAwesomeIcons.dumbbell,
+                      size: 40, color: Theme.of(context).primaryColor)
                 ],
               ),
             ),
@@ -220,8 +210,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                           padding: EdgeInsets.symmetric(horizontal: 12.0),
                           child: Row(
                             children: <Widget>[
-                              Icon(FontAwesomeIcons.search,
-                                  color: Colors.grey),
+                              Icon(FontAwesomeIcons.search, color: Colors.grey),
                               Expanded(
                                 child: TextField(
                                   style: TextStyle(fontSize: 18.0),
@@ -231,8 +220,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                       hintText: 'Digite o nome de um Aluno'),
                                 ),
                               ),
-                              Icon(FontAwesomeIcons.filter,
-                                  color: Colors.grey),
+                              Icon(FontAwesomeIcons.filter, color: Colors.grey),
                             ],
                           ),
                         ),
@@ -250,15 +238,20 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                       Expanded(
                         child: ListView.builder(
                             padding: EdgeInsets.only(top: 10.0),
-                            itemCount: selectAnimalIconIndex == 1 ? animals.length : man.length,
+                            itemCount: selectPeopleIconIndex == 1
+                                ? woman.length
+                                : man.length,
                             itemBuilder: (context, index) {
-                              final animal = selectAnimalIconIndex == 1 ? animals[index] : man[index];
+                              final people = selectPeopleIconIndex == 1
+                                  ? woman[index]
+                                  : man[index];
 
                               return GestureDetector(
                                 onTap: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return AnimalDetailScreen(animal: animal);
+                                    return PeopleDetailScreen(
+                                        people: people); //mudar
                                   }));
                                 },
                                 child: Padding(
@@ -273,12 +266,10 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                         elevation: 4.0,
                                         child: Padding(
                                           padding: EdgeInsets.symmetric(
-                                              horizontal: 20.0,
-                                              vertical: 20.0),
+                                              horizontal: 20.0, vertical: 20.0),
                                           child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceBetween,
+                                                MainAxisAlignment.spaceBetween,
                                             children: <Widget>[
                                               SizedBox(
                                                 width: deviceWidth * 0.4,
@@ -286,8 +277,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                               Flexible(
                                                 child: Column(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
+                                                      CrossAxisAlignment.start,
                                                   children: <Widget>[
                                                     Row(
                                                       mainAxisAlignment:
@@ -296,10 +286,9 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                                       mainAxisSize:
                                                           MainAxisSize.max,
                                                       children: <Widget>[
-                                                        Text(animal.name,
+                                                        Text(people.name,
                                                             style: TextStyle(
-                                                                fontSize:
-                                                                    26.0,
+                                                                fontSize: 26.0,
                                                                 color: Theme.of(
                                                                         context)
                                                                     .primaryColor,
@@ -307,7 +296,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                                                     FontWeight
                                                                         .bold)),
                                                         Icon(
-                                                          animal.isFemale
+                                                          people.isFemale
                                                               ? FontAwesomeIcons
                                                                   .venus
                                                               : FontAwesomeIcons
@@ -323,10 +312,9 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                        '${animal.age} years old',
+                                                        '${people.age} anos',
                                                         style: TextStyle(
-                                                            color:
-                                                                Colors.grey,
+                                                            color: Colors.grey,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w600)),
@@ -338,19 +326,18 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                                         Icon(
                                                           FontAwesomeIcons
                                                               .mapMarkerAlt,
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .primaryColor,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .primaryColor,
                                                           size: 16.0,
                                                         ),
                                                         SizedBox(
                                                           width: 6.0,
                                                         ),
                                                         Text(
-                                                            'Distance: ${animal.distanceToUser}',
+                                                            'Endereço: ${people.adress}',
                                                             style: TextStyle(
-                                                                fontSize:
-                                                                    16.0,
+                                                                fontSize: 16.0,
                                                                 color: Theme.of(
                                                                         context)
                                                                     .primaryColor,
@@ -370,7 +357,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                         children: <Widget>[
                                           Container(
                                             decoration: BoxDecoration(
-                                                color: animal.backgroungColor,
+                                                color:  Color(0xffa54657),
                                                 borderRadius:
                                                     BorderRadius.circular(
                                                         20.0)),
@@ -378,8 +365,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                                             width: deviceWidth * 0.4,
                                           ),
                                           Image(
-                                            image:
-                                                AssetImage(animal.imageUrl),
+                                            image: AssetImage(people.imageUrl),
                                             height: 220.0,
                                             width: deviceWidth * 0.4,
                                           )

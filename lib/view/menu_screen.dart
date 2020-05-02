@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../main.dart';
 
 class MenuScreen extends StatefulWidget {
   final Function(int) menuCallback;
@@ -36,8 +35,8 @@ class _MenuScreenState extends State<MenuScreen> {
             Icon(icons[index],
                 size: 30,
                 color: selectedMenuIndex == index
-                    ? mainColor
-                    : mainColor.withOpacity(0.65)),
+                    ? Colors.black //mainColor
+                    : Colors.black.withOpacity(0.65)), //mainColor.withOpacity(0.65)),
             SizedBox(
               width: 16.0,
             ),
@@ -45,8 +44,8 @@ class _MenuScreenState extends State<MenuScreen> {
               menuItems[index],
               style: TextStyle(
                   color: selectedMenuIndex == index
-                      ? mainColor
-                      : mainColor.withOpacity(0.65),
+                      ? Colors.black//mainColor
+                      : Colors.black.withOpacity(0.65),//mainColor.withOpacity(0.65),
                   fontSize: 20.0,
                   fontFamily: 'RobotoMono',
                   fontWeight: FontWeight.bold),
@@ -88,14 +87,14 @@ class _MenuScreenState extends State<MenuScreen> {
                 Row(
                   children: <Widget>[
                     Icon(FontAwesomeIcons.cog,
-                        color:mainColor.withOpacity(0.65)),
+                        color:Colors.black.withOpacity(0.65)),
                     SizedBox(
                       width: 16.0,
                     ),
                     Text(
                       'Settings   |   Log out',
                       style: TextStyle(
-                          color: mainColor.withOpacity(0.65),
+                          color: Colors.black.withOpacity(0.65),
                           fontSize: 20.0,
                           fontWeight: FontWeight.w600),
                     )
