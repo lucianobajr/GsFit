@@ -36,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
       age: 19,
       adress: '7.8 km',
       isFemale: false,
-      imageUrl: 'assets/gato2.png',
+      imageUrl:'assets/images/adolescence-male.png',
       backgroungColor: Color(0xffa54657),
     ),
     People(
@@ -44,7 +44,7 @@ class _MainScreenState extends State<MainScreen> {
       age: 20,
       adress: '20 km',
       isFemale: false,
-      imageUrl: 'assets/gato2.png',
+      imageUrl: 'assets/images/adult-male.png',
       backgroungColor: Color.fromRGBO(237, 213, 216, 1.0),
     ),
   ];
@@ -55,7 +55,7 @@ class _MainScreenState extends State<MainScreen> {
       age: 20,
       adress: '3.6 km',
       isFemale: true,
-      imageUrl: 'assets/gato1.png',
+      imageUrl: 'assets/images/adolescence-female.png',
       backgroungColor: Color.fromRGBO(203, 213, 216, 1.0),
     ),
     People(
@@ -63,7 +63,7 @@ class _MainScreenState extends State<MainScreen> {
       age: 20,
       adress: '3.6 km',
       isFemale: true,
-      imageUrl: 'assets/gato1.png',
+      imageUrl: 'assets/images/adult-female.png',
       backgroungColor: Color.fromRGBO(203, 213, 216, 1.0),
     ),
   ];

@@ -25,6 +25,9 @@ dependencies:
   cupertino_icons: ^0.1.2
   font_awesome_flutter: ^8.8.1
   shimmer: ^1.1.1
+  sqflite: any
+  path_provider: ^0.4.1
+  intl: ^0.15.7
 
 dev_dependencies:
   flutter_test:
@@ -45,6 +48,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - assets/
+   - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
