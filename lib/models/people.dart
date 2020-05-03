@@ -12,34 +12,7 @@ class People {
 
   People(this._name, this._age, this._adress, this._isFemale, this._imageUrl,this._id);
 
-  String url(int _age) {
-    String base = 'assets/images';
-
-    if (this._age < 12) {
-      //child
-      base = base + 'child-';
-    } else if (this._age >= 12 && this._age < 20) {
-      //adolescence
-      base = base + 'adolescence-';
-    } else if (this._age >= 20 && this._age < 35) {
-      //adult
-      base = base + 'adult-';
-    } else if (this._age >= 35 && this._age < 50) {
-      //mildlife
-      base = base + 'mildlife-';
-    } else {
-      //mature
-      base = base + 'mature-';
-    }
-
-    if (_isFemale) {
-      base = base + 'female.png';
-    } else {
-      base = base + 'male.png';
-    }
-
-    return base;
-  }
+ 
 
   People.map(dynamic obj) {
     this._name = obj["nome"];
@@ -63,7 +36,7 @@ class People {
     map["idade"] = _age;
     map["Endereço"] = _adress;
     map["Sexo"] = _isFemale;
-    map["Imagem"] = url(_age);
+    map["Imagem"] = imageUrl;
     if (_id != null) {
       map["id"] = _id;
     }
