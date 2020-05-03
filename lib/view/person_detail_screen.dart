@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsfit/view/main_screen.dart';
 
 class PeopleDetailScreen extends StatelessWidget {
-  final People people;
+  final Peoples people;
 
   PeopleDetailScreen({@required this.people});
 

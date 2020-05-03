@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gsfit/view/afazeres_tela.dart';
 import 'package:gsfit/view/appointments.dart';
 import 'package:gsfit/view/new_client.dart';
 import 'package:gsfit/view/menu_screen.dart';
@@ -45,9 +46,10 @@ class _MenuFrameState extends State<MenuFrame>
     1: NewClient(
       menuCallback: () {},
     ),
-    2: Appointment(
+    2: AfazeresTela(),
+    3:Appointment(
       menuCallback: () {},
-    ),
+    )
   };
 
   List<Widget> screenSnapShopt;
@@ -83,7 +85,7 @@ class _MenuFrameState extends State<MenuFrame>
       top: 0,
       bottom: 0,
       left: menuOpen ? deviceWith * 0.55 - (position * 20) : 0.0,
-      right: menuOpen ? deviceWith * -0.45 + (position * 30): 0.0,
+      right: menuOpen ? deviceWith * -0.45 - (position * 60): 0.0,
       child: ScaleTransition(
         scale: scaleAnimation,
         child: GestureDetector(

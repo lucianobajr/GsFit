@@ -10,7 +10,7 @@ class People {
   String _imageUrl;
   int _id;
 
-  People(this._name, this._age, this._adress, this._isFemale, this._imageUrl,this._id);
+  People(this._name, this._age, this._adress, this._isFemale, this._imageUrl);
 
  
 

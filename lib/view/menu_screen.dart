@@ -12,12 +12,13 @@ class MenuScreen extends StatefulWidget {
 class _MenuScreenState extends State<MenuScreen> {
   int selectedMenuIndex = 0;
 
-  List<String> menuItems = ['Alunos', 'Novo Aluno', 'Compromissos'];
+  List<String> menuItems = ['Alunos', 'Novo Aluno', 'Compromissos','Teste'];
 
   List<IconData> icons = [
     FontAwesomeIcons.walking,
     FontAwesomeIcons.pen,
     FontAwesomeIcons.calendarCheck,
+    FontAwesomeIcons.grimace,
   ];
 
   Widget buildMenuRow(int index) {

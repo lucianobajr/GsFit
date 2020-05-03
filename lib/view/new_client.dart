@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-//import 'package:gsfit/models/people.dart';
+import 'package:gsfit/models/people.dart';
 import 'package:gsfit/database/config.dart';
 
 class NewClient extends StatefulWidget {
@@ -20,7 +20,7 @@ class _NewClientState extends State<NewClient> {
   String teste;
 
   var db = new DbHelper();
-  //final List<People> _peopleList = <People>[];
+  List<People> _peopleList = <People>[];
 
   @override
   void initState() {
@@ -274,8 +274,9 @@ class _NewClientState extends State<NewClient> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(20.0),
                                           child: Icon(
-                                            FontAwesomeIcons.heart,
+                                            FontAwesomeIcons.child,
                                             color: Colors.white,
+                                            size: 25,
                                           ),
                                         ),
                                       ),
@@ -304,7 +305,10 @@ class _NewClientState extends State<NewClient> {
                                               ),
                                             ),
                                           ),
-                                          onTap: () => seeInfos(),
+                                          onTap: () {
+
+                                            print('ok');
+                                          },
                                         ),
                                       ),
                                     ],
@@ -319,12 +323,6 @@ class _NewClientState extends State<NewClient> {
                     ),
                   )))
         ]));
-  }
-
-  void seeInfos() {
-    teste = url(int.parse(this._age.text), selectPeopleIconIndex);
-    print(_age.text);
-    print(teste);
   }
 
   String url(int _age, int index) {
@@ -356,5 +354,31 @@ class _NewClientState extends State<NewClient> {
       base = base + 'male.png';
     }
     return base;
+  }
+
+  void _insetPeople(String name, int age, String adress, int sex) async {
+    _name.clear();
+    _age.clear();
+    _adress.clear();
+    selectPeopleIconIndex = null;
+    bool sexo;
+    if (sex == 0) {
+      sexo = false;
+    } else {
+      sexo = true;
+    }
+
+    String url = this.url(int.parse(_age.text), selectPeopleIconIndex);
+
+
+    People newPerson = new People(name, age, adress, sexo, url);
+
+    int salvoId = await db.savePeople(newPerson);
+
+    People personSave = await db.recoverPerson(salvoId);
+
+    setState(() {
+      _peopleList.insert(0, personSave);
+    });
   }
 }

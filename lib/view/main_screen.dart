@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsfit/view/person_detail_screen.dart';
 
-class People {
+class Peoples {
   String name;
   int age;
   String adress;
@@ -10,7 +10,7 @@ class People {
   String imageUrl;
   Color backgroungColor;
 
-  People(
+  Peoples(
       {this.name,
       this.age,
       this.adress,
@@ -28,10 +28,10 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int selectPeopleIconIndex = 0;
+  int selectPeoplesIconIndex = 0;
 
-  final List<People> man = [
-    People(
+  final List<Peoples> man = [
+    Peoples(
       name: 'Guilherme',
       age: 19,
       adress: '7.8 km',
@@ -39,7 +39,7 @@ class _MainScreenState extends State<MainScreen> {
       imageUrl:'assets/images/adolescence-male.png',
       backgroungColor: Color(0xffa54657),
     ),
-    People(
+    Peoples(
       name: 'Bordoni',
       age: 20,
       adress: '20 km',
@@ -49,8 +49,8 @@ class _MainScreenState extends State<MainScreen> {
     ),
   ];
 
-  final List<People> woman = [
-    People(
+  final List<Peoples> woman = [
+    Peoples(
       name: 'Sola',
       age: 20,
       adress: '3.6 km',
@@ -58,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
       imageUrl: 'assets/images/adolescence-female.png',
       backgroungColor: Color.fromRGBO(203, 213, 216, 1.0),
     ),
-    People(
+    Peoples(
       name: 'Sola',
       age: 20,
       adress: '3.6 km',
@@ -68,7 +68,7 @@ class _MainScreenState extends State<MainScreen> {
     ),
   ];
 
-  List<String> peopleList = [
+  List<String> peoplesList = [
     'Homens',
     'Mulheres',
   ];
@@ -86,11 +86,11 @@ class _MainScreenState extends State<MainScreen> {
           InkWell(
             onTap: () {
               setState(() {
-                selectPeopleIconIndex = index;
+                selectPeoplesIconIndex = index;
               });
             },
             child: Material(
-              color: selectPeopleIconIndex == index
+              color: selectPeoplesIconIndex == index
                   ? Theme.of(context).primaryColor
                   : Colors.white,
               elevation: 8.0,
@@ -100,7 +100,7 @@ class _MainScreenState extends State<MainScreen> {
                 child: Icon(
                   peopleIcons[index],
                   size: 30.0,
-                  color: selectPeopleIconIndex == index
+                  color: selectPeoplesIconIndex == index
                       ? Colors.white
                       : Theme.of(context).primaryColor,
                 ),
@@ -111,7 +111,7 @@ class _MainScreenState extends State<MainScreen> {
             height: 12.0,
           ),
           Text(
-            peopleList[index],
+            peoplesList[index],
             style: TextStyle(
               color: Theme.of(context).primaryColor,
               fontSize: 16.0,
@@ -230,7 +230,7 @@ class _MainScreenState extends State<MainScreen> {
                         child: ListView.builder(
                             padding: EdgeInsets.only(left: 24.0, top: 8.0),
                             scrollDirection: Axis.horizontal,
-                            itemCount: peopleList.length,
+                            itemCount: peoplesList.length,
                             itemBuilder: (context, index) {
                               return buildPeopleIcon(index);
                             }),
@@ -238,11 +238,11 @@ class _MainScreenState extends State<MainScreen> {
                       Expanded(
                         child: ListView.builder(
                             padding: EdgeInsets.only(top: 10.0),
-                            itemCount: selectPeopleIconIndex == 1
+                            itemCount: selectPeoplesIconIndex == 1
                                 ? woman.length
                                 : man.length,
                             itemBuilder: (context, index) {
-                              final people = selectPeopleIconIndex == 1
+                              final people = selectPeoplesIconIndex == 1
                                   ? woman[index]
                                   : man[index];
 
