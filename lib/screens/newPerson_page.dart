@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsfit/models/employee.dart';
 import 'package:gsfit/database/dbhelper.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
+import 'package:status_alert/status_alert.dart';
 
 
 var parser = EmojiParser();
@@ -21,6 +22,7 @@ class _NewPersonPageState extends State<NewPersonPage> {
   String firstname;
   String age;
   String adress;
+  
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
 
@@ -160,7 +162,7 @@ class _NewPersonPageState extends State<NewPersonPage> {
                                             BorderSide(color: Colors.black),
                                         borderRadius:
                                             BorderRadius.circular(20.0)),
-                                    labelText: 'Primeiro Name',
+                                    labelText: 'Primeiro Nome',
                                     labelStyle: TextStyle(
                                         color: Theme.of(context).primaryColor),
                                     icon: Icon(
@@ -180,7 +182,7 @@ class _NewPersonPageState extends State<NewPersonPage> {
                               SizedBox(height: 10),
                               TextFormField(
                                 autofocus: false,
-                                keyboardType: TextInputType.text,
+                                keyboardType: TextInputType.number,
                                 cursorColor: Theme.of(context).primaryColor,
                                 style: TextStyle(
                                   color: Colors.black,
@@ -252,8 +254,11 @@ class _NewPersonPageState extends State<NewPersonPage> {
                                     : null,
                                 onSaved: (val) => this.adress = val,
                               ),
+                                SizedBox(
+                                height: 10,
+                              ),
                               SizedBox(
-                                height: 35,
+                                height: 30,
                               ),
                               Container(
                                 height: 120.0,
@@ -351,5 +356,13 @@ class _NewPersonPageState extends State<NewPersonPage> {
     );
     var dbHelper = DBHelper();
     dbHelper.saveEmployee(employee);
+
+    StatusAlert.show(
+      context,
+      duration: Duration(seconds: 1),
+      title: 'Salvo',
+      subtitle: 'Aluno Cadastrado Com Sucesso',
+      configuration: IconConfiguration(icon: FontAwesomeIcons.check),
+    );
   }
 }

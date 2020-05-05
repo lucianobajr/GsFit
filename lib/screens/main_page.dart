@@ -17,7 +17,8 @@ Future<List<Employee>> fetchEmployeesFemaleFromDatabase() async {
   Future<List<Employee>> female = dbHelper.getFemale();
   return female;
 }
- class MainPage extends KFDrawerContent {
+
+class MainPage extends KFDrawerContent {
   MainPage({
     Key key,
   });
@@ -173,17 +174,26 @@ class _MainPageState extends State<MainPage> {
                           padding: EdgeInsets.symmetric(horizontal: 12.0),
                           child: Row(
                             children: <Widget>[
-                              Icon(FontAwesomeIcons.search, color: Colors.grey),
+                              Icon(FontAwesomeIcons.search,
+                                  color: Colors.black.withOpacity(0.7)),
                               Expanded(
                                 child: TextField(
-                                  style: TextStyle(fontSize: 18.0),
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Colors.black,
+                                    fontFamily: 'RobotoMonoLight',
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                           borderSide: BorderSide.none),
-                                      hintText: 'Digite o nome de um Aluno'),
+                                      hintText: 'Digite o nome de um Aluno',
+                                      hintStyle: TextStyle(
+                                          fontFamily: 'RobotoMonoLigh')),
                                 ),
                               ),
-                              Icon(FontAwesomeIcons.filter, color: Colors.grey),
+                              Icon(FontAwesomeIcons.filter,
+                                  color: Colors.black.withOpacity(0.7)),
                             ],
                           ),
                         ),
@@ -256,18 +266,19 @@ class _MainPageState extends State<MainPage> {
                                                                       .max,
                                                               children: <
                                                                   Widget>[
-                                                                Text(
-                                                                    snapshot
-                                                                        .data[
-                                                                            index]
-                                                                        .firstName,
+                                                                Text(snapshot.data[index].firstName,
                                                                     style: TextStyle(
-                                                                        fontSize:
-                                                                            26.0,
+                                                                        fontSize: snapshot.data[index].firstName.length <
+                                                                                12
+                                                                            ? 25.0
+                                                                            : 18.0,
                                                                         color: Theme.of(context)
                                                                             .primaryColor,
                                                                         fontWeight:
-                                                                            FontWeight.bold)),
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontFamily:
+                                                                            'Lobster')),
                                                                 Icon(
                                                                   int.parse(snapshot
                                                                               .data[
@@ -279,26 +290,27 @@ class _MainPageState extends State<MainPage> {
                                                                       : FontAwesomeIcons
                                                                           .mars,
                                                                   color: Colors
-                                                                      .grey,
+                                                                      .black
+                                                                      .withOpacity(
+                                                                          0.7),
                                                                 )
                                                               ],
                                                             ),
                                                             SizedBox(
-                                                              width: 10.0,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 10.0,
+                                                              width: 20.0,
+                                                              height: 10,
                                                             ),
                                                             Text(
                                                                 '${snapshot.data[index].age} anos',
                                                                 style: TextStyle(
                                                                     color: Colors
-                                                                        .grey,
+                                                                        .black,
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .w600)),
+                                                                            .w400)),
                                                             SizedBox(
                                                               width: 10.0,
+                                                              height: 10,
                                                             ),
                                                             Row(
                                                               children: <
@@ -315,12 +327,12 @@ class _MainPageState extends State<MainPage> {
                                                                   width: 6.0,
                                                                 ),
                                                                 Text(
-                                                                    '${snapshot.data[index].adress}',
+                                                                    'Endereço', //${snapshot.data[index].adress}
                                                                     style: TextStyle(
                                                                         fontSize:
-                                                                            10.0,
-                                                                        color: Theme.of(context)
-                                                                            .primaryColor,
+                                                                            15,
+                                                                        color: Colors
+                                                                            .black,
                                                                         fontWeight:
                                                                             FontWeight.w400)),
                                                               ],

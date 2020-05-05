@@ -52,14 +52,14 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
         KFDrawerItem.initWithPage(
           text: Text('Alunos',
               style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20.0,
-                  fontFamily: 'RobotoMono',
-                  fontWeight: FontWeight.bold)),
+                color: Colors.black.withOpacity(0.85),
+                fontSize: 29.0,
+                fontFamily: 'Lobster',
+              )),
           icon: Icon(
             FontAwesomeIcons.walking,
-            color: Colors.black,
-            size: 40,
+            color: Colors.black.withOpacity(0.85),
+            size: 35,
           ),
           page: MainPage(),
         ),
@@ -67,15 +67,15 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           text: Text(
             'Novo Aluno',
             style: TextStyle(
-                color: Colors.black.withOpacity(0.7),
-                fontSize: 20.0,
-                fontFamily: 'RobotoMono',
-                fontWeight: FontWeight.bold),
+              color: Colors.black.withOpacity(0.85),
+              fontSize: 27,
+              fontFamily: 'Lobster',
+            ),
           ),
           icon: Icon(
             FontAwesomeIcons.pen,
-            color: Colors.black,
-            size: 30,
+            color: Colors.black.withOpacity(0.85),
+            size: 27,
           ),
           page: NewPersonPage(),
         ),
@@ -83,12 +83,16 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           text: Text(
             'Compromissos',
             style: TextStyle(
-                color: Colors.black,
-                fontSize: 20.0,
-                fontFamily: 'RobotoMono',
-                fontWeight: FontWeight.bold),
+              color: Colors.black.withOpacity(0.85),
+              fontSize: 26.0,
+              fontFamily: 'Lobster',
+            ),
           ),
-          icon: Icon(FontAwesomeIcons.calendarCheck, color: Colors.black,size: 30,),
+          icon: Icon(
+            FontAwesomeIcons.calendarCheck,
+            color: Colors.black.withOpacity(0.85),
+            size: 27,
+          ),
           page: AppointmentsPage(),
         ),
       ],
@@ -106,21 +110,31 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             width: MediaQuery.of(context).size.width * 0.6,
             child: Image.asset(
-              'assets/gsfit_teste.png',
-              height: 155,
-              width: 155,
+              'assets/Logo.png',
+              height: 120,
+              width: 120,
               alignment: Alignment.centerLeft,
             ),
           ),
         ),
         footer: KFDrawerItem(
-          text: Text(
-            'SIGN IN',
-            style: TextStyle(color: Colors.white),
+          text: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  'Sign In',
+                  style: TextStyle(
+                      color: Colors.black.withOpacity(0.9), fontFamily: 'Lobster', fontSize: 22),
+                ),
+              ],
+            ),
           ),
           icon: Icon(
-            Icons.input,
-            color: Colors.white,
+            FontAwesomeIcons.signInAlt,
+            color: Colors.black.withOpacity(0.9),
           ),
           onPressed: () {
             Navigator.of(context).push(CupertinoPageRoute(
@@ -131,7 +145,15 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
             ));
           },
         ),
-        decoration: BoxDecoration(color: mainColor.withOpacity(0.015)),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xfff4f4f4), Color(0xfff2f2f2)],
+            tileMode: TileMode.repeated,
+          ),
+        ),
+        //decoration: BoxDecoration(color: Color(0xfff2f2f2)),
       ),
     );
   }

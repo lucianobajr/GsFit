@@ -11,7 +11,7 @@ class PeopleDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-
+    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -23,7 +23,7 @@ class PeopleDetailScreen extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     height: screenHeight * 0.5,
-                    color:  Color(0xffa54657),
+                    color: Color(0xffa54657),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 60.0),
@@ -39,12 +39,12 @@ class PeopleDetailScreen extends StatelessWidget {
                                 },
                                 child: Icon(
                                   FontAwesomeIcons.arrowLeft,
-                                  color: Theme.of(context).primaryColor,
+                                  color: Colors.white,
                                 ),
                               ),
                               Icon(
-                                CupertinoIcons.share,
-                                color: Theme.of(context).primaryColor,
+                                FontAwesomeIcons.share,
+                                color: Colors.white,
                               )
                             ],
                           ),
@@ -54,10 +54,12 @@ class PeopleDetailScreen extends StatelessWidget {
                   ),
                   Container(
                     height: screenHeight * 0.35,
+                    width: screenWidth - 50,
                     child: Hero(
                       tag: people.firstName,
                       child: Image(
-                        image: AssetImage(url(int.parse(people.age), int.parse(people.sex))),
+                        image: AssetImage(
+                            url(int.parse(people.age), int.parse(people.sex))),
                         fit: BoxFit.fitHeight,
                       ),
                     ),
@@ -81,15 +83,14 @@ class PeopleDetailScreen extends StatelessWidget {
                         children: <Widget>[
                           Row(
                             children: <Widget>[
-                              CircleAvatar(
-                                radius: 22.0,
-                                backgroundImage:
-                                    AssetImage('assets/perfil.jpeg'),
-                              ),
+                              Icon(
+                                FontAwesomeIcons.marker,
+                                size: 40,
+                              )
                             ],
                           ),
                           SizedBox(
-                            width: 10.0,
+                            width: 16.0,
                           ),
                           Flexible(
                             child: Column(
@@ -99,15 +100,15 @@ class PeopleDetailScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    Text('Luciano Belo',
+                                    Text('Studio GS  Fit ',
                                         style: TextStyle(
-                                          color: Theme.of(context).primaryColor,
-                                          fontSize: 16.0,
+                                          color: Colors.black,
+                                          fontSize: 20.0,
                                           fontWeight: FontWeight.bold,
                                         )),
                                     Text('May 25, 2019',
                                         style: TextStyle(
-                                          color: Colors.grey,
+                                          color: Colors.black.withOpacity(0.7),
                                           fontWeight: FontWeight.w600,
                                         )),
                                   ],
@@ -115,11 +116,6 @@ class PeopleDetailScreen extends StatelessWidget {
                                 SizedBox(
                                   height: 8.0,
                                 ),
-                                Text('Owner',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w600,
-                                    ))
                               ],
                             ),
                           ),
@@ -131,9 +127,9 @@ class PeopleDetailScreen extends StatelessWidget {
                       Text(
                           "My job requires moving to another contry. I don't have the opportunity to take the cat with me.I am looking for good people who will shetter Sola.",
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: Colors.black.withOpacity(0.8),
                             fontSize: 16.0,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w400,
                           )),
                     ],
                   ),
@@ -153,8 +149,9 @@ class PeopleDetailScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Icon(
-                            FontAwesomeIcons.heart,
+                            FontAwesomeIcons.userClock,
                             color: Colors.white,
+                            size: 30,
                           ),
                         ),
                       ),
@@ -169,7 +166,7 @@ class PeopleDetailScreen extends StatelessWidget {
                           child: Padding(
                               padding: const EdgeInsets.all(20.0),
                               child: Text(
-                                'Adoption',
+                                'Avaliação Física',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -192,7 +189,7 @@ class PeopleDetailScreen extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 22.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Material(
               borderRadius: BorderRadius.circular(20.0),
               elevation: 6.0,
@@ -207,14 +204,15 @@ class PeopleDetailScreen extends StatelessWidget {
                       children: <Widget>[
                         Text(people.firstName,
                             style: TextStyle(
-                                fontSize: 26.0,
+                                fontSize: 24.0,
+                                fontFamily: 'Lobster',
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold)),
                         Icon(
                           int.parse(people.sex) == 1
                               ? FontAwesomeIcons.venus
                               : FontAwesomeIcons.mars,
-                          color: Colors.grey,
+                          color: Colors.black.withOpacity(0.7),
                         )
                       ],
                     ),
@@ -225,15 +223,15 @@ class PeopleDetailScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text('${people.age} years old',
+                        Text('${people.age} anos',
                             style: TextStyle(
-                                color: Colors.grey,
+                                color: Colors.black.withOpacity(0.8),
                                 fontWeight: FontWeight.w600)),
                       ],
                     ),
                     SizedBox(
                       width: 10.0,
-                      height: 12.0,
+                      height: 10.0,
                     ),
                     Row(
                       children: <Widget>[
@@ -245,10 +243,10 @@ class PeopleDetailScreen extends StatelessWidget {
                         SizedBox(
                           width: 16.0,
                         ),
-                        Text('Address',
+                        Text('${people.adress}',
                             style: TextStyle(
-                                fontSize: 16.0,
-                                color: Theme.of(context).primaryColor,
+                                fontSize: 20.0,
+                                color: Colors.black,
                                 fontWeight: FontWeight.w400)),
                       ],
                     )
@@ -294,5 +292,4 @@ class PeopleDetailScreen extends StatelessWidget {
     }
     return base;
   }
-
 }

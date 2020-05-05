@@ -200,12 +200,12 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
               autofocus: true,
               cursorColor: Theme.of(context).primaryColor,
               style: TextStyle(
-                  fontFamily: 'RobotoMonoLight', fontWeight: FontWeight.w500),
+                  fontFamily: 'RobotoMonoLight', fontWeight: FontWeight.w100),
               decoration: InputDecoration(
                   labelText: "Compromisso",
                   icon: Icon(
                     FontAwesomeIcons.wrench,
-                    size: 35,
+                    size: 25,
                   )),
             ),
           )
