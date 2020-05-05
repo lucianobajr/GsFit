@@ -1,33 +1,30 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kf_drawer/kf_drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gsfit/models/people.dart';
-import 'package:gsfit/database/config.dart';
+import 'package:gsfit/models/employee.dart';
+import 'package:gsfit/database/dbhelper.dart';
+import 'package:flutter_emoji/flutter_emoji.dart';
 
-class NewClient extends StatefulWidget {
-  final Function menuCallback;
-  NewClient({@required this.menuCallback});
 
+var parser = EmojiParser();
+
+class NewPersonPage extends KFDrawerContent {
   @override
-  _NewClientState createState() => _NewClientState();
+  _NewPersonPageState createState() => _NewPersonPageState();
 }
 
-class _NewClientState extends State<NewClient> {
-  int selectPeopleIconIndex = null;
-  final TextEditingController _name = new TextEditingController();
-  final TextEditingController _age = new TextEditingController();
-  final TextEditingController _adress = new TextEditingController();
-  int index = 0;
-  String teste;
+class _NewPersonPageState extends State<NewPersonPage> {
 
-  var db = new DbHelper();
-  List<People> _peopleList = <People>[];
+  Employee employee = new Employee("", "", "", "");
+  int selectPeopleIconIndex = 0;
+  String firstname;
+  String age;
+  String adress;
+  final scaffoldKey = new GlobalKey<ScaffoldState>();
+  final formKey = new GlobalKey<FormState>();
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  List<String> peopleList = [
+  List<String> sexList = [
     'Homem',
     'Mulher',
   ];
@@ -70,7 +67,7 @@ class _NewClientState extends State<NewClient> {
             height: 12.0,
           ),
           Text(
-            peopleList[index],
+            sexList[index],
             style: TextStyle(
               color: Theme.of(context).primaryColor,
               fontSize: 16.0,
@@ -93,12 +90,12 @@ class _NewClientState extends State<NewClient> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                // InkWell(
-                /* child:*/ Icon(
-                  FontAwesomeIcons.bars,
+                InkWell(
+                  child: Icon(
+                    FontAwesomeIcons.bars,
+                  ),
+                  onTap: widget.onMenuPressed,
                 ),
-                // onTap: widget.menuCallback,
-                //),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15.0),
                   child: Column(
@@ -120,40 +117,35 @@ class _NewClientState extends State<NewClient> {
             ),
           ),
           Expanded(
-              child: Padding(
-                  padding: const EdgeInsets.only(top: 24.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30.0),
-                      color: Theme.of(context).primaryColor.withOpacity(0.06),
-                    ),
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24.0, vertical: 20.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20.0)),
-                            padding: EdgeInsets.symmetric(horizontal: 12.0),
-                          ),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 24.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30.0),
+                  color: Theme.of(context).primaryColor.withOpacity(0.06),
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24.0, vertical: 20.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20.0)),
+                          padding: EdgeInsets.symmetric(horizontal: 12.0),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Form(
+                          key: formKey,
                           child: Column(
-                            children: <Widget>[
-                              SizedBox(height: 10),
-                              TextField(
+                            children: [
+                              TextFormField(
                                 autofocus: false,
                                 keyboardType: TextInputType.text,
-                                controller: _name,
-                                cursorColor: Theme.of(context).primaryColor,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'RobotoMonoLight',
-                                  fontWeight: FontWeight.bold,
-                                ),
                                 decoration: InputDecoration(
                                     focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -168,19 +160,27 @@ class _NewClientState extends State<NewClient> {
                                             BorderSide(color: Colors.black),
                                         borderRadius:
                                             BorderRadius.circular(20.0)),
-                                    labelText: 'Nome',
+                                    labelText: 'Primeiro Name',
                                     labelStyle: TextStyle(
                                         color: Theme.of(context).primaryColor),
                                     icon: Icon(
                                       FontAwesomeIcons.signature,
                                       color: Theme.of(context).primaryColor,
                                     )),
+                                validator: (val) =>
+                                    val.length == 0 ? "Digite seu nome" : null,
+                                onSaved: (val) => this.firstname = val,
+                                cursorColor: Theme.of(context).primaryColor,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'RobotoMonoLight',
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               SizedBox(height: 10),
-                              TextField(
+                              TextFormField(
                                 autofocus: false,
-                                keyboardType: TextInputType.number,
-                                controller: _age,
+                                keyboardType: TextInputType.text,
                                 cursorColor: Theme.of(context).primaryColor,
                                 style: TextStyle(
                                   color: Colors.black,
@@ -209,12 +209,16 @@ class _NewClientState extends State<NewClient> {
                                       FontAwesomeIcons.hourglassHalf,
                                       color: Theme.of(context).primaryColor,
                                     )),
+                                validator: (val) =>
+                                    val.length == 0 ? 'Digite sua idade' : null,
+                                onSaved: (val) => this.age = val,
                               ),
-                              SizedBox(height: 10),
-                              TextField(
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextFormField(
                                 autofocus: false,
                                 keyboardType: TextInputType.text,
-                                controller: _adress,
                                 cursorColor: Theme.of(context).primaryColor,
                                 style: TextStyle(
                                   color: Colors.black,
@@ -243,6 +247,10 @@ class _NewClientState extends State<NewClient> {
                                       FontAwesomeIcons.mapMarkedAlt,
                                       color: Theme.of(context).primaryColor,
                                     )),
+                                validator: (val) => val.length == 0
+                                    ? 'Digite seu endereço'
+                                    : null,
+                                onSaved: (val) => this.adress = val,
                               ),
                               SizedBox(
                                 height: 35,
@@ -250,13 +258,14 @@ class _NewClientState extends State<NewClient> {
                               Container(
                                 height: 120.0,
                                 child: ListView.builder(
-                                    padding:
-                                        EdgeInsets.only(left: 24.0, top: 8.0),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: peopleList.length,
-                                    itemBuilder: (context, index) {
-                                      return buildPeopleIcon(index);
-                                    }),
+                                  padding:
+                                      EdgeInsets.only(left: 24.0, top: 8.0),
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: sexList.length,
+                                  itemBuilder: (context, index) {
+                                    return buildPeopleIcon(index);
+                                  },
+                                ),
                               ),
                               Container(
                                 child: Padding(
@@ -306,8 +315,7 @@ class _NewClientState extends State<NewClient> {
                                             ),
                                           ),
                                           onTap: () {
-
-                                            print('ok');
+                                            _submit();
                                           },
                                         ),
                                       ),
@@ -319,66 +327,29 @@ class _NewClientState extends State<NewClient> {
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                  )))
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          )
         ]));
   }
 
-  String url(int _age, int index) {
-    String base = 'assets/images/';
-
-    if (int.parse(this._age.text) < 12) {
-      //child
-      base = base + 'child-';
-    } else if (int.parse(this._age.text) >= 12 &&
-        int.parse(this._age.text) < 20) {
-      //adolescence
-      base = base + 'adolescence-';
-    } else if (int.parse(this._age.text) >= 20 &&
-        int.parse(this._age.text) < 35) {
-      //adult
-      base = base + 'adult-';
-    } else if (int.parse(this._age.text) >= 35 &&
-        int.parse(this._age.text) < 50) {
-      //mildlife
-      base = base + 'mildlife-';
+  void _submit() {
+    if (this.formKey.currentState.validate()) {
+      formKey.currentState.save();
     } else {
-      //mature
-      base = base + 'mature-';
+      return null;
     }
-
-    if (index == 1) {
-      base = base + 'female.png';
-    } else {
-      base = base + 'male.png';
-    }
-    return base;
-  }
-
-  void _insetPeople(String name, int age, String adress, int sex) async {
-    _name.clear();
-    _age.clear();
-    _adress.clear();
-    selectPeopleIconIndex = null;
-    bool sexo;
-    if (sex == 0) {
-      sexo = false;
-    } else {
-      sexo = true;
-    }
-
-    String url = this.url(int.parse(_age.text), selectPeopleIconIndex);
-
-
-    People newPerson = new People(name, age, adress, sexo, url);
-
-    int salvoId = await db.savePeople(newPerson);
-
-    People personSave = await db.recoverPerson(salvoId);
-
-    setState(() {
-      _peopleList.insert(0, personSave);
-    });
+    var employee = Employee(
+      firstname,
+      age,
+      adress,
+      selectPeopleIconIndex.toString(),
+    );
+    var dbHelper = DBHelper();
+    dbHelper.saveEmployee(employee);
   }
 }

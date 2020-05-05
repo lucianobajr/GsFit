@@ -1,16 +1,21 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kf_drawer/kf_drawer.dart';
 import 'package:gsfit/models/afazer.dart';
 import 'package:gsfit/database/db_ajudante.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-class AfazeresTela extends StatefulWidget {
+class AppointmentsPage extends KFDrawerContent {
+  AppointmentsPage({
+    Key key,
+  });
+
   @override
-  _AfazeresTelaState createState() => _AfazeresTelaState();
+  _AppointmentsPageState createState() => _AppointmentsPageState();
 }
 
-class _AfazeresTelaState extends State<AfazeresTela> {
+class _AppointmentsPageState extends State<AppointmentsPage> {
   final TextEditingController _control = new TextEditingController();
   var db = new DbAjudante();
   final List<Afazer> _afazerLista = <Afazer>[];
@@ -32,12 +37,12 @@ class _AfazeresTelaState extends State<AfazeresTela> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                //InkWell(
-                /*child:*/ Icon(
-                  FontAwesomeIcons.bars,
+                InkWell(
+                  child: Icon(
+                    FontAwesomeIcons.bars,
+                  ),
+                  onTap: widget.onMenuPressed,
                 ),
-                //onTap: widget.menuCallback,
-                //),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15.0),
                   child: Column(
@@ -246,7 +251,7 @@ class _AfazeresTelaState extends State<AfazeresTela> {
   void _lidarComAtualizacao(int posicao, Afazer afazer) {
     setState(() {
       _afazerLista.removeWhere((elemento) {
-        _afazerLista[posicao].afazerNome == afazer.afazerNome;
+        _afazerLista[posicao].afazerNome == elemento.afazerNome;
       });
     });
   }

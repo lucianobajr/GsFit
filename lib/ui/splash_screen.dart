@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gsfit/view/menu_frame.dart';
 import 'dart:async';
 import 'package:shimmer/shimmer.dart';
 
 void main() {
   runApp(new MaterialApp(
     routes: <String, WidgetBuilder>{
-      '/HomeScreen': (BuildContext context) => MenuFrame()
+      //'/HomeScreen': (BuildContext context) => MenuFrame()
     },
   ));
 }

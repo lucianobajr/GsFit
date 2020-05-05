@@ -28,7 +28,9 @@ dependencies:
   sqflite: any
   path_provider: ^0.4.1
   intl: ^0.15.7
-
+  kf_drawer: ^0.0.2
+  flutter_emoji: ">= 2.0.0"  
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter

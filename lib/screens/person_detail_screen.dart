@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gsfit/view/main_screen.dart';
+import 'package:gsfit/models/employee.dart';
 
 class PeopleDetailScreen extends StatelessWidget {
-  final Peoples people;
+  final Employee people;
 
   PeopleDetailScreen({@required this.people});
 
@@ -55,9 +55,9 @@ class PeopleDetailScreen extends StatelessWidget {
                   Container(
                     height: screenHeight * 0.35,
                     child: Hero(
-                      tag: people.name,
+                      tag: people.firstName,
                       child: Image(
-                        image: AssetImage(people.imageUrl),
+                        image: AssetImage(url(int.parse(people.age), int.parse(people.sex))),
                         fit: BoxFit.fitHeight,
                       ),
                     ),
@@ -205,13 +205,13 @@ class PeopleDetailScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        Text(people.name,
+                        Text(people.firstName,
                             style: TextStyle(
                                 fontSize: 26.0,
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold)),
                         Icon(
-                          people.isFemale
+                          int.parse(people.sex) == 1
                               ? FontAwesomeIcons.venus
                               : FontAwesomeIcons.mars,
                           color: Colors.grey,
@@ -266,4 +266,33 @@ class PeopleDetailScreen extends StatelessWidget {
       ),
     );
   }
+
+  String url(int age, int index) {
+    String base = 'assets/images/';
+
+    if (age < 12) {
+      //child
+      base = base + 'child-';
+    } else if (age >= 12 && age < 20) {
+      //adolescence
+      base = base + 'adolescence-';
+    } else if (age >= 20 && age < 35) {
+      //adult
+      base = base + 'adult-';
+    } else if (age >= 35 && age < 50) {
+      //mildlife
+      base = base + 'mildlife-';
+    } else {
+      //mature
+      base = base + 'mature-';
+    }
+
+    if (index == 1) {
+      base = base + 'female.png';
+    } else {
+      base = base + 'male.png';
+    }
+    return base;
+  }
+
 }
