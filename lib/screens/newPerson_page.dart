@@ -6,7 +6,8 @@ import 'package:gsfit/models/employee.dart';
 import 'package:gsfit/database/dbhelper.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:status_alert/status_alert.dart';
-
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 var parser = EmojiParser();
 
@@ -17,11 +18,12 @@ class NewPersonPage extends KFDrawerContent {
 
 class _NewPersonPageState extends State<NewPersonPage> {
 
-  Employee employee = new Employee("", "", "", "");
+  Employee employee = new Employee("", "", "", "","","");
   int selectPeopleIconIndex = 0;
   String firstname;
   String age;
   String adress;
+  String description;
   
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
@@ -131,7 +133,7 @@ class _NewPersonPageState extends State<NewPersonPage> {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 24.0, vertical: 20.0),
+                            horizontal: 24.0, vertical: 15.0),
                         child: Container(
                           decoration: BoxDecoration(
                               color: Colors.white,
@@ -257,11 +259,49 @@ class _NewPersonPageState extends State<NewPersonPage> {
                                 SizedBox(
                                 height: 10,
                               ),
+                              TextFormField(
+                                autofocus: false,
+                                minLines: 8,
+                                maxLines: 9,
+                                keyboardType: TextInputType.text,
+                                cursorColor: Theme.of(context).primaryColor,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'RobotoMonoLight',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color:
+                                                Theme.of(context).primaryColor),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0)),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.black),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0)),
+                                    labelText: 'Descrição',
+                                    labelStyle: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                    icon: Icon(
+                                      FontAwesomeIcons.commentAlt,
+                                      color: Theme.of(context).primaryColor,
+                                    )),
+                                validator: (val) => val.length == 0
+                                    ? 'Digite uma Descrição'
+                                    : null,
+                                onSaved: (val) => this.description = val,
+                              ),
                               SizedBox(
-                                height: 30,
+                                height: 20,
                               ),
                               Container(
-                                height: 120.0,
+                                height: 100.0,
                                 child: ListView.builder(
                                   padding:
                                       EdgeInsets.only(left: 24.0, top: 8.0),
@@ -353,6 +393,8 @@ class _NewPersonPageState extends State<NewPersonPage> {
       age,
       adress,
       selectPeopleIconIndex.toString(),
+      description,
+      dataFormatada(),
     );
     var dbHelper = DBHelper();
     dbHelper.saveEmployee(employee);
@@ -364,5 +406,13 @@ class _NewPersonPageState extends State<NewPersonPage> {
       subtitle: 'Aluno Cadastrado Com Sucesso',
       configuration: IconConfiguration(icon: FontAwesomeIcons.check),
     );
+  }
+
+   String dataFormatada() {
+    var agora = DateTime.now();
+    initializeDateFormatting("pt_BR", null);
+    var formatador = new DateFormat.yMMMd("pt_BR");
+
+    return formatador.format(agora);
   }
 }

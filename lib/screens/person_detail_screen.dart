@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsfit/models/employee.dart';
+import 'package:gsfit/database/dbhelper.dart';
 
 class PeopleDetailScreen extends StatelessWidget {
   final Employee people;
-
+  var db = DBHelper();
   PeopleDetailScreen({@required this.people});
 
   @override
@@ -43,7 +44,7 @@ class PeopleDetailScreen extends StatelessWidget {
                                 ),
                               ),
                               Icon(
-                                FontAwesomeIcons.share,
+                                FontAwesomeIcons.trashAlt,
                                 color: Colors.white,
                               )
                             ],
@@ -71,7 +72,7 @@ class PeopleDetailScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 22.0,
-                    vertical: 30.0,
+                    vertical: 50.0,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -85,7 +86,7 @@ class PeopleDetailScreen extends StatelessWidget {
                             children: <Widget>[
                               Icon(
                                 FontAwesomeIcons.marker,
-                                size: 40,
+                                size: 25,
                               )
                             ],
                           ),
@@ -99,6 +100,7 @@ class PeopleDetailScreen extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
                                     Text('Studio GS  Fit ',
                                         style: TextStyle(
@@ -106,7 +108,7 @@ class PeopleDetailScreen extends StatelessWidget {
                                           fontSize: 20.0,
                                           fontWeight: FontWeight.bold,
                                         )),
-                                    Text('May 25, 2019',
+                                    Text(people.createIn,
                                         style: TextStyle(
                                           color: Colors.black.withOpacity(0.7),
                                           fontWeight: FontWeight.w600,
@@ -124,8 +126,7 @@ class PeopleDetailScreen extends StatelessWidget {
                       SizedBox(
                         height: 20.0,
                       ),
-                      Text(
-                          "My job requires moving to another contry. I don't have the opportunity to take the cat with me.I am looking for good people who will shetter Sola.",
+                      Text(people.description,
                           style: TextStyle(
                             color: Colors.black.withOpacity(0.8),
                             fontSize: 16.0,
@@ -208,11 +209,10 @@ class PeopleDetailScreen extends StatelessWidget {
                                 fontFamily: 'Lobster',
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold)),
-                        Icon(
-                          int.parse(people.sex) == 1
-                              ? FontAwesomeIcons.venus
-                              : FontAwesomeIcons.mars,
-                          color: Colors.black.withOpacity(0.7),
+                        InkWell(
+                          onTap: () => db.delete(people.id),
+                          child: Icon(FontAwesomeIcons.edit,
+                              color: Colors.black.withOpacity(0.7)),
                         )
                       ],
                     ),

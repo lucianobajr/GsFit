@@ -16,7 +16,7 @@ class DBHelper {
 
   initDb() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "final.db");
+    String path = join(documentsDirectory.path, "new.db");
     var theDb = await openDatabase(path, version: 1, onCreate: _onCreate);
     return theDb;
   }
@@ -24,7 +24,7 @@ class DBHelper {
   void _onCreate(Database db, int version) async {
     // When creating the db, create the table
     await db.execute(
-        "CREATE TABLE Employee(id INTEGER PRIMARY KEY, firstname TEXT, age TEXT, adress TEXT,sex TEXT)");
+        "CREATE TABLE Employee(id INTEGER PRIMARY KEY, firstname TEXT, age TEXT, adress TEXT,sex TEXT,description TEXT,createIn TEXT)");
     print("Created tables");
   }
 
@@ -32,7 +32,7 @@ class DBHelper {
     var dbClient = await db;
     await dbClient.transaction((txn) async {
       return await txn.rawInsert(
-          'INSERT INTO Employee(firstname, age, adress, sex) VALUES(' +
+          'INSERT INTO Employee(firstname, age, adress, sex, description, createIn) VALUES(' +
               '\'' +
               employee.firstName +
               '\'' +
@@ -48,6 +48,14 @@ class DBHelper {
               '\'' +
               employee.sex +
               '\'' +
+              ',' +
+              '\'' +
+              employee.description +
+              '\'' +
+              ',' +
+              '\'' +
+              employee.createIn +
+              '\'' +
               ')');
     });
   }
@@ -57,8 +65,13 @@ class DBHelper {
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Employee');
     List<Employee> employees = new List();
     for (int i = 0; i < list.length; i++) {
-      employees.add(new Employee(list[i]["firstname"], list[i]["age"],
-          list[i]["adress"], list[i]["sex"]));
+      employees.add(new Employee(
+          list[i]["firstname"],
+          list[i]["age"],
+          list[i]["adress"],
+          list[i]["sex"],
+          list[i]["description"],
+          list[i]["createIn"]));
     }
     return employees;
   }
@@ -69,8 +82,13 @@ class DBHelper {
     List<Employee> employees = new List();
     for (int i = 0; i < list.length; i++) {
       if (int.parse(list[i]["sex"]) == 0) {
-        employees.add(new Employee(list[i]["firstname"], list[i]["age"],
-            list[i]["adress"], list[i]["sex"]));
+        employees.add(new Employee(
+            list[i]["firstname"],
+            list[i]["age"],
+            list[i]["adress"],
+            list[i]["sex"],
+            list[i]["description"],
+            list[i]["createIn"]));
       }
     }
     return employees;
@@ -82,10 +100,21 @@ class DBHelper {
     List<Employee> employees = new List();
     for (int i = 0; i < list.length; i++) {
       if (int.parse(list[i]["sex"]) == 1) {
-        employees.add(new Employee(list[i]["firstname"], list[i]["age"],
-            list[i]["adress"], list[i]["sex"]));
+        employees.add(new Employee(
+            list[i]["firstname"],
+            list[i]["age"],
+            list[i]["adress"],
+            list[i]["sex"],
+            list[i]["description"],
+            list[i]["createIn"]));
       }
     }
     return employees;
+  }
+
+  Future<int> delete(int id) async {
+    var dbClient = await db;
+    return await dbClient
+        .delete('Employee', where: "id = ?", whereArgs: [id]);
   }
 }
