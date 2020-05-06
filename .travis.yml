@@ -8,7 +8,7 @@ install:
   - git clone https://github.com/flutter/flutter.git -b stable
   - ./flutter/bin/flutter doctor
 script:
-  - ./flutter/bin/flutter test
+  - ./flutter/bin/flutter run
 cache:
   directories:
     - $HOME/.pub-cache
