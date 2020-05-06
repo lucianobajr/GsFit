@@ -222,8 +222,8 @@ class _MainPageState extends State<MainPage> {
                                               MaterialPageRoute(
                                                   builder: (context) {
                                             return PeopleDetailScreen(
-                                                people: snapshot
-                                                    .data[index]); //mudar
+                                              people: snapshot.data[index],
+                                            ); //mudar
                                           }));
                                         },
                                         child: Padding(
@@ -358,11 +358,15 @@ class _MainPageState extends State<MainPage> {
                                                     width: deviceWidth * 0.4,
                                                   ),
                                                   Image(
-                                                    image: AssetImage(url(
-                                                        int.parse(snapshot
-                                                            .data[index].age),
-                                                        int.parse(snapshot
-                                                            .data[index].sex))),
+                                                    image: AssetImage(snapshot
+                                                        .data[index]
+                                                        .url(
+                                                            int.parse(snapshot
+                                                                .data[index]
+                                                                .age),
+                                                            int.parse(snapshot
+                                                                .data[index]
+                                                                .sex))),
                                                     height: 220.0,
                                                     width: deviceWidth * 0.4,
                                                   )
@@ -390,33 +394,5 @@ class _MainPageState extends State<MainPage> {
             ),
           ],
         ));
-  }
-
-  String url(int age, int index) {
-    String base = 'assets/images/';
-
-    if (age < 12) {
-      //child
-      base = base + 'child-';
-    } else if (age >= 12 && age < 20) {
-      //adolescence
-      base = base + 'adolescence-';
-    } else if (age >= 20 && age < 35) {
-      //adult
-      base = base + 'adult-';
-    } else if (age >= 35 && age < 50) {
-      //mildlife
-      base = base + 'mildlife-';
-    } else {
-      //mature
-      base = base + 'mature-';
-    }
-
-    if (index == 1) {
-      base = base + 'female.png';
-    } else {
-      base = base + 'male.png';
-    }
-    return base;
   }
 }

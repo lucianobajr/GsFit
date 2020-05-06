@@ -28,36 +28,10 @@ class DBHelper {
     print("Created tables");
   }
 
-  void saveEmployee(Employee employee) async {
+  Future<int> saveEmployee(Employee employee) async {
     var dbClient = await db;
-    await dbClient.transaction((txn) async {
-      return await txn.rawInsert(
-          'INSERT INTO Employee(firstname, age, adress, sex, description, createIn) VALUES(' +
-              '\'' +
-              employee.firstName +
-              '\'' +
-              ',' +
-              '\'' +
-              employee.age +
-              '\'' +
-              ',' +
-              '\'' +
-              employee.adress +
-              '\'' +
-              ',' +
-              '\'' +
-              employee.sex +
-              '\'' +
-              ',' +
-              '\'' +
-              employee.description +
-              '\'' +
-              ',' +
-              '\'' +
-              employee.createIn +
-              '\'' +
-              ')');
-    });
+    int res = await dbClient.insert('Employee', employee.toMap());
+    return res;
   }
 
   Future<List<Employee>> getEmployees() async {
@@ -78,43 +52,81 @@ class DBHelper {
 
   Future<List<Employee>> getMale() async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Employee');
+    List<Map> list = await dbClient.rawQuery(
+        'SELECT * FROM Employee WHERE sex = 0 ORDER BY firstname ASC');
     List<Employee> employees = new List();
     for (int i = 0; i < list.length; i++) {
-      if (int.parse(list[i]["sex"]) == 0) {
-        employees.add(new Employee(
-            list[i]["firstname"],
-            list[i]["age"],
-            list[i]["adress"],
-            list[i]["sex"],
-            list[i]["description"],
-            list[i]["createIn"]));
-      }
+      employees.add(new Employee(
+          list[i]["firstname"],
+          list[i]["age"],
+          list[i]["adress"],
+          list[i]["sex"],
+          list[i]["description"],
+          list[i]["createIn"]));
     }
     return employees;
   }
 
   Future<List<Employee>> getFemale() async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Employee');
+    var list = await dbClient.rawQuery(
+        'SELECT * FROM Employee WHERE sex = 1 ORDER BY firstname ASC');
     List<Employee> employees = new List();
     for (int i = 0; i < list.length; i++) {
-      if (int.parse(list[i]["sex"]) == 1) {
-        employees.add(new Employee(
-            list[i]["firstname"],
-            list[i]["age"],
-            list[i]["adress"],
-            list[i]["sex"],
-            list[i]["description"],
-            list[i]["createIn"]));
-      }
+      employees.add(new Employee(
+          list[i]["firstname"],
+          list[i]["age"],
+          list[i]["adress"],
+          list[i]["sex"],
+          list[i]["description"],
+          list[i]["createIn"]));
     }
     return employees;
   }
 
-  Future<int> delete(int id) async {
+  Future deletePerson(Employee delete) async {
     var dbClient = await db;
-    return await dbClient
-        .delete('Employee', where: "id = ?", whereArgs: [id]);
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Employee');
+    for (int i = 0; i < list.length; i++) {
+      if (list[i]["firstname"] == delete.firstName &&
+          list[i]["age"] == delete.age &&
+          list[i]["adress"] == delete.adress &&
+          list[i]["sex"] == delete.sex) {
+        await dbClient.delete('Employee',
+            where:
+                "firstname = ? AND age = ? AND adress = ? AND sex = ? AND description = ? AND createIn = ?",
+            whereArgs: [
+              list[i]["firstname"],
+              list[i]["age"],
+              list[i]["adress"],
+              list[i]["sex"],
+              list[i]["description"],
+              list[i]["createIn"]
+            ]);
+      }
+    }
+  }
+
+  Future updatePerson(Employee old, Employee actual) async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Employee');
+    for (int i = 0; i < list.length; i++) {
+      if (list[i]["firstname"] == old.firstName &&
+          list[i]["age"] == old.age &&
+          list[i]["adress"] == old.adress &&
+          list[i]["sex"] == old.sex) {
+        await dbClient.update('Employee', actual.toMap(),
+            where:
+                "firstname = ? AND age = ? AND adress = ? AND sex = ? AND description = ? AND createIn = ?",
+            whereArgs: [
+              list[i]["firstname"],
+              list[i]["age"],
+              list[i]["adress"],
+              list[i]["sex"],
+              list[i]["description"],
+              list[i]["createIn"]
+            ]);
+      }
+    }
   }
 }

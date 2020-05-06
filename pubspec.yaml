@@ -31,6 +31,7 @@ dependencies:
   kf_drawer: ^0.0.2
   flutter_emoji: ">= 2.0.0"  
   status_alert: ^0.1.2
+  fancy_dialog: ^1.0.1
     
 dev_dependencies:
   flutter_test:
