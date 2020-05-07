@@ -1,4 +1,6 @@
 # gsfit
+[![Build Status](https://travis-ci.com/lucianobajr/GsFit.svg?token=QgWZ7HrqQPZf96iGxTca&branch=master)](https://travis-ci.com/lucianobajr/GsFit)
+[![Coverage Status](https://coveralls.io/repos/github/lucianobajr/GsFit/badge.svg?t=I7deIv)](https://coveralls.io/github/lucianobajr/GsFit)
 
 A new Flutter project.
 
