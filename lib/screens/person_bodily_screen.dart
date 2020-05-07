@@ -7,13 +7,11 @@ class PeopleBodilyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         resizeToAvoidBottomPadding: false,
         body: Stack(alignment: Alignment.center, children: <Widget>[Column(
           children: <Widget>[
-            Text('tsete')
+            Text('sfgmjnsxgmsgbmsbgmsg')
           ],
         )]));
   }

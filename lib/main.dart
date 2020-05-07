@@ -53,13 +53,13 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           text: Text('Alunos',
               style: TextStyle(
                 color: Colors.black.withOpacity(0.85),
-                fontSize: 29.0,
-                fontFamily: 'Lobster',
+                fontSize: 22.0,
+                fontFamily: 'RobotoMono'
               )),
           icon: Icon(
             FontAwesomeIcons.walking,
             color: Colors.black.withOpacity(0.85),
-            size: 35,
+            size: 28,
           ),
           page: MainPage(),
         ),
@@ -67,15 +67,15 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           text: Text(
             'Novo Aluno',
             style: TextStyle(
-              color: Colors.black.withOpacity(0.85),
-              fontSize: 27,
-              fontFamily: 'Lobster',
-            ),
+                color: Colors.black.withOpacity(0.85),
+                fontSize: 22,
+                fontFamily: 'RobotoMono',
+                ),
           ),
           icon: Icon(
             FontAwesomeIcons.pen,
             color: Colors.black.withOpacity(0.85),
-            size: 27,
+            size: 20,
           ),
           page: NewPersonPage(),
         ),
@@ -84,14 +84,15 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
             'Compromissos',
             style: TextStyle(
               color: Colors.black.withOpacity(0.85),
-              fontSize: 26.0,
-              fontFamily: 'Lobster',
+              fontSize: 21.0,
+              fontFamily: 'RobotoMono',
+              
             ),
           ),
           icon: Icon(
             FontAwesomeIcons.calendarCheck,
             color: Colors.black.withOpacity(0.85),
-            size: 27,
+            size: 22,
           ),
           page: AppointmentsPage(),
         ),
@@ -102,6 +103,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: KFDrawer(
         controller: _drawerController,
         header: Align(
@@ -109,10 +111,11 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             width: MediaQuery.of(context).size.width * 0.6,
+            
             child: Image.asset(
               'assets/Logo.png',
-              height: 120,
-              width: 120,
+              height: 100,
+              width: 100,
               alignment: Alignment.centerLeft,
             ),
           ),
@@ -127,7 +130,10 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
                 Text(
                   'Sign In',
                   style: TextStyle(
-                      color: Colors.black.withOpacity(0.9), fontFamily: 'Lobster', fontSize: 22),
+                      color: Colors.black.withOpacity(0.9),
+                      fontFamily: 'RobotoMono',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 18),
                 ),
               ],
             ),

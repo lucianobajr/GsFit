@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsfit/models/employee.dart';
 import 'package:gsfit/database/dbhelper.dart';
 import 'package:fancy_dialog/fancy_dialog.dart';
+import 'package:gsfit/screens/bodily_screen.dart';
 import 'package:gsfit/screens/person_bodily_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -121,65 +122,70 @@ class PeopleDetailScreen extends StatelessWidget {
                     horizontal: 22.0,
                     vertical: 50.0,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Icon(
-                                FontAwesomeIcons.marker,
-                                size: 25,
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            width: 16.0,
-                          ),
-                          Flexible(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Row(
                               children: <Widget>[
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text('Studio GS  Fit ',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                    Text(people.createIn,
-                                        style: TextStyle(
-                                          color: Colors.black.withOpacity(0.7),
-                                          fontWeight: FontWeight.w600,
-                                        )),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 8.0,
-                                ),
+                                Icon(
+                                  FontAwesomeIcons.marker,
+                                  size: 25,
+                                )
                               ],
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      Text(people.description,
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(0.8),
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w400,
-                          )),
-                    ],
+                            SizedBox(
+                              width: 16.0,
+                              height: 90,
+                            ),
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text('Studio GS  Fit ',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                          )),
+                                      Text(people.createIn,
+                                          style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(0.7),
+                                            fontWeight: FontWeight.w600,
+                                          )),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 8.0,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Text(people.description,
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(0.8),
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400,
+                            )),
+                      ],
+                    ),
                   ),
                 ),
                 color: Colors.white,
@@ -227,9 +233,7 @@ class PeopleDetailScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return PeopleBodilyScreen(
-                                people: people,
-                              ); //mudar
+                              return BodyDetail(people: null);
                             }));
                           },
                         ),
@@ -252,7 +256,7 @@ class PeopleDetailScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.0),
               elevation: 6.0,
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                padding: EdgeInsets.symmetric(vertical: 13.0, horizontal: 20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[

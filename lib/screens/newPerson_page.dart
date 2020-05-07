@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gsfit/screens/bodily_screen.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsfit/models/employee.dart';
@@ -17,14 +18,13 @@ class NewPersonPage extends KFDrawerContent {
 }
 
 class _NewPersonPageState extends State<NewPersonPage> {
-
-  Employee employee = new Employee("", "", "", "","","");
+  Employee employee = new Employee("", "", "", "", "", "");
   int selectPeopleIconIndex = 0;
   String firstname;
   String age;
   String adress;
   String description;
-  
+
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
 
@@ -256,7 +256,7 @@ class _NewPersonPageState extends State<NewPersonPage> {
                                     : null,
                                 onSaved: (val) => this.adress = val,
                               ),
-                                SizedBox(
+                              SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -327,10 +327,20 @@ class _NewPersonPageState extends State<NewPersonPage> {
                                         color: Theme.of(context).primaryColor,
                                         child: Padding(
                                           padding: const EdgeInsets.all(20.0),
-                                          child: Icon(
-                                            FontAwesomeIcons.child,
-                                            color: Colors.white,
-                                            size: 25,
+                                          child: InkWell(
+                                            onTap: () {
+                                              return Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                return BodyDetail(
+                                                    people: new Employee(firstname, age, adress, selectPeopleIconIndex.toString(), description, dataFormatada()));
+                                              })); //mudar
+                                            },
+                                            child: Icon(
+                                              FontAwesomeIcons.child,
+                                              color: Colors.white,
+                                              size: 25,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -408,7 +418,7 @@ class _NewPersonPageState extends State<NewPersonPage> {
     );
   }
 
-   String dataFormatada() {
+  String dataFormatada() {
     var agora = DateTime.now();
     initializeDateFormatting("pt_BR", null);
     var formatador = new DateFormat.yMMMd("pt_BR");
