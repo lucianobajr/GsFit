@@ -52,13 +52,14 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
         KFDrawerItem.initWithPage(
           text: Text('Alunos',
               style: TextStyle(
-                  color: Colors.black.withOpacity(0.85),
-                  fontSize: 22.0,
-                  fontFamily: 'RobotoMono')),
+                  color: Colors.black,
+                  fontSize: 27.0,
+                  fontWeight: FontWeight.w200,
+                  fontFamily: 'BadScript')),
           icon: Image.asset(
             'assets/Stylus/pupils.png',
-            width: 50,
-            height: 50,
+            width: 53,
+            height: 53,
           ),
           page: MainPage(),
         ),
@@ -66,9 +67,10 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           text: Text(
             'Novo Aluno',
             style: TextStyle(
-              color: Colors.black.withOpacity(0.85),
-              fontSize: 22,
-              fontFamily: 'RobotoMono',
+              color: Colors.black,
+              fontSize:26,
+              fontWeight: FontWeight.w200,
+              fontFamily: 'BadScript',
             ),
           ),
           icon: Image.asset(
@@ -82,9 +84,10 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           text: Text(
             'Compromissos',
             style: TextStyle(
-              color: Colors.black.withOpacity(0.85),
-              fontSize: 21.0,
-              fontFamily: 'RobotoMono',
+              color: Colors.black,
+              fontSize: 26.0,
+              fontWeight: FontWeight.w200,
+              fontFamily: 'BadScript',
             ),
           ),
           icon: Image.asset(
@@ -128,8 +131,8 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
                   'Sign In',
                   style: TextStyle(
                       color: Colors.black.withOpacity(0.9),
-                      fontFamily: 'RobotoMono',
-                      fontWeight: FontWeight.w100,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.w400,
                       fontSize: 18),
                 ),
               ],

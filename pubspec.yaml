@@ -100,6 +100,18 @@ flutter:
     - family: Kalam
       fonts:
         - asset: fonts/Kalam-Regular.ttf 
+    - family: PlayfairDisplay
+      fonts:
+        - asset: fonts/PlayfairDisplay-MediumItalic.ttf 
+    - family: OleoScript
+      fonts:
+        - asset: fonts/OleoScript-Regular.ttf
+    - family: CarterOne
+      fonts:
+        - asset: fonts/CarterOne-Regular.ttf
+    - family: BadScript 
+      fonts:
+        - asset: fonts/BadScript-Regular.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
