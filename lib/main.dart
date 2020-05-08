@@ -55,7 +55,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
                   color: Colors.black,
                   fontSize: 27.0,
                   fontWeight: FontWeight.w200,
-                  fontFamily: 'BadScript')),
+                  fontFamily: 'Lobster')),
           icon: Image.asset(
             'assets/Stylus/pupils.png',
             width: 53,
@@ -70,7 +70,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
               color: Colors.black,
               fontSize:26,
               fontWeight: FontWeight.w200,
-              fontFamily: 'BadScript',
+              fontFamily: 'Lobster'
             ),
           ),
           icon: Image.asset(
@@ -87,7 +87,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
               color: Colors.black,
               fontSize: 26.0,
               fontWeight: FontWeight.w200,
-              fontFamily: 'BadScript',
+              fontFamily: 'Lobster',
             ),
           ),
           icon: Image.asset(
@@ -131,7 +131,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
                   'Sign In',
                   style: TextStyle(
                       color: Colors.black.withOpacity(0.9),
-                      fontFamily: 'RobotoMonoLight',
+                      fontFamily: 'Lobster',
                       fontWeight: FontWeight.w400,
                       fontSize: 18),
                 ),

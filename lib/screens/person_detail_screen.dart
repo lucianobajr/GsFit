@@ -4,26 +4,39 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsfit/models/employee.dart';
 import 'package:gsfit/database/dbhelper.dart';
 import 'package:fancy_dialog/fancy_dialog.dart';
-import 'package:gsfit/screens/bodily_screen.dart';
-import 'package:gsfit/screens/person_bodily_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:status_alert/status_alert.dart';
 
-class PeopleDetailScreen extends StatelessWidget {
+import 'body_part_screen.dart';
+
+class PeopleDetailScreen extends StatefulWidget {
   final Employee people;
+
+  PeopleDetailScreen({@required this.people});
+
+  @override
+  _PeopleDetailScreenState createState() => _PeopleDetailScreenState();
+}
+
+class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
   Employee employee = new Employee("", "", "", "", "", "");
+
   bool value5 = false;
+
   String firstname;
+
   String age;
+
   String adress;
+
   String description;
 
   final scaffoldKey = new GlobalKey<ScaffoldState>();
+
   final formKey = new GlobalKey<FormState>();
 
   var db = DBHelper();
-  PeopleDetailScreen({@required this.people});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +86,7 @@ class PeopleDetailScreen extends StatelessWidget {
                                             cancelColor: Colors.black,
                                             title: "Excluir Aluno",
                                             okFun: () {
-                                              _submit(people);
+                                              _submit(widget.people);
                                               StatusAlert.show(
                                                 context,
                                                 duration: Duration(seconds: 1),
@@ -105,10 +118,10 @@ class PeopleDetailScreen extends StatelessWidget {
                     height: screenHeight * 0.31,
                     width: screenWidth,
                     child: Hero(
-                      tag: people.firstName,
+                      tag: widget.people.firstName,
                       child: Image(
-                        image: AssetImage(people.url(
-                            int.parse(people.age), int.parse(people.sex))),
+                        image: AssetImage(widget.people.url(
+                            int.parse(widget.people.age), int.parse(widget.people.sex))),
                         fit: BoxFit.fitHeight,
                       ),
                     ),
@@ -162,7 +175,7 @@ class PeopleDetailScreen extends StatelessWidget {
                                             fontSize: 20.0,
                                             fontWeight: FontWeight.bold,
                                           )),
-                                      Text(people.createIn,
+                                      Text(widget.people.createIn,
                                           style: TextStyle(
                                             color:
                                                 Colors.black.withOpacity(0.7),
@@ -181,7 +194,7 @@ class PeopleDetailScreen extends StatelessWidget {
                         SizedBox(
                           height: 5.0,
                         ),
-                        Text(people.description,
+                        Text(widget.people.description,
                             style: TextStyle(
                               color: Colors.black.withOpacity(0.8),
                               fontSize: 16.0,
@@ -236,7 +249,7 @@ class PeopleDetailScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return BodyDetail(people: null);
+                              return Body(people: null);
                             }));
                           },
                         ),
@@ -267,7 +280,7 @@ class PeopleDetailScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        Text(people.firstName,
+                        Text(widget.people.firstName,
                             style: TextStyle(
                                 fontSize: 24.0,
                                 fontFamily: 'Lobster',
@@ -520,7 +533,7 @@ class PeopleDetailScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text('${people.age} anos',
+                        Text('${widget.people.age} anos',
                             style: TextStyle(
                                 color: Colors.black.withOpacity(0.8),
                                 fontWeight: FontWeight.w600)),
@@ -540,7 +553,7 @@ class PeopleDetailScreen extends StatelessWidget {
                         SizedBox(
                           width: 16.0,
                         ),
-                        Text('${people.adress}',
+                        Text('${widget.people.adress}',
                             style: TextStyle(
                                 fontSize: 20.0,
                                 color: Colors.black,
@@ -577,13 +590,13 @@ class PeopleDetailScreen extends StatelessWidget {
       firstname,
       age,
       adress,
-      people.sex,
+      widget.people.sex,
       description,
       dataFormatada(),
     );
 
     var dbHelper = DBHelper();
-    dbHelper.updatePerson(people, employee);
+    dbHelper.updatePerson(widget.people, employee);
   }
 
   String dataFormatada() {

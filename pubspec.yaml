@@ -56,6 +56,8 @@ flutter:
     - assets/
     - assets/images/
     - assets/icons/
+    - assets/icons/male/
+    - assets/icons/female/
     - assets/Stylus/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -100,18 +102,7 @@ flutter:
     - family: Kalam
       fonts:
         - asset: fonts/Kalam-Regular.ttf 
-    - family: PlayfairDisplay
-      fonts:
-        - asset: fonts/PlayfairDisplay-MediumItalic.ttf 
-    - family: OleoScript
-      fonts:
-        - asset: fonts/OleoScript-Regular.ttf
-    - family: CarterOne
-      fonts:
-        - asset: fonts/CarterOne-Regular.ttf
-    - family: BadScript 
-      fonts:
-        - asset: fonts/BadScript-Regular.ttf
+
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

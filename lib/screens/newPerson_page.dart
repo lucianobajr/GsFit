@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gsfit/screens/bodily_screen.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsfit/models/employee.dart';
@@ -9,6 +8,8 @@ import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:status_alert/status_alert.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+
+import 'body_part_screen.dart';
 
 var parser = EmojiParser();
 
@@ -332,7 +333,7 @@ class _NewPersonPageState extends State<NewPersonPage> {
                                               return Navigator.push(context,
                                                   MaterialPageRoute(
                                                       builder: (context) {
-                                                return BodyDetail(
+                                                return Body(
                                                     people: new Employee(firstname, age, adress, selectPeopleIconIndex.toString(), description, dataFormatada()));
                                               })); //mudar
                                             },
