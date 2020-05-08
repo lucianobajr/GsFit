@@ -52,14 +52,13 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
         KFDrawerItem.initWithPage(
           text: Text('Alunos',
               style: TextStyle(
-                color: Colors.black.withOpacity(0.85),
-                fontSize: 22.0,
-                fontFamily: 'RobotoMono'
-              )),
-          icon: Icon(
-            FontAwesomeIcons.walking,
-            color: Colors.black.withOpacity(0.85),
-            size: 28,
+                  color: Colors.black.withOpacity(0.85),
+                  fontSize: 22.0,
+                  fontFamily: 'RobotoMono')),
+          icon: Image.asset(
+            'assets/Stylus/pupils.png',
+            width: 50,
+            height: 50,
           ),
           page: MainPage(),
         ),
@@ -67,15 +66,15 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           text: Text(
             'Novo Aluno',
             style: TextStyle(
-                color: Colors.black.withOpacity(0.85),
-                fontSize: 22,
-                fontFamily: 'RobotoMono',
-                ),
+              color: Colors.black.withOpacity(0.85),
+              fontSize: 22,
+              fontFamily: 'RobotoMono',
+            ),
           ),
-          icon: Icon(
-            FontAwesomeIcons.pen,
-            color: Colors.black.withOpacity(0.85),
-            size: 20,
+          icon: Image.asset(
+            'assets/Stylus/new_person.png',
+            width: 53,
+            height: 53,
           ),
           page: NewPersonPage(),
         ),
@@ -86,13 +85,12 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
               color: Colors.black.withOpacity(0.85),
               fontSize: 21.0,
               fontFamily: 'RobotoMono',
-              
             ),
           ),
-          icon: Icon(
-            FontAwesomeIcons.calendarCheck,
-            color: Colors.black.withOpacity(0.85),
-            size: 22,
+          icon: Image.asset(
+            'assets/Stylus/appointments.png',
+            width: 50,
+            height: 50,
           ),
           page: AppointmentsPage(),
         ),
@@ -111,7 +109,6 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             width: MediaQuery.of(context).size.width * 0.6,
-            
             child: Image.asset(
               'assets/Logo.png',
               height: 100,

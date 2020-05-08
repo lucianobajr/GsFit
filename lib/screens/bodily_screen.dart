@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsfit/main.dart';
 import 'package:gsfit/models/employee.dart';
+import 'package:gsfit/screens/body_part_screen.dart';
 
 class BodyDetail extends StatefulWidget {
   final Employee people;
@@ -15,7 +16,6 @@ class _BodyDetailState extends State<BodyDetail> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: Stack(
@@ -80,96 +80,120 @@ class _BodyDetailState extends State<BodyDetail> {
                 color: Colors.white,
               )),
               Expanded(
-                child: Container(
-                  margin:
-                      const EdgeInsets.only(bottom: 10, left: 16, right: 16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [mainColor, Color(0xff772e25)]),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        'Medidas',
-                        style: TextStyle(color: Colors.white),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Body(),
                       ),
-                      Expanded(
-                          child: Row(
-                        children: <Widget>[
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
-                              color: Color.fromRGBO(255, 255, 255, 0.4),
-                            ),
-                            padding: const EdgeInsets.all(10.0),
-                            child: Image.asset(
-                              'assets/icons/chest.png',
-                              color: Colors.white,
-                              width: 50,
-                              height: 50,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
-                              color: Color.fromRGBO(255, 255, 255, 0.4),
-                            ),
-                            padding: const EdgeInsets.all(10.0),
-                            child: Image.asset(
-                              'assets/icons/abs.png',
-                              color: Colors.white,
-                              width: 50,
-                              height: 50,
+                    );
+                  },
+                  child: Container(
+                    margin:
+                        const EdgeInsets.only(bottom: 20, left: 16, right: 16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [mainColor, Color(0xff772e25)]),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16.0),
+                          child: Align(
+                            child: Text(
+                              'Medidas',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w800),
                             ),
                           ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
-                              color: Color.fromRGBO(255, 255, 255, 0.4),
+                        ),
+                        Expanded(
+                            child: Row(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 20,
                             ),
-                            padding: const EdgeInsets.all(10.0),
-                            child: Image.asset(
-                              'assets/icons/calf.png',
-                              color: Colors.white,
-                              width: 50,
-                              height: 50,
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25)),
+                                color: Color.fromRGBO(255, 255, 255, 0.4),
+                              ),
+                              padding: const EdgeInsets.all(10.0),
+                              child: Image.asset(
+                                'assets/icons/chest.png',
+                                color: Colors.white,
+                                width: 50,
+                                height: 50,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25)),
-                              color: Color.fromRGBO(255, 255, 255, 0.4),
+                            SizedBox(
+                              width: 10.0,
                             ),
-                            padding: const EdgeInsets.all(10.0),
-                            child: Image.asset(
-                              'assets/icons/leg.png',
-                              color: Colors.white,
-                              width: 50,
-                              height: 50,
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25)),
+                                color: Color.fromRGBO(255, 255, 255, 0.4),
+                              ),
+                              padding: const EdgeInsets.all(10.0),
+                              child: Image.asset(
+                                'assets/icons/abs.png',
+                                color: Colors.white,
+                                width: 50,
+                                height: 50,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                        ],
-                      ))
-                    ],
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25)),
+                                color: Color.fromRGBO(255, 255, 255, 0.4),
+                              ),
+                              padding: const EdgeInsets.all(10.0),
+                              child: Image.asset(
+                                'assets/icons/calf.png',
+                                color: Colors.white,
+                                width: 50,
+                                height: 50,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25)),
+                                color: Color.fromRGBO(255, 255, 255, 0.4),
+                              ),
+                              padding: const EdgeInsets.all(10.0),
+                              child: Image.asset(
+                                'assets/icons/leg.png',
+                                color: Colors.white,
+                                width: 50,
+                                height: 50,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                          ],
+                        ))
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -133,15 +133,18 @@ class PeopleDetailScreen extends StatelessWidget {
                           children: <Widget>[
                             Row(
                               children: <Widget>[
-                                Icon(
-                                  FontAwesomeIcons.marker,
-                                  size: 25,
+                                Align(
+                                  child: Image.asset(
+                                    'assets/Stylus/description.png',
+                                    width: 55,
+                                    height: 55,
+                                  ),
                                 )
                               ],
                             ),
                             SizedBox(
                               width: 16.0,
-                              height: 90,
+                              height: screenHeight/10,
                             ),
                             Flexible(
                               child: Column(
