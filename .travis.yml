@@ -1,11 +1,16 @@
-language: dart
-dist: xenial
+os:
+  - linux
+sudo: false
 addons:
   apt:
+   
+    sources:
+      - ubuntu-toolchain-r-test # if we don't specify this, the libstdc++6 we get is the wrong version
     packages:
-      - lib32stdc++6
-install:
-  - git clone https://github.com/flutter/flutter.git -b stable
+      - libstdc++6
+      - fonts-droid-fallback
+before_script:
+  - git clone https://github.com/flutter/flutter.git -b beta
   - ./flutter/bin/flutter doctor
 script:
   - ./flutter/bin/flutter test
