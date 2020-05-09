@@ -4,11 +4,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsfit/models/employee.dart';
 import 'package:gsfit/database/dbhelper.dart';
 import 'package:fancy_dialog/fancy_dialog.dart';
+import 'package:gsfit/screens/body_part_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:status_alert/status_alert.dart';
-
-import 'body_part_screen.dart';
 
 class PeopleDetailScreen extends StatefulWidget {
   final Employee people;
@@ -249,7 +248,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return Body(people: null);
+                              return BodyScreen(people:widget.people);
                             }));
                           },
                         ),

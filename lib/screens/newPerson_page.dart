@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gsfit/models/body.dart';
+import 'package:gsfit/screens/body_part_screen.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsfit/models/employee.dart';
@@ -8,8 +10,6 @@ import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:status_alert/status_alert.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
-
-import 'body_part_screen.dart';
 
 var parser = EmojiParser();
 
@@ -20,6 +20,7 @@ class NewPersonPage extends KFDrawerContent {
 
 class _NewPersonPageState extends State<NewPersonPage> {
   Employee employee = new Employee("", "", "", "", "", "");
+  Body teste;
   int selectPeopleIconIndex = 0;
   String firstname;
   String age;
@@ -327,21 +328,30 @@ class _NewPersonPageState extends State<NewPersonPage> {
                                         elevation: 4.0,
                                         color: Theme.of(context).primaryColor,
                                         child: Padding(
-                                          padding: const EdgeInsets.all(20.0),
+                                          padding: const EdgeInsets.all(7.0),
                                           child: InkWell(
                                             onTap: () {
                                               return Navigator.push(context,
                                                   MaterialPageRoute(
                                                       builder: (context) {
-                                                return Body(
-                                                    people: new Employee(firstname, age, adress, selectPeopleIconIndex.toString(), description, dataFormatada()));
+                                                return BodyScreen(
+                                                    people: new Employee(
+                                                        firstname,
+                                                        age,
+                                                        adress,
+                                                        selectPeopleIconIndex
+                                                            .toString(),
+                                                        description,
+                                                        dataFormatada()),
+                                                    finalBody: teste);
                                               })); //mudar
                                             },
-                                            child: Icon(
-                                              FontAwesomeIcons.child,
+                                            child: Image.asset(
+                                              'assets/Stylus/measuring.png',
+                                              width: 55,
+                                              height: 55,
                                               color: Colors.white,
-                                              size: 25,
-                                            ),
+                                            )
                                           ),
                                         ),
                                       ),
@@ -417,6 +427,7 @@ class _NewPersonPageState extends State<NewPersonPage> {
       subtitle: 'Aluno Cadastrado Com Sucesso',
       configuration: IconConfiguration(icon: FontAwesomeIcons.check),
     );
+    print(teste.abs);
   }
 
   String dataFormatada() {

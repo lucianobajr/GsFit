@@ -1,42 +1,76 @@
-class BodyPart {
-  final String imagePath, name;
-  BodyPart({this.imagePath, this.name});
+class Body {
+  String height;
+  String neck;
+  String bicepsL;
+  String chest;
+  String forearmL;
+  String waist;
+  String legL;
+  String calfL;
+  String weight;
+  String shoulders;
+  String bicepsR;
+  String abs;
+  String forearmR;
+  String glutes;
+  String legR;
+  String calfR;
+
+  Body(
+      this.height,
+      this.neck,
+      this.bicepsL,
+      this.chest,
+      this.forearmL,
+      this.waist,
+      this.legL,
+      this.calfL,
+      this.weight,
+      this.shoulders,
+      this.bicepsR,
+      this.abs,
+      this.forearmR,
+      this.glutes,
+      this.legR,
+      this.calfR);
+
+  Body.map(Map map) {
+    height = map[height];
+    neck = map[neck];
+    bicepsL = map[bicepsL];
+    chest = map[chest];
+    forearmL = map[forearmL];
+    waist = map[waist];
+    legL = map[legL];
+    calfL = map[calfL];
+    weight = map[weight];
+    shoulders = map[shoulders];
+    bicepsR = map[bicepsR];
+    abs = map[abs];
+    forearmR = map[forearmR];
+    glutes = map[glutes];
+    legR = map[legR];
+    calfR = map[calfR];
+  }
+
+  Map<String, dynamic> toMap() {
+    var mapa = new Map<String, dynamic>();
+    mapa["height"] = height;
+    mapa["neck"] = neck;
+    mapa["bicepsL"] = bicepsL;
+    mapa["chest"] = chest;
+    mapa["forearmL"] = forearmL;
+    mapa["waist"] = waist;
+    mapa["legL"] = legL;
+    mapa["calfL"] = calfL;
+    mapa["weight"] = weight;
+    mapa["shoulders"] = shoulders;
+    mapa["bicepsR"] = bicepsR;
+    mapa["abs"] = abs;
+    mapa["forearmR"] = forearmR;
+    mapa["glutes"] = glutes;
+    mapa["legR"] = legR;
+    mapa["calfR"] = calfR;
+    return mapa;
+  }
 }
-
-final bodyPartMale = [
-  BodyPart(imagePath: "assets/icons/height.png", name: "Altura",),
-  BodyPart(imagePath: "assets/icons/male/neck.png", name: "Pescoço",),
-  BodyPart(imagePath: "assets/icons/male/bicepsL.png", name: "Braço Esq",),
-  BodyPart(imagePath: "assets/icons/male/chest.png", name: "Peito",),
-  BodyPart(imagePath: "assets/icons/forearmL.png", name: "Antebraço Esq",),
-  BodyPart(imagePath: "assets/icons/male/waist.png", name: "Cintura",),
-  BodyPart(imagePath: "assets/icons/legL.png", name: "Coxa Esq",),
-  BodyPart(imagePath: "assets/icons/calfL.png", name: "Panturilha Esq",),
-  BodyPart(imagePath: "assets/icons/weight.png", name: "Peso",),
-  BodyPart(imagePath: "assets/icons/shoulders.png", name: "Ombros",),
-  BodyPart(imagePath: "assets/icons/male/bicepsR.png", name: "Braço Dir",),
-  BodyPart(imagePath: "assets/icons/male/abs.png", name: "Abdômen",),
-  BodyPart(imagePath: "assets/icons/forearmR.png", name: "Antebraço Dir",),
-  BodyPart(imagePath: "assets/icons/glutes.png", name: "Glúteos",),
-  BodyPart(imagePath: "assets/icons/legR.png", name: "Coxa Dir",),
-  BodyPart(imagePath: "assets/icons/calfR.png", name: "Panturilha Dir",),
-];
-
-final bodyPartFemale = [
-  BodyPart(imagePath: "assets/icons/height.png", name: "Altura",),
-  BodyPart(imagePath: "assets/icons/female/neck.png", name: "Pescoço",),
-  BodyPart(imagePath: "assets/icons/female/bicepsL.png", name: "Braço Esq",),
-  BodyPart(imagePath: "assets/icons/female/chest.png", name: "Peito",),
-  BodyPart(imagePath: "assets/icons/forearmL.png", name: "Antebraço Esq",),
-  BodyPart(imagePath: "assets/icons/female/waist.png", name: "Cintura",),
-  BodyPart(imagePath: "assets/icons/legL.png", name: "Coxa Esq",),
-  BodyPart(imagePath: "assets/icons/calfL.png", name: "Panturilha Esq",),
-  BodyPart(imagePath: "assets/icons/weight.png", name: "Peso",),
-  BodyPart(imagePath: "assets/icons/shoulders.png", name: "Ombros",),
-  BodyPart(imagePath: "assets/icons/female/bicepsR.png", name: "Braço Dir",),
-  BodyPart(imagePath: "assets/icons/female/abs.png", name: "Abdômen",),
-  BodyPart(imagePath: "assets/icons/forearmR.png", name: "Antebraço Dir",),
-  BodyPart(imagePath: "assets/icons/glutes.png", name: "Glúteos",),
-  BodyPart(imagePath: "assets/icons/legR.png", name: "Coxa Dir",),
-  BodyPart(imagePath: "assets/icons/calfR.png", name: "Panturilha Dir",),
-];
