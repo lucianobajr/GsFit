@@ -32,6 +32,7 @@ dependencies:
   flutter_emoji: ">= 2.0.0"  
   status_alert: ^0.1.2
   fancy_dialog: ^1.0.1
+  animations: ^1.0.0+5
     
 dev_dependencies:
   flutter_test:

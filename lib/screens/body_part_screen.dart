@@ -6,8 +6,7 @@ import 'package:gsfit/models/employee.dart';
 
 class BodyScreen extends StatefulWidget {
   final Employee people;
-  final Body finalBody;
-  BodyScreen({@required this.people, this.finalBody});
+  BodyScreen({@required this.people});
 
   //widget.people.sex
   @override
@@ -697,7 +696,7 @@ class _BodyScreenState extends State<BodyScreen> {
                                   onSaved: (val) => this.calfR = val,
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height:100,
                                 ),
                                 Material(
                                   borderRadius: BorderRadius.circular(20.0),
@@ -758,6 +757,6 @@ class _BodyScreenState extends State<BodyScreen> {
       calfR,
     );
 
-    print(body.abs);
+    Navigator.pop(context,body);
   }
 }

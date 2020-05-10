@@ -1,10 +1,11 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsfit/models/employee.dart';
 import 'package:gsfit/database/dbhelper.dart';
 import 'package:fancy_dialog/fancy_dialog.dart';
-import 'package:gsfit/screens/body_part_screen.dart';
+import 'package:gsfit/screens/body_detail_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:status_alert/status_alert.dart';
@@ -19,7 +20,30 @@ class PeopleDetailScreen extends StatefulWidget {
 }
 
 class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
-  Employee employee = new Employee("", "", "", "", "", "");
+  Employee employee = new Employee(
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  );
 
   bool value5 = false;
 
@@ -120,7 +144,8 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                       tag: widget.people.firstName,
                       child: Image(
                         image: AssetImage(widget.people.url(
-                            int.parse(widget.people.age), int.parse(widget.people.sex))),
+                            int.parse(widget.people.age),
+                            int.parse(widget.people.sex))),
                         fit: BoxFit.fitHeight,
                       ),
                     ),
@@ -156,7 +181,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                             ),
                             SizedBox(
                               width: 16.0,
-                              height: screenHeight/10,
+                              height: screenHeight / 10,
                             ),
                             Flexible(
                               child: Column(
@@ -217,10 +242,13 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                         color: Theme.of(context).primaryColor,
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
-                          child: Icon(
-                            FontAwesomeIcons.userClock,
-                            color: Colors.white,
-                            size: 30,
+                          child: InkWell(
+                            onLongPress: () => _teste(widget.people),
+                            child: Icon(
+                              FontAwesomeIcons.userClock,
+                              color: Colors.white,
+                              size: 30,
+                            ),
                           ),
                         ),
                       ),
@@ -228,31 +256,66 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                         width: 24.0,
                       ),
                       Expanded(
-                        child: InkWell(
-                          child: Material(
-                            borderRadius: BorderRadius.circular(20.0),
-                            elevation: 4.0,
-                            color: Theme.of(context).primaryColor,
-                            child: Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Text(
-                                  'Avaliação Física',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18.0,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                )),
+                          child: InkWell(
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          elevation: 4.0,
+                          color: Theme.of(context).primaryColor,
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: OpenContainer(
+                              closedElevation: 0,
+                              transitionType:
+                                  ContainerTransitionType.fadeThrough,
+                              transitionDuration:
+                                  const Duration(milliseconds: 800),
+                              closedColor:
+                                  Theme.of(context).primaryColor.withAlpha(100),
+                              openBuilder: (context, _) {
+                                return BodyDetailScreen(
+                                    people: new Employee(
+                                        firstname,
+                                        age,
+                                        adress,
+                                        widget.people.sex,
+                                        description,
+                                        dataFormatada(),
+                                        widget.people.height,
+                                        widget.people.neck,
+                                        widget.people.bicepsL,
+                                        widget.people.chest,
+                                        widget.people.forearmL,
+                                        widget.people.waist,
+                                        widget.people.legL,
+                                        widget.people.calfL,
+                                        widget.people.weight,
+                                        widget.people.shoulders,
+                                        widget.people.bicepsR,
+                                        widget.people.abs,
+                                        widget.people.forearmR,
+                                        widget.people.glutes,
+                                        widget.people.legR,
+                                        widget.people.calfR),
+                                    finalBody: null);
+                              },
+                              closedBuilder:
+                                  (context, VoidCallback openContainer) {
+                                return InkWell(
+                                    onTap: openContainer,
+                                    child: Text(
+                                      'Avaliação Física',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ));
+                              },
+                            ),
                           ),
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return BodyScreen(people:widget.people);
-                            }));
-                          },
                         ),
-                      )
+                      ))
                     ],
                   ),
                 ),
@@ -586,16 +649,36 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
       return null;
     }
     var employee = Employee(
-      firstname,
-      age,
-      adress,
-      widget.people.sex,
-      description,
-      dataFormatada(),
-    );
+        firstname,
+        age,
+        adress,
+        widget.people.sex,
+        description,
+        dataFormatada(),
+        widget.people.height,
+        widget.people.neck,
+        widget.people.bicepsL,
+        widget.people.chest,
+        widget.people.forearmL,
+        widget.people.waist,
+        widget.people.legL,
+        widget.people.calfL,
+        widget.people.weight,
+        widget.people.shoulders,
+        widget.people.bicepsR,
+        widget.people.abs,
+        widget.people.forearmR,
+        widget.people.glutes,
+        widget.people.legR,
+        widget.people.calfR);
 
     var dbHelper = DBHelper();
     dbHelper.updatePerson(widget.people, employee);
+  }
+
+  void _teste(Employee teste){
+     var dbHelper = DBHelper();
+     dbHelper.teste(teste);
   }
 
   String dataFormatada() {

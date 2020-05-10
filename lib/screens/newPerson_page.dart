@@ -19,13 +19,31 @@ class NewPersonPage extends KFDrawerContent {
 }
 
 class _NewPersonPageState extends State<NewPersonPage> {
-  Employee employee = new Employee("", "", "", "", "", "");
-  Body teste;
+  Employee employee = new Employee("", "", "", "", "", "", "", "", "", "", "",
+      "", "", "", "", "", "", "", "", "", "", "");
   int selectPeopleIconIndex = 0;
   String firstname;
   String age;
   String adress;
   String description;
+  String height; //0
+  String neck; //1
+  String bicepsL; //2
+  String chest; //3
+  String forearmL; //4
+  String waist; //5
+  String legL; //6
+  String calfL; //7
+  String weight; //8
+  String shoulders; //9
+  String bicepsR; //10
+  String abs; //11
+  String forearmR; //12
+  String glutes; //13
+  String legR; //14
+  String calfR; //15
+
+  Body callback;
 
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
@@ -328,32 +346,17 @@ class _NewPersonPageState extends State<NewPersonPage> {
                                         elevation: 4.0,
                                         color: Theme.of(context).primaryColor,
                                         child: Padding(
-                                          padding: const EdgeInsets.all(7.0),
-                                          child: InkWell(
-                                            onTap: () {
-                                              return Navigator.push(context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) {
-                                                return BodyScreen(
-                                                    people: new Employee(
-                                                        firstname,
-                                                        age,
-                                                        adress,
-                                                        selectPeopleIconIndex
-                                                            .toString(),
-                                                        description,
-                                                        dataFormatada()),
-                                                    finalBody: teste);
-                                              })); //mudar
-                                            },
-                                            child: Image.asset(
-                                              'assets/Stylus/measuring.png',
-                                              width: 55,
-                                              height: 55,
-                                              color: Colors.white,
-                                            )
-                                          ),
-                                        ),
+                                            padding: const EdgeInsets.all(7.0),
+                                            child: InkWell(
+                                                onTap: () {
+                                                  _callback(context);
+                                                },
+                                                child: Image.asset(
+                                                  'assets/Stylus/measuring.png',
+                                                  width: 55,
+                                                  height: 55,
+                                                  color: Colors.white,
+                                                ))),
                                       ),
                                       SizedBox(
                                         width: 24.0,
@@ -410,13 +413,28 @@ class _NewPersonPageState extends State<NewPersonPage> {
       return null;
     }
     var employee = Employee(
-      firstname,
-      age,
-      adress,
-      selectPeopleIconIndex.toString(),
-      description,
-      dataFormatada(),
-    );
+        firstname,
+        age,
+        adress,
+        selectPeopleIconIndex.toString(),
+        description,
+        dataFormatada(),
+        callback.height,
+        callback.neck,
+        callback.bicepsL,
+        callback.chest,
+        callback.forearmL,
+        callback.waist,
+        callback.legL,
+        callback.calfL,
+        callback.weight,
+        callback.shoulders,
+        callback.bicepsR,
+        callback.abs,
+        callback.forearmR,
+        callback.glutes,
+        callback.legR,
+        callback.calfR);
     var dbHelper = DBHelper();
     dbHelper.saveEmployee(employee);
 
@@ -427,7 +445,6 @@ class _NewPersonPageState extends State<NewPersonPage> {
       subtitle: 'Aluno Cadastrado Com Sucesso',
       configuration: IconConfiguration(icon: FontAwesomeIcons.check),
     );
-    print(teste.abs);
   }
 
   String dataFormatada() {
@@ -436,5 +453,41 @@ class _NewPersonPageState extends State<NewPersonPage> {
     var formatador = new DateFormat.yMMMd("pt_BR");
 
     return formatador.format(agora);
+  }
+
+  void _callback(BuildContext context) async {
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BodyScreen(
+            people: new Employee(
+                firstname,
+                age,
+                adress,
+                selectPeopleIconIndex.toString(),
+                description,
+                dataFormatada(),
+                height,
+                neck,
+                bicepsL,
+                chest,
+                forearmL,
+                waist,
+                legL,
+                calfL,
+                weight,
+                shoulders,
+                bicepsR,
+                abs,
+                forearmR,
+                glutes,
+                legR,
+                calfR),
+          ),
+        ));
+
+    setState(() {
+      callback = result;
+    });
   }
 }

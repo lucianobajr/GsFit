@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io' as io;
+import 'package:gsfit/models/body.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
@@ -16,7 +17,7 @@ class DBHelper {
 
   initDb() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "new.db");
+    String path = join(documentsDirectory.path, "testes.db");
     var theDb = await openDatabase(path, version: 1, onCreate: _onCreate);
     return theDb;
   }
@@ -24,7 +25,7 @@ class DBHelper {
   void _onCreate(Database db, int version) async {
     // When creating the db, create the table
     await db.execute(
-        "CREATE TABLE Employee(id INTEGER PRIMARY KEY, firstname TEXT, age TEXT, adress TEXT,sex TEXT,description TEXT,createIn TEXT)");
+        "CREATE TABLE Employee(id INTEGER PRIMARY KEY, firstname TEXT, age TEXT, adress TEXT,sex TEXT,description TEXT,createIn TEXT,height TEXT,neck TEXT,bicepsL TEXT,chest TEXT,forearmL TEXT,waist TEXT,legL TEXT,calfL TEXT,weight TEXT,shoulders TEXT,bicepsR TEXT,abs TEXT,forearmR TEXT,glutes TEXT,legR TEXT,calfR TEXT)");
     print("Created tables");
   }
 
@@ -45,7 +46,23 @@ class DBHelper {
           list[i]["adress"],
           list[i]["sex"],
           list[i]["description"],
-          list[i]["createIn"]));
+          list[i]["createIn"],
+          list[i]["height"],
+          list[i]["neck"],
+          list[i]["bicepsL"],
+          list[i]["chest"],
+          list[i]["forearmL"],
+          list[i]["waist"],
+          list[i]["legL"],
+          list[i]["calfL"],
+          list[i]["weight"],
+          list[i]["shoulders"],
+          list[i]["bicepsR"],
+          list[i]["abs"],
+          list[i]["forearmR"],
+          list[i]["glutes"],
+          list[i]["legR"],
+          list[i]["calfR"]));
     }
     return employees;
   }
@@ -62,7 +79,23 @@ class DBHelper {
           list[i]["adress"],
           list[i]["sex"],
           list[i]["description"],
-          list[i]["createIn"]));
+          list[i]["createIn"],
+          list[i]["height"],
+          list[i]["neck"],
+          list[i]["bicepsL"],
+          list[i]["chest"],
+          list[i]["forearmL"],
+          list[i]["waist"],
+          list[i]["legL"],
+          list[i]["calfL"],
+          list[i]["weight"],
+          list[i]["shoulders"],
+          list[i]["bicepsR"],
+          list[i]["abs"],
+          list[i]["forearmR"],
+          list[i]["glutes"],
+          list[i]["legR"],
+          list[i]["calfR"]));
     }
     return employees;
   }
@@ -79,7 +112,23 @@ class DBHelper {
           list[i]["adress"],
           list[i]["sex"],
           list[i]["description"],
-          list[i]["createIn"]));
+          list[i]["createIn"],
+          list[i]["height"],
+          list[i]["neck"],
+          list[i]["bicepsL"],
+          list[i]["chest"],
+          list[i]["forearmL"],
+          list[i]["waist"],
+          list[i]["legL"],
+          list[i]["calfL"],
+          list[i]["weight"],
+          list[i]["shoulders"],
+          list[i]["bicepsR"],
+          list[i]["abs"],
+          list[i]["forearmR"],
+          list[i]["glutes"],
+          list[i]["legR"],
+          list[i]["calfR"]));
     }
     return employees;
   }
@@ -126,6 +175,34 @@ class DBHelper {
               list[i]["description"],
               list[i]["createIn"]
             ]);
+      }
+    }
+  }
+
+  Future teste(Employee teste) async {
+    var dbClient = await db;
+    List<Map> list = await dbClient.rawQuery('SELECT * FROM Employee');
+    for (int i = 0; i < list.length; i++) {
+      if (list[i]["firstname"] == teste.firstName &&
+          list[i]["age"] == teste.age &&
+          list[i]["adress"] == teste.adress &&
+          list[i]["sex"] == teste.sex) {
+          print(teste.height);
+          print(teste.neck);
+          print(teste.bicepsL);
+          print(teste.chest);
+          print(teste.forearmL);
+          print(teste.waist);
+          print(teste.legL);
+          print(teste.calfL);
+          print(teste.weight);
+          print(teste.shoulders);
+          print(teste.bicepsR);
+          print(teste.abs);
+          print(teste.forearmR);
+          print(teste.glutes);
+          print(teste.legR);
+          print(teste.calfR);
       }
     }
   }
