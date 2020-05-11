@@ -33,6 +33,10 @@ dependencies:
   status_alert: ^0.1.2
   fancy_dialog: ^1.0.1
   animations: ^1.0.0+5
+  csv: ^4.0.3
+  pdf: ^1.7.1
+  flutter_full_pdf_viewer: ^1.0.4
+  flutter_html_to_pdf: ^0.4.2
     
 dev_dependencies:
   flutter_test:

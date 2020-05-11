@@ -58,15 +58,39 @@ class _BodyDetailScreenState extends State<BodyDetailScreen> {
                   child: SingleChildScrollView(
                     child: Column(children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 24.0, vertical: 15.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20.0)),
-                          padding: EdgeInsets.symmetric(horizontal: 12.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 22.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            IconButton(
+                              onPressed: () => {},
+                              icon: Image.asset(
+                                'assets/Stylus/csv.png',
+                                color: Colors.black,
+                              ),
+                              iconSize: 65,
+                            ),
+                            IconButton(
+                              onPressed: () => {},
+                              icon: Image.asset(
+                                'assets/Stylus/pdf.png',
+                                color: Colors.black,
+                              ),
+                              iconSize: 65,
+                            ),
+                            IconButton(
+                              onPressed: () => print(widget.people.firstName),
+                              icon: Image.asset(
+                                'assets/Stylus/edit.png',
+                                color: Colors.black,
+                              ),
+                              iconSize: 65,
+                            )
+                          ],
                         ),
                       ),
+                      SizedBox(height: 30),
                       Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(

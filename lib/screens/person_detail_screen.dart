@@ -2,13 +2,20 @@ import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gsfit/models/body.dart';
 import 'package:gsfit/models/employee.dart';
 import 'package:gsfit/database/dbhelper.dart';
 import 'package:fancy_dialog/fancy_dialog.dart';
 import 'package:gsfit/screens/body_detail_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:pdf/pdf.dart';
 import 'package:status_alert/status_alert.dart';
+import 'package:gsfit/screens/view_pdf.dart';
+import 'dart:io';
+import 'package:pdf/widgets.dart' as pdfLib;
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter_html_to_pdf/flutter_html_to_pdf.dart';
 
 class PeopleDetailScreen extends StatefulWidget {
   final Employee people;
@@ -130,7 +137,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                   FontAwesomeIcons.trashAlt,
                                   color: Colors.white,
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ],
@@ -296,7 +303,23 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                         widget.people.glutes,
                                         widget.people.legR,
                                         widget.people.calfR),
-                                    finalBody: null);
+                                    finalBody: Body(
+                                        widget.people.height,
+                                        widget.people.neck,
+                                        widget.people.bicepsL,
+                                        widget.people.chest,
+                                        widget.people.forearmL,
+                                        widget.people.waist,
+                                        widget.people.legL,
+                                        widget.people.calfL,
+                                        widget.people.weight,
+                                        widget.people.shoulders,
+                                        widget.people.bicepsR,
+                                        widget.people.abs,
+                                        widget.people.forearmR,
+                                        widget.people.glutes,
+                                        widget.people.legR,
+                                        widget.people.calfR));
                               },
                               closedBuilder:
                                   (context, VoidCallback openContainer) {
@@ -676,9 +699,9 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
     dbHelper.updatePerson(widget.people, employee);
   }
 
-  void _teste(Employee teste){
-     var dbHelper = DBHelper();
-     dbHelper.teste(teste);
+  void _teste(Employee teste) {
+    var dbHelper = DBHelper();
+    dbHelper.teste(teste);
   }
 
   String dataFormatada() {
@@ -687,5 +710,31 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
     var formatador = new DateFormat.yMMMd("pt_BR");
 
     return formatador.format(agora);
+  }
+
+  _generatePDF(context) async {
+  
+
+    final pdfLib.Document pdf = pdfLib.Document(deflate: zlib.encode);
+
+    pdf.addPage(
+      pdfLib.MultiPage(
+          pageFormat: PdfPageFormat.a4,
+          crossAxisAlignment: pdfLib.CrossAxisAlignment.start,
+          margin: pdfLib.EdgeInsets.all(32),
+          build: (pdfLib.Context context) {
+            return <pdfLib.Widget>[pdfLib.Table()];
+          }),
+    );
+
+    final String dir = (await getApplicationDocumentsDirectory()).path;
+    final String path = '$dir/teste.pdf';
+    final File file = File(path);
+    await file.writeAsBytes(pdf.save());
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => PdfViewerPage(path: path),
+      ),
+    );
   }
 }
