@@ -256,33 +256,75 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: InkWell(
-                            onLongPress: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PDFViewerScaffold(
-                                      appBar: AppBar(
-                                        title: Text("PDF - Avaliação Física"),
-                                        actions: <Widget>[
-                                          IconButton(
-                                            icon: Icon(FontAwesomeIcons.share),
-                                            onPressed: () async {
-                                              final String dir =
-                                                  (await getApplicationDocumentsDirectory())
-                                                      .path;
-                                              final String path =
-                                                  '$dir/${widget.people.firstName}-${dataFormatada()}.pdf';
+                            onTap: () {
+                              var alert = AlertDialog(
+                                title: Text("Funcionalidades para  Aluno"),
+                                content: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: <Widget>[
+                                        IconButton(
+                                          icon: Image.asset(
+                                              'assets/Stylus/pdf.png',),
+                                              iconSize: 60,
+                                          onPressed: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PDFViewerScaffold(
+                                                        appBar: AppBar(
+                                                          title: Text(
+                                                              "PDF - Avaliação Física"),
+                                                          actions: <Widget>[
+                                                            IconButton(
+                                                              icon: Icon(
+                                                                  FontAwesomeIcons
+                                                                      .share),
+                                                              onPressed:
+                                                                  () async {
+                                                                final String
+                                                                    dir =
+                                                                    (await getApplicationDocumentsDirectory())
+                                                                        .path;
+                                                                final String
+                                                                    path =
+                                                                    '$dir/${widget.people.firstName}-${dataFormatada()}.pdf';
 
-                                              ShareExtend.share(path, "file");
-                                            },
-                                          )
-                                        ],
-                                      ),
-                                      path: generatedPdfFilePath)),
-                            ),
+                                                                ShareExtend
+                                                                    .share(path,
+                                                                        "file");
+                                                              },
+                                                            )
+                                                          ],
+                                                        ),
+                                                        path:
+                                                            generatedPdfFilePath)),
+                                          ),
+                                        ),
+                                        IconButton(
+                                          onPressed: () => print('Pagamentos'),
+                                          icon: Image.asset('assets/Stylus/payment.png'),
+                                          iconSize: 60,
+                                        ),
+                                        IconButton(
+                                          onPressed: () => print('Fotos'),
+                                          icon: Image.asset('assets/Stylus/album.png'),
+                                          iconSize: 70,
+                                        ),
+                                      ],
+                                    )),
+                              );
+                              showDialog(
+                                  context: context,
+                                  builder: (_) {
+                                    return alert;
+                                  });
+                            },
+
                             child: Icon(
-                              FontAwesomeIcons.userClock,
+                              FontAwesomeIcons.infoCircle,
                               color: Colors.white,
-                              size: 30,
+                              size: 32,
                             ),
                           ),
                         ),

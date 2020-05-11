@@ -59,36 +59,6 @@ class _BodyDetailScreenState extends State<BodyDetailScreen> {
                     child: Column(children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 22.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            IconButton(
-                              onPressed: () => {},
-                              icon: Image.asset(
-                                'assets/Stylus/csv.png',
-                                color: Colors.black,
-                              ),
-                              iconSize: 65,
-                            ),
-                            IconButton(
-                              onPressed: () => {},
-                              icon: Image.asset(
-                                'assets/Stylus/pdf.png',
-                                color: Colors.black,
-                              ),
-                              iconSize: 65,
-                            ),
-                            IconButton(
-                              onPressed: () => print(widget.people.firstName),
-                              icon: Image.asset(
-                                'assets/Stylus/edit.png',
-                                color: Colors.black,
-                              ),
-                              iconSize: 65,
-                            )
-                          ],
-                        ),
                       ),
                       SizedBox(height: 30),
                       Padding(
