@@ -1,0 +1,266 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Table Style</title>
+    <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+</head>
+
+<body>
+    <div class="table-title">
+        <h3>Studio GS Fit</h3>
+    </div>
+    <table class="table-fill">
+        <thead>
+            <tr>
+                <th class="text-left">Avaliação Física</th>
+                <th class="text-left">Dados</th>
+            </tr>
+        </thead>
+        <tbody class="table-hover">
+            <tr>
+                <td class="text-left">Nome</td>
+                <td class="text-left">Teste</td>
+            </tr>
+            <tr>
+                <td class="text-left">Altura</td>
+                <td class="text-left">1.8</td>
+            </tr>
+            <tr>
+                <td class="text-left">Peso</td>
+                <td class="text-left">80</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+    <table class="table-fill">
+        <thead>
+            <tr>
+                <th class="text-left">Avaliação Física - Superiores</th>
+                <th class="text-left">Medidas</th>
+            </tr>
+        </thead>
+        <tbody class="table-hover">
+            <tr>
+                <td class="text-left">Pescoço</td>
+                <td class="text-left">1</td>
+            </tr>
+            <tr>
+                <td class="text-left">Ombros</td>
+                <td class="text-left">2</td>
+            </tr>
+            <tr>
+                <td class="text-left">Braço Esq.</td>
+                <td class="text-left">3</td>
+            </tr>
+            <tr>
+                <td class="text-left">Braço Dir.</td>
+                <td class="text-left">4</td>
+            </tr>
+            <tr>
+                <td class="text-left">Antebraço Esq.</td>
+                <td class="text-left">5</td>
+            </tr>
+            <tr>
+                <td class="text-left">Antebraço Dir.</td>
+                <td class="text-left">6</td>
+            </tr>
+            <tr>
+                <td class="text-left">Peito</td>
+                <td class="text-left">7</td>
+            </tr>
+            <tr>
+                <td class="text-left">Cintura</td>
+                <td class="text-left">8</td>
+            </tr>
+            <tr>
+                <td class="text-left">Abdômen</td>
+                <td class="text-left">9</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Avaliado Em</th>
+                <th>Dia de hoje</th>
+            </tr>
+        </tfoot>
+    </table>
+    <table class="table-fill">
+        <thead>
+            <tr>
+                <th class="text-left">Avaliação Física - Inferiores</th>
+                <th class="text-left">Medidas</th>
+            </tr>
+        </thead>
+        <tbody class="table-hover">
+            <tr>
+                <td class="text-left">Glúteos</td>
+                <td class="text-left">10</td>
+            </tr>
+            <tr>
+                <td class="text-left">Coxa Esq.</td>
+                <td class="text-left">11</td>
+            </tr>
+            <tr>
+                <td class="text-left">Coxa Dir.</td>
+                <td class="text-left">12</td>
+            </tr>
+            <tr>
+                <td class="text-left">Panturrilha Dir.</td>
+                <td class="text-left">13</td>
+            </tr>
+
+            <tr>
+                <td class="text-left">Panturrilha Esq.</td>
+                <td class="text-left">15</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Avaliado Em</th>
+                <th>Dia de hoje</th>
+            </tr>
+        </tfoot>
+    </table>
+    <style>
+        body {
+
+            font-family: "Roboto", helvetica, arial, sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        div.table-title {
+            display: block;
+            margin: auto;
+            max-width: 600px;
+            padding: 5px;
+            width: 100%;
+        }
+
+        .table-title h3 {
+            color: #1b1e24;
+            font-size: 30px;
+            font-weight: 400;
+            font-style: normal;
+            font-family: "Roboto", helvetica, arial, sans-serif;
+            text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+        }
+
+
+        /*** Table Styles **/
+
+        .table-fill {
+            background: white;
+            border-radius: 3px;
+            border-collapse: collapse;
+            height: 320px;
+            margin: auto;
+            max-width: 600px;
+            padding: 5px;
+            width: 100%;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            color: #D5DDE5;
+            ;
+            background: #1b1e24;
+            border-bottom: 4px solid #9ea7af;
+            border-right: 1px solid #343a45;
+            font-size: 23px;
+            font-weight: 100;
+            padding: 24px;
+            text-align: left;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            vertical-align: middle;
+        }
+
+        th:first-child {
+            border-top-left-radius: 3px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 3px;
+            border-right: none;
+        }
+
+        tr {
+            border-top: 1px solid #C1C3D1;
+            border-bottom: 1px solid #C1C3D1;
+            color: #666B85;
+            font-size: 16px;
+            font-weight: normal;
+            text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+        }
+
+        tr:first-child {
+            border-top: none;
+        }
+
+        tr:last-child {
+            border-bottom: none;
+        }
+
+        tr:nth-child(odd) td {
+            background: #EBEBEB;
+        }
+
+        tr:last-child td:first-child {
+            border-bottom-left-radius: 3px;
+        }
+
+        tr:last-child td:last-child {
+            border-bottom-right-radius: 3px;
+        }
+
+        td {
+            background: #FFFFFF;
+            padding: 20px;
+            text-align: left;
+            vertical-align: middle;
+            font-weight: 300;
+            font-size: 18px;
+            text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+            border-right: 1px solid #C1C3D1;
+        }
+
+        td:last-child {
+            border-right: 0px;
+        }
+
+        th.text-left {
+            text-align: left;
+        }
+
+        th.text-center {
+            text-align: center;
+        }
+
+        th.text-right {
+            text-align: right;
+        }
+
+        td.text-left {
+            text-align: left;
+        }
+
+        td.text-center {
+            text-align: center;
+        }
+
+        td.text-right {
+            text-align: right;
+        }
+    </style>
+
+</body>
+
+
+</html>

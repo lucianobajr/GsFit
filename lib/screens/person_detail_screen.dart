@@ -9,13 +9,13 @@ import 'package:fancy_dialog/fancy_dialog.dart';
 import 'package:gsfit/screens/body_detail_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:pdf/pdf.dart';
+import 'package:share_extend/share_extend.dart';
 import 'package:status_alert/status_alert.dart';
-import 'package:gsfit/screens/view_pdf.dart';
-import 'dart:io';
-import 'package:pdf/widgets.dart' as pdfLib;
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_html_to_pdf/flutter_html_to_pdf.dart';
+import 'dart:io';
+import 'dart:async';
+import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
 
 class PeopleDetailScreen extends StatefulWidget {
   final Employee people;
@@ -61,12 +61,18 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
   String adress;
 
   String description;
+  String generatedPdfFilePath;
 
   final scaffoldKey = new GlobalKey<ScaffoldState>();
 
   final formKey = new GlobalKey<FormState>();
 
   var db = DBHelper();
+
+  void initState() {
+    super.initState();
+    generateExampleDocument();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -250,7 +256,29 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: InkWell(
-                            onLongPress: () => _teste(widget.people),
+                            onLongPress: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PDFViewerScaffold(
+                                      appBar: AppBar(
+                                        title: Text("PDF - Avaliação Física"),
+                                        actions: <Widget>[
+                                          IconButton(
+                                            icon: Icon(FontAwesomeIcons.share),
+                                            onPressed: () async {
+                                              final String dir =
+                                                  (await getApplicationDocumentsDirectory())
+                                                      .path;
+                                              final String path =
+                                                  '$dir/${widget.people.firstName}-${dataFormatada()}.pdf';
+
+                                              ShareExtend.share(path, "file");
+                                            },
+                                          )
+                                        ],
+                                      ),
+                                      path: generatedPdfFilePath)),
+                            ),
                             child: Icon(
                               FontAwesomeIcons.userClock,
                               color: Colors.white,
@@ -712,29 +740,272 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
     return formatador.format(agora);
   }
 
-  _generatePDF(context) async {
-  
+  Future<void> generateExampleDocument() async {
+    var htmlContent = """
+    <!DOCTYPE html>
+    <html lang="en">
 
-    final pdfLib.Document pdf = pdfLib.Document(deflate: zlib.encode);
+    <head>
+        <meta charset="utf-8" />
+        <title>Table Style</title>
+        <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+    </head>
 
-    pdf.addPage(
-      pdfLib.MultiPage(
-          pageFormat: PdfPageFormat.a4,
-          crossAxisAlignment: pdfLib.CrossAxisAlignment.start,
-          margin: pdfLib.EdgeInsets.all(32),
-          build: (pdfLib.Context context) {
-            return <pdfLib.Widget>[pdfLib.Table()];
-          }),
-    );
+    <body>
+        <div class="table-title">
+            <h3>Studio GS Fit</h3>
+        </div>
+        <table class="table-fill">
+            <thead>
+                <tr>
+                    <th class="text-left">Avaliação Física</th>
+                    <th class="text-left">Dados</th>
+                </tr>
+            </thead>
+            <tbody class="table-hover">
+                <tr>
+                    <td class="text-left">Nome</td>
+                    <td class="text-left">${widget.people.firstName}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Altura</td>
+                    <td class="text-left">${widget.people.height}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Peso</td>
+                    <td class="text-left">${widget.people.weight}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+        <br/><br/><br/><br/>
+        <table class="table-fill">
+            <thead>
+                <tr>
+                    <th class="text-left">Avaliação Física - Superiores</th>
+                    <th class="text-left">Medidas</th>
+                </tr>
+            </thead>
+            <tbody class="table-hover">
+                <tr>
+                    <td class="text-left">Pescoço</td>
+                    <td class="text-left">${widget.people.neck}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Ombros</td>
+                    <td class="text-left">${widget.people.shoulders}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Braços</td>
+                    <td class="text-left">Esq = ${widget.people.bicepsL} - Dir = ${widget.people.bicepsR}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Antebraço</td>
+                    <td class="text-left">Esq = ${widget.people.forearmL} - Dir = ${widget.people.forearmR}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Peito</td>
+                    <td class="text-left">${widget.people.chest}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Abdômen e Cintura </td>
+                    <td class="text-left">Abs = ${widget.people.abs} - Cint = ${widget.people.waist}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Avaliado Em</th>
+                    <th>${dataFormatada()}</th>
+                </tr>
+            </tfoot>
+        </table>
+        <br/><br/><br/><br/>
+        <table class="table-fill">
+            <thead>
+                <tr>
+                    <th class="text-left">Avaliação Física - Inferiores</th>
+                    <th class="text-left">Medidas</th>
+                </tr>
+            </thead>
+            <tbody class="table-hover">
+                <tr>
+                    <td class="text-left">Glúteos</td>
+                    <td class="text-left">${widget.people.glutes}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Coxa Esq.</td>
+                    <td class="text-left">${widget.people.legL}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Coxa Dir.</td>
+                    <td class="text-left">${widget.people.legR}</td>
+                </tr>
+                 <tr>
+                    <td class="text-left">Panturrilha Esq.</td>
+                    <td class="text-left">${widget.people.calfL}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Panturrilha Dir.</td>
+                    <td class="text-left">${widget.people.calfR}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Avaliado Em</th>
+                    <th>${dataFormatada()}</th>
+                </tr>
+            </tfoot>
+        </table>
+        <style>
+            body {
 
-    final String dir = (await getApplicationDocumentsDirectory()).path;
-    final String path = '$dir/teste.pdf';
-    final File file = File(path);
-    await file.writeAsBytes(pdf.save());
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => PdfViewerPage(path: path),
-      ),
-    );
+                font-family: "Roboto", helvetica, arial, sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+            }
+
+            div.table-title {
+                display: block;
+                margin: auto;
+                max-width: 600px;
+                padding: 5px;
+                width: 100%;
+            }
+
+            .table-title h3 {
+                color: #1b1e24;
+                font-size: 30px;
+                font-weight: 400;
+                font-style: normal;
+                font-family: "Roboto", helvetica, arial, sans-serif;
+                text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+                text-transform: uppercase;
+            }
+
+
+            /*** Table Styles **/
+
+            .table-fill {
+                background: white;
+                border-radius: 3px;
+                border-collapse: collapse;
+                height: 320px;
+                margin: auto;
+                max-width: 600px;
+                padding: 5px;
+                width: 100%;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            th {
+                color: #D5DDE5;
+                ;
+                background: #1b1e24;
+                border-bottom: 4px solid #9ea7af;
+                border-right: 1px solid #343a45;
+                font-size: 23px;
+                font-weight: 100;
+                padding: 24px;
+                text-align: left;
+                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+                vertical-align: middle;
+            }
+
+            th:first-child {
+                border-top-left-radius: 3px;
+            }
+
+            th:last-child {
+                border-top-right-radius: 3px;
+                border-right: none;
+            }
+
+            tr {
+                border-top: 1px solid #C1C3D1;
+                border-bottom: 1px solid #C1C3D1;
+                color: #666B85;
+                font-size: 16px;
+                font-weight: normal;
+                text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+            }
+
+            tr:first-child {
+                border-top: none;
+            }
+
+            tr:last-child {
+                border-bottom: none;
+            }
+
+            tr:nth-child(odd) td {
+                background: #EBEBEB;
+            }
+
+            tr:last-child td:first-child {
+                border-bottom-left-radius: 3px;
+            }
+
+            tr:last-child td:last-child {
+                border-bottom-right-radius: 3px;
+            }
+
+            td {
+                background: #FFFFFF;
+                padding: 20px;
+                text-align: left;
+                vertical-align: middle;
+                font-weight: 300;
+                font-size: 18px;
+                text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+                border-right: 1px solid #C1C3D1;
+            }
+
+            td:last-child {
+                border-right: 0px;
+            }
+
+            th.text-left {
+                text-align: left;
+            }
+
+            th.text-center {
+                text-align: center;
+            }
+
+            th.text-right {
+                text-align: right;
+            }
+
+            td.text-left {
+                text-align: left;
+            }
+
+            td.text-center {
+                text-align: center;
+            }
+
+            td.text-right {
+                text-align: right;
+            }
+        </style>
+
+    </body>
+
+
+    </html>
+    """;
+
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    var targetPath = appDocDir.path;
+    var targetFileName = "${widget.people.firstName}-${dataFormatada()}";
+
+    var generatedPdfFile = await FlutterHtmlToPdf.convertFromHtmlContent(
+        htmlContent, targetPath, targetFileName);
+    generatedPdfFilePath = generatedPdfFile.path;
   }
 }
