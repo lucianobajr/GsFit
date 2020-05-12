@@ -179,30 +179,25 @@ class DBHelper {
     }
   }
 
-  Future teste(Employee teste) async {
+  Future updateBodyPerson(Employee old, Employee actual) async {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT * FROM Employee');
     for (int i = 0; i < list.length; i++) {
-      if (list[i]["firstname"] == teste.firstName &&
-          list[i]["age"] == teste.age &&
-          list[i]["adress"] == teste.adress &&
-          list[i]["sex"] == teste.sex) {
-          print(teste.height);
-          print(teste.neck);
-          print(teste.bicepsL);
-          print(teste.chest);
-          print(teste.forearmL);
-          print(teste.waist);
-          print(teste.legL);
-          print(teste.calfL);
-          print(teste.weight);
-          print(teste.shoulders);
-          print(teste.bicepsR);
-          print(teste.abs);
-          print(teste.forearmR);
-          print(teste.glutes);
-          print(teste.legR);
-          print(teste.calfR);
+      if (list[i]["firstname"] == old.firstName &&
+          list[i]["age"] == old.age &&
+          list[i]["adress"] == old.adress &&
+          list[i]["sex"] == old.sex) {
+        await dbClient.update('Employee', actual.toMap(),
+            where:
+                "firstname = ? AND age = ? AND adress = ? AND sex = ? AND description = ? AND createIn = ?",
+            whereArgs: [
+              list[i]["firstname"],
+              list[i]["age"],
+              list[i]["adress"],
+              list[i]["sex"],
+              list[i]["description"],
+              list[i]["createIn"]
+            ]);
       }
     }
   }

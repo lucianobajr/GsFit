@@ -16,6 +16,7 @@ import 'package:flutter_html_to_pdf/flutter_html_to_pdf.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
+import 'package:gsfit/models/bodyPart.dart';
 
 class PeopleDetailScreen extends StatefulWidget {
   final Employee people;
@@ -61,6 +62,24 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
   String adress;
 
   String description;
+
+  String height; //0
+  String neck; //1
+  String bicepsL; //2
+  String chest; //3
+  String forearmL; //4
+  String waist; //5
+  String legL; //6
+  String calfL; //7
+  String weight; //8
+  String shoulders; //9
+  String bicepsR; //10
+  String abs; //11
+  String forearmR; //12
+  String glutes; //13
+  String legR; //14
+  String calfR; //1
+
   String generatedPdfFilePath;
 
   final scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -265,8 +284,9 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                       children: <Widget>[
                                         IconButton(
                                           icon: Image.asset(
-                                              'assets/Stylus/pdf.png',),
-                                              iconSize: 60,
+                                            'assets/Stylus/pdf.png',
+                                          ),
+                                          iconSize: 60,
                                           onPressed: () => Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -303,12 +323,14 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                         ),
                                         IconButton(
                                           onPressed: () => print('Pagamentos'),
-                                          icon: Image.asset('assets/Stylus/payment.png'),
+                                          icon: Image.asset(
+                                              'assets/Stylus/payment.png'),
                                           iconSize: 60,
                                         ),
                                         IconButton(
                                           onPressed: () => print('Fotos'),
-                                          icon: Image.asset('assets/Stylus/album.png'),
+                                          icon: Image.asset(
+                                              'assets/Stylus/album.png'),
                                           iconSize: 70,
                                         ),
                                       ],
@@ -320,7 +342,6 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                     return alert;
                                   });
                             },
-
                             child: Icon(
                               FontAwesomeIcons.infoCircle,
                               color: Colors.white,
@@ -395,6 +416,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                   (context, VoidCallback openContainer) {
                                 return InkWell(
                                     onTap: openContainer,
+                                    onLongPress: () => _updateBody(),
                                     child: Text(
                                       'Avaliação Física',
                                       style: TextStyle(
@@ -769,11 +791,6 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
     dbHelper.updatePerson(widget.people, employee);
   }
 
-  void _teste(Employee teste) {
-    var dbHelper = DBHelper();
-    dbHelper.teste(teste);
-  }
-
   String dataFormatada() {
     var agora = DateTime.now();
     initializeDateFormatting("pt_BR", null);
@@ -1049,5 +1066,634 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
     var generatedPdfFile = await FlutterHtmlToPdf.convertFromHtmlContent(
         htmlContent, targetPath, targetFileName);
     generatedPdfFilePath = generatedPdfFile.path;
+  }
+
+  _updateBody() {
+    final body = widget.people.sex == '1' ? bodyPartFemale : bodyPartMale;
+    var alert = AlertDialog(
+      title: Text("Atualizar Avaliação Física"),
+      content: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Form(
+              key: formKey,
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: body[0].name,
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[0].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) =>
+                        val.length == 0 ? 'Digite a Altura' : null,
+                    onSaved: (val) => this.height = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: body[1].name,
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[1].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) =>
+                        val.length == 0 ? 'Digite a Medida do Pescoço' : null,
+                    onSaved: (val) => this.neck = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: body[2].name,
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[2].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) =>
+                        val.length == 0 ? 'Digite a Medida do Braço Esq' : null,
+                    onSaved: (val) => this.bicepsL = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: body[3].name,
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[3].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) =>
+                        val.length == 0 ? 'Digite a Medida do Peito' : null,
+                    onSaved: (val) => this.chest = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: 'Antb Esq',
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[4].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) => val.length == 0
+                        ? 'Digite a Medida do Antebraço Esq'
+                        : null,
+                    onSaved: (val) => this.forearmL = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: body[5].name,
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[5].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) =>
+                        val.length == 0 ? 'Digite a Medida da Cintura' : null,
+                    onSaved: (val) => this.waist = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: body[6].name,
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[6].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) =>
+                        val.length == 0 ? 'Digite a Medida da Coxa Esq.' : null,
+                    onSaved: (val) => this.legL = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: 'Pant Esq',
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[7].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) => val.length == 0
+                        ? 'Digite a Medida da Panturrilha Esq.'
+                        : null,
+                    onSaved: (val) => this.calfL = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: body[8].name,
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[8].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) =>
+                        val.length == 0 ? 'Digite o Peso' : null,
+                    onSaved: (val) => this.weight = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: body[9].name,
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[9].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) =>
+                        val.length == 0 ? 'Digite a Medida dos Ombros' : null,
+                    onSaved: (val) => this.shoulders = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: body[10].name,
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[10].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) =>
+                        val.length == 0 ? 'Digite a Medida do Braço Dir' : null,
+                    onSaved: (val) => this.bicepsR = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: body[11].name,
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[11].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) =>
+                        val.length == 0 ? 'Digite a Medida do Abdômen' : null,
+                    onSaved: (val) => this.abs = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: 'Ant Dir',
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[12].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) => val.length == 0
+                        ? 'Digite a Medida do Antebraço Dir'
+                        : null,
+                    onSaved: (val) => this.forearmR = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: body[13].name,
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[13].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) =>
+                        val.length == 0 ? 'Digite a Medida dos Glúteos' : null,
+                    onSaved: (val) => this.glutes = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: body[14].name,
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[14].imagePath,
+                        color:Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) =>
+                        val.length == 0 ? 'Digite a Medida da Coxa Dir' : null,
+                    onSaved: (val) => this.legR = val,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'RobotoMonoLight',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      labelText: 'Pant Dir',
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                      icon: Image.asset(
+                        body[15].imagePath,
+                        color: Colors.black,
+                        height: 55,
+                        width: 55,
+                      ),
+                    ),
+                    validator: (val) => val.length == 0
+                        ? 'Digite a Medida da Panturrilha Dir'
+                        : null,
+                    onSaved: (val) => this.calfR = val,
+                  ),
+                  SizedBox(
+                    height: 100,
+                  ),
+                ]),
+              ))),
+      actions: <Widget>[
+        FlatButton(
+            onPressed: () async {
+              _auxUpdateBody();
+              Navigator.pop(context);
+              StatusAlert.show(
+                context,
+                duration: Duration(seconds: 1),
+                title: 'Atualizado',
+                subtitle: 'Aluno Atualizado Com Sucesso',
+                configuration: IconConfiguration(icon: FontAwesomeIcons.check),
+              );
+            },
+            child: Text(
+              'Atualizar',
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+              ),
+            )),
+        FlatButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("Cancelar",
+                style: TextStyle(color: Theme.of(context).primaryColor)))
+      ],
+    );
+
+    showDialog(
+        context: context,
+        builder: (_) {
+          return alert;
+        });
+  }
+
+  _auxUpdateBody() {
+    if (this.formKey.currentState.validate()) {
+      formKey.currentState.save();
+    } else {
+      return null;
+    }
+    var employee = Employee(
+        widget.people.firstName,
+        widget.people.age,
+        widget.people.adress,
+        widget.people.sex,
+        widget.people.description,
+        dataFormatada(),
+        height,
+        neck,
+        bicepsL,
+        chest,
+        forearmL,
+        waist,
+        legL,
+        calfL,
+        weight,
+        shoulders,
+        bicepsR,
+        abs,
+        forearmR,
+        glutes,
+        legR,
+        calfR);
+
+    var dbHelper = DBHelper();
+    dbHelper.updateBodyPerson(widget.people, employee);
   }
 }

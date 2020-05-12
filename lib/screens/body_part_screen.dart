@@ -696,7 +696,7 @@ class _BodyScreenState extends State<BodyScreen> {
                                   onSaved: (val) => this.calfR = val,
                                 ),
                                 SizedBox(
-                                  height:100,
+                                  height:130,
                                 ),
                                 Material(
                                   borderRadius: BorderRadius.circular(20.0),
