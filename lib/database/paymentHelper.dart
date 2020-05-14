@@ -25,7 +25,7 @@ class DBPayment {
   void _onCreate(Database db, int version) async {
     // When creating the db, create the table
     await db.execute(
-        "CREATE TABLE Payment(id INTEGER PRIMARY KEY, firstname TEXT, age TEXT, adress TEXT,sex TEXT,description TEXT,createIn TEXT, data TEXT,january TEXT,february TEXT,march TEXT,april TEXT,may TEXT,june TEXT,july TEXT,august TEXT,september TEXT,october TEXT,november TEXT,december TEXT,dataJanuary TEXT,dataFebruary TEXT,dataMarch TEXT,dataApril TEXT,dataMay TEXT,dataJune TEXT,dataJuly TEXT,dataAugust TEXT,dataSeptember TEXT,dataOctober TEXT,dataNovember TEXT,dataDecember TEXT)");
+        "CREATE TABLE Payment(id INTEGER PRIMARY KEY, firstname TEXT, age TEXT, adress TEXT,sex TEXT,description TEXT,createIn TEXT, dataStart TEXT,dataEnd TEXT,january TEXT,february TEXT,march TEXT,april TEXT,may TEXT,june TEXT,july TEXT,august TEXT,september TEXT,october TEXT,november TEXT,december TEXT,dataJanuary TEXT,dataFebruary TEXT,dataMarch TEXT,dataApril TEXT,dataMay TEXT,dataJune TEXT,dataJuly TEXT,dataAugust TEXT,dataSeptember TEXT,dataOctober TEXT,dataNovember TEXT,dataDecember TEXT)");
     print("Created tables");
   }
 
@@ -52,7 +52,8 @@ class DBPayment {
         payment.sex = list[i]["sex"];
         payment.description = list[i]["description"];
         payment.createIn = list[i]["createIn"];
-        payment.data = list[i]["data"];
+        payment.dataStart = list[i]["dataStart"];
+        payment.dataEnd = list[i]["dataEnd"];
         payment.january = list[i]["january"];
         payment.february = list[i]["february"];
         payment.march = list[i]["march"];

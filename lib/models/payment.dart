@@ -5,7 +5,8 @@ class Payment {
   String sex;
   String description;
   String createIn;
-  String data;
+  String dataStart;
+  String dataEnd;
   String january;
   String february;
   String march;
@@ -38,7 +39,8 @@ class Payment {
     this.sex,
     this.description,
     this.createIn,
-    this.data,
+    this.dataStart,
+    this.dataEnd,
     this.january,
     this.february,
     this.march,
@@ -72,7 +74,8 @@ class Payment {
     sex = map[sex];
     description = map[description];
     createIn = map[createIn];
-    data = map[data];
+    dataStart = map[dataStart];
+    dataEnd = map[dataEnd];
     january = map[january];
     february = map[february];
     march = map[march];
@@ -107,7 +110,8 @@ class Payment {
     mapa["sex"] = sex;
     mapa["description"] = description;
     mapa["createIn"] = createIn;
-    mapa["data"] = data;
+    mapa["dataStart"] = dataStart;
+    mapa["dataEnd"] = dataEnd;
     mapa["january"] = january;
     mapa["february"] = february;
     mapa["march"] = march;
@@ -142,7 +146,8 @@ class Payment {
     this.sex = mapa["sex"];
     this.description = mapa["description"];
     this.createIn = mapa["createIn"];
-    this.data = mapa["data"];
+    this.dataStart = mapa["dataStart"];
+    this.dataStart = mapa["dataEnd"];
     this.january = mapa["january"];
     this.february = mapa["february"];
     this.march = mapa["march"];

@@ -16,7 +16,7 @@ class DBHelper {
 
   initDb() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "testes.db");
+    String path = join(documentsDirectory.path, "final.db");
     var theDb = await openDatabase(path, version: 1, onCreate: _onCreate);
     return theDb;
   }
@@ -24,7 +24,7 @@ class DBHelper {
   void _onCreate(Database db, int version) async {
     // When creating the db, create the table
     await db.execute(
-        "CREATE TABLE Employee(id INTEGER PRIMARY KEY, firstname TEXT, age TEXT, adress TEXT,sex TEXT,description TEXT,createIn TEXT,height TEXT,neck TEXT,bicepsL TEXT,chest TEXT,forearmL TEXT,waist TEXT,legL TEXT,calfL TEXT,weight TEXT,shoulders TEXT,bicepsR TEXT,abs TEXT,forearmR TEXT,glutes TEXT,legR TEXT,calfR TEXT)");
+        "CREATE TABLE Employee(id INTEGER PRIMARY KEY, firstname TEXT, age TEXT, adress TEXT,sex TEXT,description TEXT,createIn TEXT,height TEXT,neck TEXT,bicepsL TEXT,chest TEXT,forearmL TEXT,waist TEXT,legL TEXT,calfL TEXT,weight TEXT,shoulders TEXT,bicepsR TEXT,abs TEXT,forearmR TEXT,glutes TEXT,legR TEXT,calfR TEXT,dataStart TEXT,dataEnd TEXT,january TEXT,february TEXT,march TEXT,april TEXT,may TEXT,june TEXT,july TEXT,august TEXT,september TEXT,october TEXT,november TEXT,december TEXT,dataJanuary TEXT,dataFebruary TEXT,dataMarch TEXT,dataApril TEXT,dataMay TEXT,dataJune TEXT,dataJuly TEXT,dataAugust TEXT,dataSeptember TEXT,dataOctober TEXT,dataNovember TEXT,dataDecember TEXT)");
     print("Created tables");
   }
 
@@ -61,7 +61,33 @@ class DBHelper {
           list[i]["forearmR"],
           list[i]["glutes"],
           list[i]["legR"],
-          list[i]["calfR"]));
+          list[i]["calfR"],
+          list[i]["dataStart"],
+          list[i]["dataEnd"],
+          list[i]["january"],
+          list[i]["february"],
+          list[i]["march"],
+          list[i]["april"],
+          list[i]["may"],
+          list[i]["june"],
+          list[i]["july"],
+          list[i]["august"],
+          list[i]["september"],
+          list[i]["october"],
+          list[i]["november"],
+          list[i]["december"],
+          list[i]["dataJanuary"],
+          list[i]["dataFebruary"],
+          list[i]["dataMarch"],
+          list[i]["dataApril"],
+          list[i]["dataMay"],
+          list[i]["dataJune"],
+          list[i]["dataJuly"],
+          list[i]["dataAugust"],
+          list[i]["dataSeptember"],
+          list[i]["dataOctober"],
+          list[i]["dataNovember"],
+          list[i]["dataDecember"]));
     }
     return employees;
   }
@@ -73,28 +99,55 @@ class DBHelper {
     List<Employee> employees = new List();
     for (int i = 0; i < list.length; i++) {
       employees.add(new Employee(
-          list[i]["firstname"],
-          list[i]["age"],
-          list[i]["adress"],
-          list[i]["sex"],
-          list[i]["description"],
-          list[i]["createIn"],
-          list[i]["height"],
-          list[i]["neck"],
-          list[i]["bicepsL"],
-          list[i]["chest"],
-          list[i]["forearmL"],
-          list[i]["waist"],
-          list[i]["legL"],
-          list[i]["calfL"],
-          list[i]["weight"],
-          list[i]["shoulders"],
-          list[i]["bicepsR"],
-          list[i]["abs"],
-          list[i]["forearmR"],
-          list[i]["glutes"],
-          list[i]["legR"],
-          list[i]["calfR"]));
+        list[i]["firstname"],
+        list[i]["age"],
+        list[i]["adress"],
+        list[i]["sex"],
+        list[i]["description"],
+        list[i]["createIn"],
+        list[i]["height"],
+        list[i]["neck"],
+        list[i]["bicepsL"],
+        list[i]["chest"],
+        list[i]["forearmL"],
+        list[i]["waist"],
+        list[i]["legL"],
+        list[i]["calfL"],
+        list[i]["weight"],
+        list[i]["shoulders"],
+        list[i]["bicepsR"],
+        list[i]["abs"],
+        list[i]["forearmR"],
+        list[i]["glutes"],
+        list[i]["legR"],
+        list[i]["calfR"],
+        list[i]["dataStart"],
+        list[i]["dataEnd"],
+        list[i]["january"],
+        list[i]["february"],
+        list[i]["march"],
+        list[i]["april"],
+        list[i]["may"],
+        list[i]["june"],
+        list[i]["july"],
+        list[i]["august"],
+        list[i]["september"],
+        list[i]["october"],
+        list[i]["november"],
+        list[i]["december"],
+        list[i]["dataJanuary"],
+        list[i]["dataFebruary"],
+        list[i]["dataMarch"],
+        list[i]["dataApril"],
+        list[i]["dataMay"],
+        list[i]["dataJune"],
+        list[i]["dataJuly"],
+        list[i]["dataAugust"],
+        list[i]["dataSeptember"],
+        list[i]["dataOctober"],
+        list[i]["dataNovember"],
+        list[i]["dataDecember"],
+      ));
     }
     return employees;
   }
@@ -106,28 +159,55 @@ class DBHelper {
     List<Employee> employees = new List();
     for (int i = 0; i < list.length; i++) {
       employees.add(new Employee(
-          list[i]["firstname"],
-          list[i]["age"],
-          list[i]["adress"],
-          list[i]["sex"],
-          list[i]["description"],
-          list[i]["createIn"],
-          list[i]["height"],
-          list[i]["neck"],
-          list[i]["bicepsL"],
-          list[i]["chest"],
-          list[i]["forearmL"],
-          list[i]["waist"],
-          list[i]["legL"],
-          list[i]["calfL"],
-          list[i]["weight"],
-          list[i]["shoulders"],
-          list[i]["bicepsR"],
-          list[i]["abs"],
-          list[i]["forearmR"],
-          list[i]["glutes"],
-          list[i]["legR"],
-          list[i]["calfR"]));
+        list[i]["firstname"],
+        list[i]["age"],
+        list[i]["adress"],
+        list[i]["sex"],
+        list[i]["description"],
+        list[i]["createIn"],
+        list[i]["height"],
+        list[i]["neck"],
+        list[i]["bicepsL"],
+        list[i]["chest"],
+        list[i]["forearmL"],
+        list[i]["waist"],
+        list[i]["legL"],
+        list[i]["calfL"],
+        list[i]["weight"],
+        list[i]["shoulders"],
+        list[i]["bicepsR"],
+        list[i]["abs"],
+        list[i]["forearmR"],
+        list[i]["glutes"],
+        list[i]["legR"],
+        list[i]["calfR"],
+        list[i]["dataStart"],
+        list[i]["dataEnd"],
+        list[i]["january"],
+        list[i]["february"],
+        list[i]["march"],
+        list[i]["april"],
+        list[i]["may"],
+        list[i]["june"],
+        list[i]["july"],
+        list[i]["august"],
+        list[i]["september"],
+        list[i]["october"],
+        list[i]["november"],
+        list[i]["december"],
+        list[i]["dataJanuary"],
+        list[i]["dataFebruary"],
+        list[i]["dataMarch"],
+        list[i]["dataApril"],
+        list[i]["dataMay"],
+        list[i]["dataJune"],
+        list[i]["dataJuly"],
+        list[i]["dataAugust"],
+        list[i]["dataSeptember"],
+        list[i]["dataOctober"],
+        list[i]["dataNovember"],
+        list[i]["dataDecember"],
+      ));
     }
     return employees;
   }
