@@ -7,6 +7,7 @@ import 'package:gsfit/models/employee.dart';
 import 'package:gsfit/database/dbhelper.dart';
 import 'package:fancy_dialog/fancy_dialog.dart';
 import 'package:gsfit/screens/body_detail_screen.dart';
+import 'package:gsfit/screens/payment_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:share_extend/share_extend.dart';
@@ -321,11 +322,30 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                                             generatedPdfFilePath)),
                                           ),
                                         ),
-                                        IconButton(
-                                          onPressed: () => print('Pagamentos'),
-                                          icon: Image.asset(
-                                              'assets/Stylus/payment.png'),
-                                          iconSize: 60,
+                                        OpenContainer(
+                                          closedElevation: 0,
+                                          transitionType:
+                                              ContainerTransitionType
+                                                  .fadeThrough,
+                                          transitionDuration:
+                                              const Duration(milliseconds: 800),
+                                          closedColor: Colors.white,
+                                          openBuilder: (context, _) {
+                                            return PaymentScreen(
+                                                people: widget.people);
+                                          },
+                                          closedBuilder: (context,
+                                              VoidCallback openContainer) {
+                                            return InkWell(
+                                              onTap: openContainer,
+                                              onLongPress: () => _updateBody(),
+                                              child: Image.asset(
+                                                'assets/Stylus/payment.png',
+                                                height: 60,
+                                                width: 60,
+                                              ),
+                                            );
+                                          },
                                         ),
                                         IconButton(
                                           onPressed: () => print('Fotos'),
@@ -1581,7 +1601,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                       ),
                       icon: Image.asset(
                         body[14].imagePath,
-                        color:Colors.black,
+                        color: Colors.black,
                         height: 55,
                         width: 55,
                       ),
