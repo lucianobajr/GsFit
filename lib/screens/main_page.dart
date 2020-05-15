@@ -87,6 +87,64 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  String formated(int count, int sex) {
+    String text;
+    if (count == 1 && sex == 0) {
+      text = "$count  Aluno Cadastrado";
+    } else if (count == 1 && sex == 1) {
+      text = "$count  Aluna Cadastrada";
+    }
+    else if(count == 0 &&sex==0 || count>1 &&sex==0){
+      text = "$count  Alunos Cadastrados";
+    }
+    else{
+      text = "$count  Alunas Cadastradas";
+    }
+
+    return text;
+  }
+
+  Widget buildCount(int count) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(25.0)),
+      padding: EdgeInsets.symmetric(horizontal: 12.0),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              height: 63,
+              child: Row(
+                children: <Widget>[
+                   SizedBox(
+                    width: 10,
+                  ),
+                  Image.asset(
+                    'assets/Custom/pupils.png',
+                    width: 50,
+                    height: 50,
+                    color: Colors.black.withOpacity(0.8),
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Text(
+                    formated(count, selectPeoplesIconIndex),
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: 'Lobster',
+                      color: Colors.black.withOpacity(0.8),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -167,34 +225,22 @@ class _MainPageState extends State<MainPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 24.0, vertical: 20.0),
+                        // O trem do text
                         child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20.0)),
-                          padding: EdgeInsets.symmetric(horizontal: 12.0),
-                          child: Row(
-                            children: <Widget>[
-                              Icon(FontAwesomeIcons.search,
-                                  color: Colors.black.withOpacity(0.7)),
-                              Expanded(
-                                child: TextField(
-                                  style: TextStyle(
-                                    fontSize: 18.0,
-                                    color: Colors.black,
-                                    fontFamily: 'RobotoMonoLight',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderSide: BorderSide.none),
-                                      hintText: 'Digite o nome de um Aluno',
-                                      hintStyle: TextStyle(
-                                          fontFamily: 'RobotoMonoLigh')),
-                                ),
-                              ),
-                              Icon(FontAwesomeIcons.filter,
-                                  color: Colors.black.withOpacity(0.7)),
-                            ],
+                          height: 60.0,
+                          child: FutureBuilder<List<Employee>>(
+                            future: selectPeoplesIconIndex == 1 ? woman : man,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return buildCount(snapshot.data.length);
+                              } else if (snapshot.hasError) {
+                                return new Text("${snapshot.error}");
+                              }
+                              return new Container(
+                                alignment: AlignmentDirectional.center,
+                                child: new CircularProgressIndicator(),
+                              );
+                            },
                           ),
                         ),
                       ),
@@ -394,5 +440,9 @@ class _MainPageState extends State<MainPage> {
             ),
           ],
         ));
+  }
+
+  _goData(int x, int z) {
+    x = z;
   }
 }

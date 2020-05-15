@@ -340,7 +340,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         }
 
                                         dataJanuary = dataFormatada();
-
+                                        _alert('Janeiro');
                                         _auxUpdateBody();
                                       },
                                       child: Card(
@@ -381,7 +381,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         }
 
                                         dataFebruary = dataFormatada();
-
+                                        _alert('Fevereiro');
                                         _auxUpdateBody();
                                       },
                                       child: Card(
@@ -423,7 +423,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         }
 
                                         dataMarch = dataFormatada();
-
+                                        _alert('Março');
                                         _auxUpdateBody();
                                       },
                                       child: Card(
@@ -464,7 +464,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         }
 
                                         dataApril = dataFormatada();
-
+                                        _alert('Abril');
                                         _auxUpdateBody();
                                       },
                                       child: Card(
@@ -505,7 +505,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         }
 
                                         dataMay = dataFormatada();
-
+                                        _alert('Maio');
                                         _auxUpdateBody();
                                       },
                                       child: Card(
@@ -539,20 +539,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     ),
                                     InkWell(
                                       onTap: () {
-                                        if (january == 'true') {
-                                          january = 'false';
+                                        if (june == 'true') {
+                                          june = 'false';
                                         } else {
-                                          january = 'true';
+                                          june = 'true';
                                         }
 
-                                        dataJanuary = dataFormatada();
-
+                                        dataJune = dataFormatada();
+                                        _alert('Junho');
                                         _auxUpdateBody();
                                       },
                                       child: Card(
                                         child: ListTile(
-                                          leading: buildButton(
-                                              toBool(june), dataJune),
+                                          leading: buildButton(toBool(june)),
                                           title: Align(
                                               child: Text(
                                             'Junho',
@@ -568,7 +567,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                               Align(
                                                 child: Text(
                                                   toBool(june)
-                                                      ? 'Pago - ${dataFormatada()}'
+                                                      ? 'Pago - ${widget.people.dataJune}'
                                                       : 'Pendente',
                                                   style:
                                                       TextStyle(fontSize: 15),
@@ -580,10 +579,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                       ),
                                     ),
                                     InkWell(
+                                      onTap: () {
+                                        if (july == 'true') {
+                                          july = 'false';
+                                        } else {
+                                          july = 'true';
+                                        }
+
+                                        dataJuly = dataFormatada();
+                                        _alert('Julho');
+                                        _auxUpdateBody();
+                                      },
                                       child: Card(
                                         child: ListTile(
-                                          leading: buildButton(
-                                              toBool(july), dataJuly),
+                                          leading: buildButton(toBool(july)),
                                           title: Align(
                                               child: Text(
                                             'Julho',
@@ -599,7 +608,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                               Align(
                                                 child: Text(
                                                   toBool(july)
-                                                      ? 'Pago - ${dataFormatada()}'
+                                                      ? 'Pago - ${widget.people.dataJuly}'
                                                       : 'Pendente',
                                                   style:
                                                       TextStyle(fontSize: 15),
@@ -611,10 +620,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                       ),
                                     ),
                                     InkWell(
+                                      onTap: () {
+                                        if (august == 'true') {
+                                          august = 'false';
+                                        } else {
+                                          august = 'true';
+                                        }
+
+                                        dataAugust = dataFormatada();
+                                        _alert('Agosto');
+                                        _auxUpdateBody();
+                                      },
                                       child: Card(
                                         child: ListTile(
-                                          leading: buildButton(
-                                              toBool(august), dataAugust),
+                                          leading: buildButton(toBool(august)),
                                           title: Align(
                                               child: Text(
                                             'Agosto',
@@ -630,7 +649,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                               Align(
                                                 child: Text(
                                                   toBool(august)
-                                                      ? 'Pago - ${dataFormatada()}'
+                                                      ? 'Pago - ${widget.people.dataAugust}'
                                                       : 'Pendente',
                                                   style:
                                                       TextStyle(fontSize: 15),
@@ -642,10 +661,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                       ),
                                     ),
                                     InkWell(
+                                      onTap: () {
+                                        if (september == 'true') {
+                                          september = 'false';
+                                        } else {
+                                          september = 'true';
+                                        }
+
+                                        dataSeptember = dataFormatada();
+                                        _alert('Setembro');
+                                        _auxUpdateBody();
+                                      },
                                       child: Card(
                                         child: ListTile(
-                                          leading: buildButton(
-                                              toBool(september), dataSeptember),
+                                          leading:
+                                              buildButton(toBool(september)),
                                           title: Align(
                                               child: Text(
                                             'Setembro',
@@ -661,7 +691,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                               Align(
                                                 child: Text(
                                                   toBool(september)
-                                                      ? 'Pago - ${dataFormatada()}'
+                                                      ? 'Pago - ${widget.people.dataSeptember}'
                                                       : 'Pendente',
                                                   style:
                                                       TextStyle(fontSize: 15),
@@ -673,10 +703,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                       ),
                                     ),
                                     InkWell(
+                                      onTap: () {
+                                        if (october == 'true') {
+                                          october = 'false';
+                                        } else {
+                                          october = 'true';
+                                        }
+
+                                        dataJanuary = dataFormatada();
+                                        _alert('Outubro');
+                                        _auxUpdateBody();
+                                      },
                                       child: Card(
                                         child: ListTile(
-                                          leading: buildButton(
-                                              toBool(october), dataOctober),
+                                          leading: buildButton(toBool(october)),
                                           title: Align(
                                               child: Text(
                                             'Outubro',
@@ -692,7 +732,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                               Align(
                                                 child: Text(
                                                   toBool(october)
-                                                      ? 'Pago - ${dataFormatada()}'
+                                                      ? 'Pago - ${widget.people.dataOctober}'
                                                       : 'Pendente',
                                                   style:
                                                       TextStyle(fontSize: 15),
@@ -704,10 +744,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                       ),
                                     ),
                                     InkWell(
+                                      onTap: () {
+                                        if (november == 'true') {
+                                          november = 'false';
+                                        } else {
+                                          november = 'true';
+                                        }
+
+                                        dataNovember = dataFormatada();
+                                        _alert('Novembro');
+                                        _auxUpdateBody();
+                                      },
                                       child: Card(
                                         child: ListTile(
-                                          leading: buildButton(
-                                              toBool(november), dataNovember),
+                                          leading:
+                                              buildButton(toBool(november)),
                                           title: Align(
                                               child: Text(
                                             'Novembro',
@@ -723,7 +774,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                               Align(
                                                 child: Text(
                                                   toBool(november)
-                                                      ? 'Pago - ${dataFormatada()}'
+                                                      ? 'Pago - ${widget.people.dataNovember}'
                                                       : 'Pendente',
                                                   style:
                                                       TextStyle(fontSize: 15),
@@ -735,10 +786,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                       ),
                                     ),
                                     InkWell(
+                                      onTap: () {
+                                        if (december == 'true') {
+                                          december = 'false';
+                                        } else {
+                                          december = 'true';
+                                        }
+
+                                        dataDecember = dataFormatada();
+                                        _alert('Dezembro');
+                                        _auxUpdateBody();
+                                      },
                                       child: Card(
                                         child: ListTile(
-                                          leading: buildButton(
-                                              toBool(december), dataDecember),
+                                          leading:
+                                              buildButton(toBool(december)),
                                           title: Align(
                                               child: Text(
                                             'Dezembro',
@@ -753,8 +815,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                             children: <Widget>[
                                               Align(
                                                 child: Text(
-                                                  toBool(widget.people.december)
-                                                      ? 'Pago - ${dataFormatada()}'
+                                                  toBool(december)
+                                                      ? 'Pago - ${widget.people.dataDecember}'
                                                       : 'Pendente',
                                                   style:
                                                       TextStyle(fontSize: 15),
@@ -911,5 +973,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
     var dbHelper = DBHelper();
     dbHelper.updateBodyPerson(widget.people, employee);
+  }
+
+  _alert(String mounth) {
+    StatusAlert.show(
+      context,
+      duration: Duration(seconds: 1),
+      title: 'Pago',
+      subtitle: 'Mensalidade de $mounth paga com sucesso',
+      configuration: IconConfiguration(icon: FontAwesomeIcons.check),
+    );
   }
 }

@@ -119,6 +119,30 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
     generateExampleDocument();
   }
 
+  Widget adressPeople(String text) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Icon(
+          FontAwesomeIcons.mapMarkerAlt,
+          color: Theme.of(context).primaryColor,
+          size: 16.0,
+        ),
+        SizedBox(
+          width: 13.0,
+        ),
+        Text(
+          '$text',
+          style: TextStyle(
+            fontSize: 18.0,
+            color: Colors.black,
+            fontWeight: FontWeight.w400,
+          ),
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -782,33 +806,24 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text('${widget.people.age} anos',
-                            style: TextStyle(
-                                color: Colors.black.withOpacity(0.8),
-                                fontWeight: FontWeight.w600)),
+                        Text(
+                          '${widget.people.age} anos',
+                          style: TextStyle(
+                              color: Colors.black.withOpacity(0.8),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 17),
+                        ),
                       ],
                     ),
                     SizedBox(
                       width: 10.0,
                       height: 10.0,
                     ),
-                    Row(
-                      children: <Widget>[
-                        Icon(
-                          FontAwesomeIcons.mapMarkerAlt,
-                          color: Theme.of(context).primaryColor,
-                          size: 16.0,
-                        ),
-                        SizedBox(
-                          width: 16.0,
-                        ),
-                        Text('${widget.people.adress}',
-                            style: TextStyle(
-                                fontSize: 20.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400)),
-                      ],
-                    )
+                    ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return adressPeople(widget.people.adress);
+                        }),
                   ],
                 ),
                 decoration: BoxDecoration(

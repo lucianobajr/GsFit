@@ -16,7 +16,7 @@ class DBHelper {
 
   initDb() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "final.db");
+    String path = join(documentsDirectory.path, "final_db.db");
     var theDb = await openDatabase(path, version: 1, onCreate: _onCreate);
     return theDb;
   }
@@ -210,6 +210,12 @@ class DBHelper {
       ));
     }
     return employees;
+  }
+
+  Future<int> contagem() async {
+    var dbCliente = await db;
+    return Sqflite.firstIntValue(
+        await dbCliente.rawQuery("SELECT COUNT(*) FROM Employee"));
   }
 
   Future deletePerson(Employee delete) async {
