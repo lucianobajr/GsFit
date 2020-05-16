@@ -172,7 +172,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         child: Column(children: [
                                           TextFormField(
                                             autofocus: false,
-                                            keyboardType: TextInputType.text,
+                                            keyboardType: TextInputType.number,
                                             decoration: InputDecoration(
                                                 focusedBorder:
                                                     OutlineInputBorder(

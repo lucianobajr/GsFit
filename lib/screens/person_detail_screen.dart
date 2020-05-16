@@ -119,7 +119,21 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
     generateExampleDocument();
   }
 
-  Widget adressPeople(String text) {
+  Widget adressPeople(String text,int size) {
+    double font;
+    if(size < 23){
+      font = 20.0;
+    }
+    else if (size>=23 && size < 30){
+      font = 18.0;
+    }
+    else if(size >= 30 && size < 37){
+      font  = 15.0;
+    }
+    else if (size > 37){
+      font = 10.0;
+    }
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -134,7 +148,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
         Text(
           '$text',
           style: TextStyle(
-            fontSize: 18.0,
+            fontSize: font,
             color: Colors.black,
             fontWeight: FontWeight.w400,
           ),
@@ -329,7 +343,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                               var alert = AlertDialog(
                                 title: Text("Funcionalidades para  Aluno"),
                                 content: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.only(left:45.0),
                                     child: Row(
                                       children: <Widget>[
                                         IconButton(
@@ -371,6 +385,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                                             generatedPdfFilePath)),
                                           ),
                                         ),
+                                        SizedBox(width: 20,),
                                         OpenContainer(
                                           closedElevation: 0,
                                           transitionType:
@@ -390,17 +405,11 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                               onLongPress: () => _updateBody(),
                                               child: Image.asset(
                                                 'assets/Stylus/payment.png',
-                                                height: 60,
-                                                width: 60,
+                                                height: 79,
+                                                width: 79,
                                               ),
                                             );
                                           },
-                                        ),
-                                        IconButton(
-                                          onPressed: () => print('Fotos'),
-                                          icon: Image.asset(
-                                              'assets/Stylus/album.png'),
-                                          iconSize: 70,
                                         ),
                                       ],
                                     )),
@@ -819,11 +828,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                       width: 10.0,
                       height: 10.0,
                     ),
-                    ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return adressPeople(widget.people.adress);
-                        }),
+                    adressPeople(widget.people.adress,widget.people.adress.length)
                   ],
                 ),
                 decoration: BoxDecoration(

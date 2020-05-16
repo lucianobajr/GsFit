@@ -718,6 +718,7 @@ class _BodyScreenState extends State<BodyScreen> {
                                     ),
                                   ),
                                 ),
+                                SizedBox(height: 30,)
                               ],
                             ),
                           ),

@@ -93,11 +93,9 @@ class _MainPageState extends State<MainPage> {
       text = "$count  Aluno Cadastrado";
     } else if (count == 1 && sex == 1) {
       text = "$count  Aluna Cadastrada";
-    }
-    else if(count == 0 &&sex==0 || count>1 &&sex==0){
+    } else if (count == 0 && sex == 0 || count > 1 && sex == 0) {
       text = "$count  Alunos Cadastrados";
-    }
-    else{
+    } else {
       text = "$count  Alunas Cadastradas";
     }
 
@@ -105,42 +103,47 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget buildCount(int count) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(25.0)),
-      padding: EdgeInsets.symmetric(horizontal: 12.0),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              height: 63,
-              child: Row(
-                children: <Widget>[
-                   SizedBox(
-                    width: 10,
-                  ),
-                  Image.asset(
-                    'assets/Custom/pupils.png',
-                    width: 50,
-                    height: 50,
-                    color: Colors.black.withOpacity(0.8),
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  Text(
-                    formated(count, selectPeoplesIconIndex),
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'Lobster',
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(25.0),
+      elevation: 4.5,
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(25.0)),
+        padding: EdgeInsets.symmetric(horizontal: 12.0),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                height: 63,
+                child: Row(
+                  children: <Widget>[
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Image.asset(
+                      'assets/Custom/pupils.png',
+                      width: 48,
+                      height: 48,
                       color: Colors.black.withOpacity(0.8),
                     ),
-                  )
-                ],
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Text(
+                      formated(count, selectPeoplesIconIndex),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Lobster',
+                        color: Colors.black.withOpacity(0.8),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -373,7 +376,10 @@ class _MainPageState extends State<MainPage> {
                                                                   width: 6.0,
                                                                 ),
                                                                 Text(
-                                                                    'Endereço', //${snapshot.data[index].adress}
+                                                                    adressPeople(snapshot
+                                                                        .data[
+                                                                            index]
+                                                                        .adress), //${snapshot.data[index].adress}
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             15,
@@ -442,7 +448,16 @@ class _MainPageState extends State<MainPage> {
         ));
   }
 
-  _goData(int x, int z) {
-    x = z;
+  String adressPeople(String adress) {
+    String finalAdress = '';
+    if (adress.length <= 19) {
+      finalAdress = adress;
+    } else {
+      for (var i = 0; i < 16; i++) {
+        finalAdress = finalAdress + adress[i];
+      }
+      finalAdress = finalAdress + '...';
+    }
+    return finalAdress;
   }
 }

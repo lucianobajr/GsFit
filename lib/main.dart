@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gsfit/screens/imc_screen.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:gsfit/screens/appointments_page.dart';
 
@@ -97,6 +98,23 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           ),
           page: AppointmentsPage(),
         ),
+         KFDrawerItem.initWithPage(
+          text: Text(
+            'Imc',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 29.0,
+              fontWeight: FontWeight.w200,
+              fontFamily: 'Lobster',
+            ),
+          ),
+          icon: Image.asset(
+            'assets/Stylus/imc.png',
+            width: 50,
+            height: 50,
+          ),
+          page: ImcPage(),
+        ),
       ],
     );
   }
@@ -130,7 +148,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
                 Text(
                   'Sign In',
                   style: TextStyle(
-                      color: Colors.black.withOpacity(0.9),
+                      color: Color(0xfff2f2f2),
                       fontFamily: 'Lobster',
                       fontWeight: FontWeight.w400,
                       fontSize: 18),
@@ -140,7 +158,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           ),
           icon: Icon(
             FontAwesomeIcons.signInAlt,
-            color: Colors.black.withOpacity(0.9),
+            color: Color(0xfff2f2f2),
           ),
           onPressed: () {
             Navigator.of(context).push(CupertinoPageRoute(
