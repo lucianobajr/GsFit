@@ -51,12 +51,15 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
       initialPage: ClassBuilder.fromString('MainPage'),
       items: [
         KFDrawerItem.initWithPage(
-          text: Text('Alunos',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 27.0,
-                  fontWeight: FontWeight.w200,
-                  fontFamily: 'Lobster')),
+          text: Text(
+            'Alunos',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 25.0,
+              fontWeight: FontWeight.w200,
+              fontFamily: 'Lobster',
+            ),
+          ),
           icon: Image.asset(
             'assets/Stylus/pupils.png',
             width: 53,
@@ -68,11 +71,10 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           text: Text(
             'Novo Aluno',
             style: TextStyle(
-              color: Colors.black,
-              fontSize:26,
-              fontWeight: FontWeight.w200,
-              fontFamily: 'Lobster'
-            ),
+                color: Colors.black,
+                fontSize: 24,
+                fontWeight: FontWeight.w200,
+                fontFamily: 'Lobster'),
           ),
           icon: Image.asset(
             'assets/Stylus/new_person.png',
@@ -86,7 +88,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
             'Compromissos',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 26.0,
+              fontSize: 24.0,
               fontWeight: FontWeight.w200,
               fontFamily: 'Lobster',
             ),
@@ -98,12 +100,12 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           ),
           page: AppointmentsPage(),
         ),
-         KFDrawerItem.initWithPage(
+        KFDrawerItem.initWithPage(
           text: Text(
             'Imc',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 29.0,
+              fontSize: 27.0,
               fontWeight: FontWeight.w200,
               fontFamily: 'Lobster',
             ),
@@ -132,15 +134,15 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
             width: MediaQuery.of(context).size.width * 0.6,
             child: Image.asset(
               'assets/Logo.png',
-              height: 100,
-              width: 100,
+              height: 90,
+              width: 90,
               alignment: Alignment.centerLeft,
             ),
           ),
         ),
         footer: KFDrawerItem(
           text: Padding(
-            padding: const EdgeInsets.all(4.0),
+            padding: const EdgeInsets.all(2.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
