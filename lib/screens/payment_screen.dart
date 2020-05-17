@@ -710,7 +710,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                           october = 'true';
                                         }
 
-                                        dataJanuary = dataFormatada();
+                                        dataOctober = dataFormatada();
                                         _alert('Outubro');
                                         _auxUpdateBody();
                                       },

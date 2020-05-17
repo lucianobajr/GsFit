@@ -10,6 +10,7 @@ import 'package:gsfit/screens/newPerson_page.dart';
 import 'package:gsfit/screens/main_page.dart';
 import 'utils/class_builder.dart';
 
+
 Color mainColor = Color.fromRGBO(162, 62, 72, 1.0);
 Color startingColor = Color.fromRGBO(196, 40, 71, 1.0);
 void main() {
