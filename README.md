@@ -1,7 +1,7 @@
 # gsfit
 [![Codemagic build status](https://api.codemagic.io/apps/5ec00f6c5c1ff53bb4fff230/5ec00f6c5c1ff53bb4fff22f/status_badge.svg)](https://codemagic.io/apps/5ec00f6c5c1ff53bb4fff230/5ec00f6c5c1ff53bb4fff22f/latest_build)
 
-![Simulator Screen Shot - iPhone 11 Pro Max - 2020-05-21 at 13 52 33](https://user-images.githubusercontent.com/45442173/82614165-857db400-9b9d-11ea-9138-5fe4b30edc82.png){:height="10%" width="10%"}
+![Simulator Screen Shot - iPhone 11 Pro Max - 2020-05-21 at 13 52 33](https://user-images.githubusercontent.com/45442173/82614165-857db400-9b9d-11ea-9138-5fe4b30edc82.pngv=4&s=50)
 
 
 
