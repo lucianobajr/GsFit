@@ -4,16 +4,16 @@
 ## Screenshots
 | Man | Woman | Detail | Infos
 |-----------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------
-|<img src="screenshots/man_screen.png" height="550em" /> | <img src="screenshots/woman_screen.png" height="550em" /> | <img src="screenshots/person_detail.png" height="550em" /> | <img src="screenshots/infos.png" height="550em"/>
+|<img src="screenshots/man_screen.png" height="400em" /> | <img src="screenshots/woman_screen.png" height="400em" /> | <img src="screenshots/person_detail.png" height="400em" /> | <img src="screenshots/infos.png" height="400em"/>
 
 | Pdf | Share-Pdf | Payment | Body-Detail
 |-----------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------
-|<img src="screenshots/pdf_screen.png" height="550em" /> | <img src="screenshots/share_pdf.png" height="550em" /> | <img src="screenshots/payment.png" height="550em" /> | <img src="screenshots/body_detail_screen.png" height="550em"/>
+|<img src="screenshots/pdf_screen.png" height="400em" /> | <img src="screenshots/share_pdf.png" height="400em" /> | <img src="screenshots/payment.png" height="400em" /> | <img src="screenshots/body_detail_screen.png" height="400em"/>
 
 | Edit-Body | Delete | Register | Body-Register
 |-----------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------
-|<img src="screenshots/edit_body.png" height="550em" /> | <img src="screenshots/delete.png" height="550em" /> | <img src="screenshots/register_screen.png" height="550em" /> | <img src="screenshots/body_register_screen.png" height="550em"/>
+|<img src="screenshots/edit_body.png" height="400em" /> | <img src="screenshots/delete.png" height="400em" /> | <img src="screenshots/register_screen.png" height="400em" /> | <img src="screenshots/body_register_screen.png" height="400em"/>
 
 | Menu | BMI | Appointments | Icon-App
 |-----------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------
-|<img src="screenshots/menu.png" height="550em" /> | <img src="screenshots/bmi_screen.png" height="550em" /> | <img src="screenshots/appointments_screen.png" height="550em" /> | <img src="screenshots/icon.png" height="550em"/>
+|<img src="screenshots/menu.png" height="400em" /> | <img src="screenshots/bmi_screen.png" height="400em" /> | <img src="screenshots/appointments_screen.png" height="400em" /> | <img src="screenshots/payment.png" height="400em"/>
