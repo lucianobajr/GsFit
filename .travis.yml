@@ -10,7 +10,6 @@ addons:
       - ubuntu-toolchain-r-test # you need this source to get the right version of libstdc++6
     packages:
       - libstdc++6
-      - fonts-droid
 install:
     - git clone https://github.com/flutter/flutter.git -b stable
     - ./flutter/bin/flutter doctor # this is to avoid an error with pub in Travis

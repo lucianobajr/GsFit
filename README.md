@@ -18,4 +18,4 @@
 
 | Menu | BMI | Appointments | Icon-App
 |-----------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------
-|<img src="screenshots/menu.png" height="400em" /> | <img src="screenshots/bmi_screen.png" height="400em" /> | <img src="screenshots/appointments_screen.png" height="400em" /> | <img src="screenshots/payment.png" height="400em"/>
+|<img src="screenshots/menu.png" height="400em" /> | <img src="screenshots/bmi_screen.png" height="400em" /> | <img src="screenshots/appointments_screen.png" height="400em" /> | <img src="screenshots/icon.png" height="400em"/>
