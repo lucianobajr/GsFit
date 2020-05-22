@@ -12,7 +12,8 @@ addons:
       - libstdc++6
       - fonts-droid
 install:
-  - echo 'Avoid default Travis CI install step' # this is to avoid an error with pub in Travis
+    - git clone https://github.com/flutter/flutter.git -b stable
+    - ./flutter/bin/flutter doctor # this is to avoid an error with pub in Travis
 before_script:
   - cd ..
   - git clone https://github.com/flutter/flutter.git
