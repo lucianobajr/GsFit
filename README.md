@@ -1,7 +1,9 @@
 # gsfit
 [![Codemagic build status](https://api.codemagic.io/apps/5ec00f6c5c1ff53bb4fff230/5ec00f6c5c1ff53bb4fff22f/status_badge.svg)](https://codemagic.io/apps/5ec00f6c5c1ff53bb4fff230/5ec00f6c5c1ff53bb4fff22f/latest_build)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
 
-## Screenshots
+<h1 align="center">Screenshots</p>
+
+
 | Man | Woman | Detail | Infos
 |-----------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------
 |<img src="screenshots/man_screen.png" height="400em" /> | <img src="screenshots/woman_screen.png" height="400em" /> | <img src="screenshots/person_detail.png" height="400em" /> | <img src="screenshots/infos.png" height="400em"/>
