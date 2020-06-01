@@ -117,20 +117,18 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
   void initState() {
     super.initState();
     generateExampleDocument();
+    generatePaymentDocument();
   }
 
-  Widget adressPeople(String text,int size) {
+  Widget adressPeople(String text, int size) {
     double font;
-    if(size < 23){
+    if (size < 23) {
       font = 20.0;
-    }
-    else if (size>=23 && size < 30){
+    } else if (size >= 23 && size < 30) {
       font = 18.0;
-    }
-    else if(size >= 30 && size < 37){
-      font  = 15.0;
-    }
-    else if (size > 37){
+    } else if (size >= 30 && size < 37) {
+      font = 15.0;
+    } else if (size > 37) {
       font = 10.0;
     }
 
@@ -343,7 +341,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                               var alert = AlertDialog(
                                 title: Text("Funcionalidades para  Aluno"),
                                 content: Padding(
-                                    padding: const EdgeInsets.only(left:45.0),
+                                    padding: const EdgeInsets.only(left: 45.0),
                                     child: Row(
                                       children: <Widget>[
                                         IconButton(
@@ -385,7 +383,9 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                                             generatedPdfFilePath)),
                                           ),
                                         ),
-                                        SizedBox(width: 20,),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
                                         OpenContainer(
                                           closedElevation: 0,
                                           transitionType:
@@ -402,7 +402,40 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                               VoidCallback openContainer) {
                                             return InkWell(
                                               onTap: openContainer,
-                                              onLongPress: () => _updateBody(),
+                                              onLongPress: () => Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        PDFViewerScaffold(
+                                                            appBar: AppBar(
+                                                              title: Text(
+                                                                  "PDF - Pagamento"),
+                                                              actions: <Widget>[
+                                                                IconButton(
+                                                                  icon: Icon(
+                                                                      FontAwesomeIcons
+                                                                          .share),
+                                                                  onPressed:
+                                                                      () async {
+                                                                    final String
+                                                                        dir =
+                                                                        (await getApplicationDocumentsDirectory())
+                                                                            .path;
+                                                                    final String
+                                                                        path =
+                                                                        '$dir/Pagamentos - ${widget.people.firstName}.pdf';
+
+                                                                    ShareExtend
+                                                                        .share(
+                                                                            path,
+                                                                            "file");
+                                                                  },
+                                                                )
+                                                              ],
+                                                            ),
+                                                            path:
+                                                                generatedPdfFilePath)),
+                                              ),
                                               child: Image.asset(
                                                 'assets/Stylus/payment.png',
                                                 height: 79,
@@ -828,7 +861,8 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                       width: 10.0,
                       height: 10.0,
                     ),
-                    adressPeople(widget.people.adress,widget.people.adress.length)
+                    adressPeople(
+                        widget.people.adress, widget.people.adress.length)
                   ],
                 ),
                 decoration: BoxDecoration(
@@ -1184,6 +1218,277 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
 
     var generatedPdfFile = await FlutterHtmlToPdf.convertFromHtmlContent(
         htmlContent, targetPath, targetFileName);
+    generatedPdfFilePath = generatedPdfFile.path;
+  }
+
+  Future<void> generatePaymentDocument() async {
+    var htmlContenttwo = """
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Payments</title>
+        <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+    </head>
+
+    <body>
+        <div class="table-title">
+            <h3>Studio GS Fit</h3>
+        </div>
+        <table class="table-fill">
+            <thead>
+                <tr>
+                    <th class="text-left">Pagamentos</th>
+                    <th class="text-left">Dados</th>
+                </tr>
+            </thead>
+            <tbody class="table-hover">
+                <tr>
+                    <td class="text-left">Nome</td>
+                    <td class="text-left">${widget.people.firstName}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Valor</td>
+                    <td class="text-left">R\$100</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Vencimento</td>
+                    <td class="text-left">Dia ${widget.people.dataStart} a ${widget.people.dataEnd}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+        <table class="table-fill">
+            <thead>
+                <tr>
+                    <th class="text-left">Pagamentos - 1º Semestre</th>
+                    <th class="text-left">Recebido</th>
+                </tr>
+            </thead>
+            <tbody class="table-hover">
+                <tr>
+                    <td class="text-left">Janeiro</td>
+                    <td class="text-left"><img src="${widget.people.january =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.january=="true"?'Pago':'Débito'}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Fevereiro</td>
+                    <td class="text-left"><img src="${widget.people.february =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.february=="true"?'Pago':'Débito'}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Março</td>
+                    <td class="text-left"><img src="${widget.people.march =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.march=="true"?'Pago':'Débito'}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Abril</td>
+                    <td class="text-left"><img src="${widget.people.april =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.april=="true"?'Pago':'Débito'}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Maio</td>
+                    <td class="text-left"><img src="${widget.people.may =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.may=="true"?'Pago':'Débito'}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Junho</td>
+                    <td class="text-left"><img src="${widget.people.june =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.june=="true"?'Pago':'Débito'}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Atualizado Em</th>
+                    <th>${dataFormatada()}</th>
+                </tr>
+            </tfoot>
+        </table>
+        <table class="table-fill">
+            <thead>
+                <tr>
+                    <th class="text-left">Pagamentos - 2º Semestre</th>
+                    <th class="text-left">Recebido</th>
+                </tr>
+            </thead>
+            <tbody class="table-hover">
+                <tr>
+                    <td class="text-left">Julho</td>
+                    <td class="text-left"><img src="${widget.people.july =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.july=="true"?'Pago':'Débito'}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Agosto</td>
+                    <td class="text-left"><img src="${widget.people.august =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.august=="true"?'Pago':'Débito'}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Setembro</td>
+                    <td class="text-left"><img src="${widget.people.september =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.september=="true"?'Pago':'Débito'}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Outubro</td>
+                    <td class="text-left"><img src="${widget.people.october =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.october=="true"?'Pago':'Débito'}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Novembro</td>
+                    <td class="text-left"><img src="${widget.people.november =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.november=="true"?'Pago':'Débito'}</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Dezembro</td>
+                    <td class="text-left"><img src="${widget.people.december =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.december=="true"?'Pago':'Débito'}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Atualizado Em</th>
+                    <th>${dataFormatada()}</th>
+                </tr>
+            </tfoot>
+        </table>
+        <style>
+            body {
+
+                font-family: "Roboto", helvetica, arial, sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+            }
+
+            div.table-title {
+                display: block;
+                margin: auto;
+                max-width: 600px;
+                padding: 5px;
+                width: 100%;
+            }
+
+            .table-title h3 {
+                color: #1b1e24;
+                font-size: 30px;
+                font-weight: 400;
+                font-style: normal;
+                font-family: "Roboto", helvetica, arial, sans-serif;
+                text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+                text-transform: uppercase;
+            }
+
+
+            /*** Table Styles **/
+
+            .table-fill {
+                background: white;
+                border-radius: 3px;
+                border-collapse: collapse;
+                height: 320px;
+                margin: auto;
+                max-width: 600px;
+                padding: 5px;
+                width: 100%;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            th {
+                color: #D5DDE5;
+                ;
+                background: #1b1e24;
+                border-bottom: 4px solid #9ea7af;
+                border-right: 1px solid #343a45;
+                font-size: 23px;
+                font-weight: 100;
+                padding: 24px;
+                text-align: left;
+                text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+                vertical-align: middle;
+            }
+
+            th:first-child {
+                border-top-left-radius: 3px;
+            }
+
+            th:last-child {
+                border-top-right-radius: 3px;
+                border-right: none;
+            }
+
+            tr {
+                border-top: 1px solid #C1C3D1;
+                border-bottom: 1px solid #C1C3D1;
+                color: #666B85;
+                font-size: 16px;
+                font-weight: normal;
+                text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+            }
+
+            tr:first-child {
+                border-top: none;
+            }
+
+            tr:last-child {
+                border-bottom: none;
+            }
+
+            tr:nth-child(odd) td {
+                background: #EBEBEB;
+            }
+
+            tr:last-child td:first-child {
+                border-bottom-left-radius: 3px;
+            }
+
+            tr:last-child td:last-child {
+                border-bottom-right-radius: 3px;
+            }
+
+            td {
+                background: #FFFFFF;
+                padding: 20px;
+                text-align: left;
+                vertical-align: middle;
+                font-weight: 300;
+                font-size: 18px;
+                text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+                border-right: 1px solid #C1C3D1;
+            }
+
+            td:last-child {
+                border-right: 0px;
+            }
+
+            th.text-left {
+                text-align: left;
+            }
+
+            th.text-center {
+                text-align: center;
+            }
+
+            th.text-right {
+                text-align: right;
+            }
+
+            td.text-left {
+                text-align: left;
+            }
+
+            td.text-center {
+                text-align: center;
+            }
+
+            td.text-right {
+                text-align: right;
+            }
+        </style>
+
+    </body>
+
+
+    </html>
+    """;
+
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    var targetPath = appDocDir.path;
+    var targetFileName = "Pagamentos - ${widget.people.firstName}";
+
+    var generatedPdfFile = await FlutterHtmlToPdf.convertFromHtmlContent(
+        htmlContenttwo, targetPath, targetFileName);
     generatedPdfFilePath = generatedPdfFile.path;
   }
 
