@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsfit/screens/imc_screen.dart';
+import 'package:gsfit/screens/invoice_page.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:gsfit/screens/appointments_page.dart';
 
@@ -118,6 +119,23 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
             height: 50,
           ),
           page: ImcPage(),
+        ),
+        KFDrawerItem.initWithPage(
+          text: Text(
+            'Notas',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 27.0,
+              fontWeight: FontWeight.w200,
+              fontFamily: 'Lobster',
+            ),
+          ),
+          icon: Image.asset(
+            'assets/Stylus/invoice_page.png',
+            width: 50,
+            height: 50,
+          ),
+          page: InvoicePage(),
         ),
       ],
     );

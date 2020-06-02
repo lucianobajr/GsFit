@@ -1,5 +1,6 @@
 import 'package:gsfit/screens/appointments_page.dart';
 import 'package:gsfit/screens/imc_screen.dart';
+import 'package:gsfit/screens/invoice_page.dart';
 import 'package:gsfit/screens/newPerson_page.dart';
 import 'package:gsfit/screens/main_page.dart';
 
@@ -18,6 +19,7 @@ class ClassBuilder {
     register<NewPersonPage>(() => NewPersonPage());
     register<AppointmentsPage>(() => AppointmentsPage());
     register<ImcPage>(() => ImcPage());
+    register<InvoicePage>(() => InvoicePage());
   }
 
   static dynamic fromString(String type) {
