@@ -250,7 +250,7 @@ class _MainPageState extends State<MainPage> {
                       Container(
                         height: 120.0,
                         child: ListView.builder(
-                            padding: EdgeInsets.only(left: 24.0, top: 8.0),
+                            padding: EdgeInsets.only(left: deviceWidth/20 ,top: 8.0),
                             scrollDirection: Axis.horizontal,
                             itemCount: peoplesList.length,
                             itemBuilder: (context, index) {

@@ -236,7 +236,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                     ),
                   ),
                   Container(
-                    height: screenHeight * 0.31,
+                    height: screenHeight/3.15,
                     width: screenWidth,
                     child: Hero(
                       tag: widget.people.firstName,
