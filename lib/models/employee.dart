@@ -5,6 +5,7 @@ class Employee {
   String sex;
   String description;
   String createIn;
+  String payment;
   String height;
   String neck;
   String bicepsL;
@@ -56,6 +57,7 @@ class Employee {
     this.sex,
     this.description,
     this.createIn,
+    this.payment,
     this.height,
     this.neck,
     this.bicepsL,
@@ -107,6 +109,7 @@ class Employee {
     sex = map[sex];
     description = map[description];
     createIn = map[createIn];
+    payment = map[payment];
     height = map[height];
     neck = map[neck];
     bicepsL = map[bicepsL];
@@ -160,6 +163,7 @@ class Employee {
     mapa["sex"] = sex;
     mapa["description"] = description;
     mapa["createIn"] = createIn;
+    mapa["payment"] = payment;
     mapa["height"] = height;
     mapa["neck"] = neck;
     mapa["bicepsL"] = bicepsL;
@@ -215,6 +219,7 @@ class Employee {
     this.sex = mapa["sex"];
     this.description = mapa["description"];
     this.createIn = mapa["createIn"];
+    this.payment = mapa["payment"];
     this.height = mapa["height"];
     this.neck = mapa["neck"];
     this.bicepsL = mapa["bicepsL"];

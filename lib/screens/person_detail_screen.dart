@@ -18,6 +18,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
 import 'package:gsfit/models/bodyPart.dart';
+import 'package:validators/validators.dart';
 
 class PeopleDetailScreen extends StatefulWidget {
   final Employee people;
@@ -77,6 +78,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
       "",
       "",
       "",
+      "",
       "");
 
   bool value5 = false;
@@ -88,6 +90,8 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
   String adress;
 
   String description;
+
+  String payment;
 
   String height; //0
   String neck; //1
@@ -489,6 +493,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                       widget.people.sex,
                                       description,
                                       dataFormatada(),
+                                      payment,
                                       widget.people.height,
                                       widget.people.neck,
                                       widget.people.bicepsL,
@@ -642,9 +647,15 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                                   color: Theme.of(context)
                                                       .primaryColor,
                                                 )),
-                                            validator: (val) => val.length == 0
-                                                ? "Digite seu nome"
-                                                : null,
+                                            validator: (val) {
+                                              if (val.length == 0 ||
+                                                  isNumeric(val)) {
+                                                val = "Digite o Nome";
+                                              } else {
+                                                val = null;
+                                              }
+                                              return val;
+                                            },
                                             onSaved: (val) =>
                                                 this.firstname = val,
                                             cursorColor:
@@ -696,9 +707,15 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                                   color: Theme.of(context)
                                                       .primaryColor,
                                                 )),
-                                            validator: (val) => val.length == 0
-                                                ? 'Digite sua idade'
-                                                : null,
+                                            validator: (val) {
+                                              if (val.length == 0 ||
+                                                  isAlpha(val)) {
+                                                val = "Digite a Idade";
+                                              } else {
+                                                val = null;
+                                              }
+                                              return val;
+                                            },
                                             onSaved: (val) => this.age = val,
                                           ),
                                           SizedBox(
@@ -743,10 +760,70 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                                   color: Theme.of(context)
                                                       .primaryColor,
                                                 )),
-                                            validator: (val) => val.length == 0
-                                                ? 'Digite seu endereço'
-                                                : null,
+                                            validator: (val) {
+                                              if (val.length == 0 ||
+                                                  isNumeric(val)) {
+                                                val = "Digite o  Endereço";
+                                              } else {
+                                                val = null;
+                                              }
+                                              return val;
+                                            },
                                             onSaved: (val) => this.adress = val,
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          TextFormField(
+                                            autofocus: false,
+                                            keyboardType: TextInputType.number,
+                                            cursorColor:
+                                                Theme.of(context).primaryColor,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontFamily: 'RobotoMonoLight',
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            decoration: InputDecoration(
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .primaryColor),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    20.0)),
+                                                filled: true,
+                                                fillColor: Colors.white,
+                                                border: OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors.black),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0)),
+                                                labelText: 'Mensalidade',
+                                                labelStyle: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
+                                                ),
+                                                icon: Icon(
+                                                  FontAwesomeIcons.moneyBillAlt,
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
+                                                )),
+                                            validator: (val) {
+                                              if (val.length == 0 ||
+                                                  isAlpha(val)) {
+                                                val = "Digite uma Mensalidade";
+                                              } else {
+                                                val = null;
+                                              }
+                                              return val;
+                                            },
+                                            onSaved: (val) =>
+                                                this.payment = val,
                                           ),
                                           SizedBox(
                                             height: 10,
@@ -792,9 +869,15 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                                                   color: Theme.of(context)
                                                       .primaryColor,
                                                 )),
-                                            validator: (val) => val.length == 0
-                                                ? 'Digite uma Descrição'
-                                                : null,
+                                            validator: (val) {
+                                              if (val.length == 0 ||
+                                                  isNumeric(val)) {
+                                                val = "Digite a Descrição";
+                                              } else {
+                                                val = null;
+                                              }
+                                              return val;
+                                            },
                                             onSaved: (val) =>
                                                 this.description = val,
                                           ),
@@ -896,6 +979,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
       widget.people.sex,
       description,
       dataFormatada(),
+      payment,
       widget.people.height,
       widget.people.neck,
       widget.people.bicepsL,
@@ -1250,7 +1334,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                 </tr>
                 <tr>
                     <td class="text-left">Valor</td>
-                    <td class="text-left">R\$100</td>
+                    <td class="text-left">R\$${widget.people.payment}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Vencimento</td>
@@ -1274,27 +1358,27 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
             <tbody class="table-hover">
                 <tr>
                     <td class="text-left">Janeiro</td>
-                    <td class="text-left"><img src="${widget.people.january =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.january=="true"?'Pago':'Débito'}</td>
+                    <td class="text-left"><img src="${widget.people.january == 'true' ? 'https://imgur.com/LqpNDiy.png' : 'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.january == "true" ? 'Pago' : 'Débito'}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Fevereiro</td>
-                    <td class="text-left"><img src="${widget.people.february =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.february=="true"?'Pago':'Débito'}</td>
+                    <td class="text-left"><img src="${widget.people.february == 'true' ? 'https://imgur.com/LqpNDiy.png' : 'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.february == "true" ? 'Pago' : 'Débito'}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Março</td>
-                    <td class="text-left"><img src="${widget.people.march =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.march=="true"?'Pago':'Débito'}</td>
+                    <td class="text-left"><img src="${widget.people.march == 'true' ? 'https://imgur.com/LqpNDiy.png' : 'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.march == "true" ? 'Pago' : 'Débito'}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Abril</td>
-                    <td class="text-left"><img src="${widget.people.april =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.april=="true"?'Pago':'Débito'}</td>
+                    <td class="text-left"><img src="${widget.people.april == 'true' ? 'https://imgur.com/LqpNDiy.png' : 'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.april == "true" ? 'Pago' : 'Débito'}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Maio</td>
-                    <td class="text-left"><img src="${widget.people.may =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.may=="true"?'Pago':'Débito'}</td>
+                    <td class="text-left"><img src="${widget.people.may == 'true' ? 'https://imgur.com/LqpNDiy.png' : 'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.may == "true" ? 'Pago' : 'Débito'}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Junho</td>
-                    <td class="text-left"><img src="${widget.people.june =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.june=="true"?'Pago':'Débito'}</td>
+                    <td class="text-left"><img src="${widget.people.june == 'true' ? 'https://imgur.com/LqpNDiy.png' : 'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.june == "true" ? 'Pago' : 'Débito'}</td>
                 </tr>
             </tbody>
             <tfoot>
@@ -1314,27 +1398,27 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
             <tbody class="table-hover">
                 <tr>
                     <td class="text-left">Julho</td>
-                    <td class="text-left"><img src="${widget.people.july =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.july=="true"?'Pago':'Débito'}</td>
+                    <td class="text-left"><img src="${widget.people.july == 'true' ? 'https://imgur.com/LqpNDiy.png' : 'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.july == "true" ? 'Pago' : 'Débito'}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Agosto</td>
-                    <td class="text-left"><img src="${widget.people.august =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.august=="true"?'Pago':'Débito'}</td>
+                    <td class="text-left"><img src="${widget.people.august == 'true' ? 'https://imgur.com/LqpNDiy.png' : 'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.august == "true" ? 'Pago' : 'Débito'}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Setembro</td>
-                    <td class="text-left"><img src="${widget.people.september =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.september=="true"?'Pago':'Débito'}</td>
+                    <td class="text-left"><img src="${widget.people.september == 'true' ? 'https://imgur.com/LqpNDiy.png' : 'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.september == "true" ? 'Pago' : 'Débito'}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Outubro</td>
-                    <td class="text-left"><img src="${widget.people.october =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.october=="true"?'Pago':'Débito'}</td>
+                    <td class="text-left"><img src="${widget.people.october == 'true' ? 'https://imgur.com/LqpNDiy.png' : 'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.october == "true" ? 'Pago' : 'Débito'}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Novembro</td>
-                    <td class="text-left"><img src="${widget.people.november =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.november=="true"?'Pago':'Débito'}</td>
+                    <td class="text-left"><img src="${widget.people.november == 'true' ? 'https://imgur.com/LqpNDiy.png' : 'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.november == "true" ? 'Pago' : 'Débito'}</td>
                 </tr>
                 <tr>
                     <td class="text-left">Dezembro</td>
-                    <td class="text-left"><img src="${widget.people.december =='true'?'https://imgur.com/LqpNDiy.png':'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.december=="true"?'Pago':'Débito'}</td>
+                    <td class="text-left"><img src="${widget.people.december == 'true' ? 'https://imgur.com/LqpNDiy.png' : 'https://imgur.com/P9D6geY.png'}" height="30em">     ${widget.people.december == "true" ? 'Pago' : 'Débito'}</td>
                 </tr>
             </tbody>
             <tfoot>
@@ -2100,6 +2184,7 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
       widget.people.sex,
       widget.people.description,
       dataFormatada(),
+      widget.people.payment,
       height,
       neck,
       bicepsL,

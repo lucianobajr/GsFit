@@ -152,7 +152,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 </tr>
                 <tr>
                     <th><span contenteditable>Valor</span></th>
-                    <td><span id="prefix" contenteditable>R\$</span><span>100.00</span></td>
+                    <td><span id="prefix" contenteditable>R\$</span><span>${widget.people.payment}</span></td>
                 </tr>
             </table>
             <table class="inventory">
@@ -177,7 +177,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             <p align="center">$vencimento</p>
                         </td>
                         <td>
-                            <p align="center">100.00</p>
+                            <p align="center">${widget.people.payment}</p>
                         </td>
                     </tr>
                 </tbody>
@@ -185,7 +185,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             <table class="balance">
                 <tr>
                     <th><span contenteditable>Total</span></th>
-                    <td><span data-prefix>R\$</span><span>100.00</span></td>
+                    <td><span data-prefix>R\$</span><span>${widget.people.payment}</span></td>
                 </tr>
             </table>
         </article>
@@ -1850,6 +1850,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         widget.people.sex,
         widget.people.description,
         widget.people.createIn,
+        widget.people.payment,
         widget.people.height,
         widget.people.neck,
         widget.people.bicepsL,
@@ -1905,6 +1906,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         widget.people.sex,
         widget.people.description,
         widget.people.createIn,
+        widget.people.payment,
         widget.people.height,
         widget.people.neck,
         widget.people.bicepsL,

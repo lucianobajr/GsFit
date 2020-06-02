@@ -10,6 +10,7 @@ import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:status_alert/status_alert.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:validators/validators.dart';
 
 var parser = EmojiParser();
 
@@ -20,6 +21,7 @@ class NewPersonPage extends KFDrawerContent {
 
 class _NewPersonPageState extends State<NewPersonPage> {
   Employee employee = new Employee(
+      "",
       "",
       "",
       "",
@@ -89,6 +91,7 @@ class _NewPersonPageState extends State<NewPersonPage> {
   String glutes; //13
   String legR; //14
   String calfR; //15
+  String payment;
 
   Body callback;
 
@@ -238,8 +241,14 @@ class _NewPersonPageState extends State<NewPersonPage> {
                                       FontAwesomeIcons.signature,
                                       color: Theme.of(context).primaryColor,
                                     )),
-                                validator: (val) =>
-                                    val.length == 0 ? "Digite seu nome" : null,
+                                validator: (val) {
+                                  if (val.length == 0 || isNumeric(val)) {
+                                    val = "Digite seu nome";
+                                  } else {
+                                    val = null;
+                                  }
+                                  return val;
+                                },
                                 onSaved: (val) => this.firstname = val,
                                 cursorColor: Theme.of(context).primaryColor,
                                 style: TextStyle(
@@ -280,8 +289,14 @@ class _NewPersonPageState extends State<NewPersonPage> {
                                       FontAwesomeIcons.hourglassHalf,
                                       color: Theme.of(context).primaryColor,
                                     )),
-                                validator: (val) =>
-                                    val.length == 0 ? 'Digite sua idade' : null,
+                                validator: (val) {
+                                  if (val.length == 0 || isAlpha(val)) {
+                                    val = "Digite sua Idade";
+                                  } else {
+                                    val = null;
+                                  }
+                                  return val;
+                                },
                                 onSaved: (val) => this.age = val,
                               ),
                               SizedBox(
@@ -318,10 +333,59 @@ class _NewPersonPageState extends State<NewPersonPage> {
                                       FontAwesomeIcons.mapMarkedAlt,
                                       color: Theme.of(context).primaryColor,
                                     )),
-                                validator: (val) => val.length == 0
-                                    ? 'Digite seu endereço'
-                                    : null,
+                                validator: (val) {
+                                  if (val.length == 0 || isNumeric(val)) {
+                                    val = "Digite seu Endereço";
+                                  } else {
+                                    val = null;
+                                  }
+                                  return val;
+                                },
                                 onSaved: (val) => this.adress = val,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextFormField(
+                                autofocus: false,
+                                keyboardType: TextInputType.number,
+                                cursorColor: Theme.of(context).primaryColor,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'RobotoMonoLight',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color:
+                                                Theme.of(context).primaryColor),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0)),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.black),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0)),
+                                    labelText: 'Mensalidade',
+                                    labelStyle: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                    icon: Icon(
+                                      FontAwesomeIcons.moneyBillAlt,
+                                      color: Theme.of(context).primaryColor,
+                                    )),
+                                validator: (val) {
+                                  if (val.length == 0 || isAlpha(val)) {
+                                    val = "Digite uma Mensalidade";
+                                  } else {
+                                    val = null;
+                                  }
+                                  return val;
+                                },
+                                onSaved: (val) => this.payment = val,
                               ),
                               SizedBox(
                                 height: 10,
@@ -359,9 +423,14 @@ class _NewPersonPageState extends State<NewPersonPage> {
                                       FontAwesomeIcons.commentAlt,
                                       color: Theme.of(context).primaryColor,
                                     )),
-                                validator: (val) => val.length == 0
-                                    ? 'Digite uma Descrição'
-                                    : null,
+                                validator: (val) {
+                                  if (val.length == 0 || isNumeric(val)) {
+                                    val = "Digite uma Descrição";
+                                  } else {
+                                    val = null;
+                                  }
+                                  return val;
+                                },
                                 onSaved: (val) => this.description = val,
                               ),
                               SizedBox(
@@ -459,6 +528,7 @@ class _NewPersonPageState extends State<NewPersonPage> {
     } else {
       return null;
     }
+
     var employee = Employee(
         firstname,
         age,
@@ -466,6 +536,7 @@ class _NewPersonPageState extends State<NewPersonPage> {
         selectPeopleIconIndex.toString(),
         description,
         dataFormatada(),
+        payment,
         callback.height,
         callback.neck,
         callback.bicepsL,
@@ -542,6 +613,7 @@ class _NewPersonPageState extends State<NewPersonPage> {
                 selectPeopleIconIndex.toString(),
                 description,
                 dataFormatada(),
+                payment,
                 height,
                 neck,
                 bicepsL,

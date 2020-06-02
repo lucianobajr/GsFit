@@ -16,7 +16,7 @@ class DBHelper {
 
   initDb() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "final_db.db");
+    String path = join(documentsDirectory.path, "studio_Gs_Fit_db.db");
     var theDb = await openDatabase(path, version: 1, onCreate: _onCreate);
     return theDb;
   }
@@ -24,7 +24,7 @@ class DBHelper {
   void _onCreate(Database db, int version) async {
     // When creating the db, create the table
     await db.execute(
-        "CREATE TABLE Employee(id INTEGER PRIMARY KEY, firstname TEXT, age TEXT, adress TEXT,sex TEXT,description TEXT,createIn TEXT,height TEXT,neck TEXT,bicepsL TEXT,chest TEXT,forearmL TEXT,waist TEXT,legL TEXT,calfL TEXT,weight TEXT,shoulders TEXT,bicepsR TEXT,abs TEXT,forearmR TEXT,glutes TEXT,legR TEXT,calfR TEXT,dataStart TEXT,dataEnd TEXT,january TEXT,february TEXT,march TEXT,april TEXT,may TEXT,june TEXT,july TEXT,august TEXT,september TEXT,october TEXT,november TEXT,december TEXT,dataJanuary TEXT,dataFebruary TEXT,dataMarch TEXT,dataApril TEXT,dataMay TEXT,dataJune TEXT,dataJuly TEXT,dataAugust TEXT,dataSeptember TEXT,dataOctober TEXT,dataNovember TEXT,dataDecember TEXT)");
+        "CREATE TABLE Employee(id INTEGER PRIMARY KEY, firstname TEXT, age TEXT, adress TEXT,sex TEXT,description TEXT,createIn TEXT,payment TEXT,height TEXT,neck TEXT,bicepsL TEXT,chest TEXT,forearmL TEXT,waist TEXT,legL TEXT,calfL TEXT,weight TEXT,shoulders TEXT,bicepsR TEXT,abs TEXT,forearmR TEXT,glutes TEXT,legR TEXT,calfR TEXT,dataStart TEXT,dataEnd TEXT,january TEXT,february TEXT,march TEXT,april TEXT,may TEXT,june TEXT,july TEXT,august TEXT,september TEXT,october TEXT,november TEXT,december TEXT,dataJanuary TEXT,dataFebruary TEXT,dataMarch TEXT,dataApril TEXT,dataMay TEXT,dataJune TEXT,dataJuly TEXT,dataAugust TEXT,dataSeptember TEXT,dataOctober TEXT,dataNovember TEXT,dataDecember TEXT)");
     print("Created tables");
   }
 
@@ -46,6 +46,7 @@ class DBHelper {
           list[i]["sex"],
           list[i]["description"],
           list[i]["createIn"],
+          list[i]["payment"],
           list[i]["height"],
           list[i]["neck"],
           list[i]["bicepsL"],
@@ -105,6 +106,7 @@ class DBHelper {
         list[i]["sex"],
         list[i]["description"],
         list[i]["createIn"],
+        list[i]["payment"],
         list[i]["height"],
         list[i]["neck"],
         list[i]["bicepsL"],
@@ -165,6 +167,7 @@ class DBHelper {
         list[i]["sex"],
         list[i]["description"],
         list[i]["createIn"],
+        list[i]["payment"],
         list[i]["height"],
         list[i]["neck"],
         list[i]["bicepsL"],

@@ -450,10 +450,11 @@ class _MainPageState extends State<MainPage> {
 
   String adressPeople(String adress) {
     String finalAdress = '';
-    if (adress.length <= 19) {
+    final tam = (MediaQuery.of(context).size.width) / 23;
+    if (adress.length <= tam) {
       finalAdress = adress;
     } else {
-      for (var i = 0; i < 16; i++) {
+      for (var i = 0; i < tam - 3; i++) {
         finalAdress = finalAdress + adress[i];
       }
       finalAdress = finalAdress + '...';
