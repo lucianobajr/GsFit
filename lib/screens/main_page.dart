@@ -315,12 +315,13 @@ class _MainPageState extends State<MainPage> {
                                                                       .max,
                                                               children: <
                                                                   Widget>[
-                                                                Text(snapshot.data[index].firstName,
+                                                                Text(namePeople(snapshot.data[index].firstName),
                                                                     style: TextStyle(
-                                                                        fontSize: snapshot.data[index].firstName.length <
-                                                                                12
-                                                                            ? 25.0
-                                                                            : 18.0,
+                                                                        fontSize: 18,
+                                                                        // snapshot.data[index].firstName.length <
+                                                                        //         12
+                                                                        //     ? 25.0
+                                                                        //     : 18.0
                                                                         color: Theme.of(context)
                                                                             .primaryColor,
                                                                         fontWeight:
@@ -460,5 +461,19 @@ class _MainPageState extends State<MainPage> {
       finalAdress = finalAdress + '...';
     }
     return finalAdress;
+  }
+
+  String namePeople(String name) {
+    String finalName = '';
+    final tam = (MediaQuery.of(context).size.width) / 23;
+    if (name.length <= tam) {
+      finalName = name;
+    } else {
+      for (var i = 0; i < tam - 3; i++) {
+        finalName = finalName + name[i];
+      }
+      finalName = finalName + '...';
+    }
+    return finalName;
   }
 }

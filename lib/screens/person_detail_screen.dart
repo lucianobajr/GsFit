@@ -600,9 +600,9 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        Text(widget.people.firstName,
+                        Text(namePeople(widget.people.firstName),
                             style: TextStyle(
-                                fontSize: 24.0,
+                                fontSize: 20,
                                 fontFamily: 'Lobster',
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold)),
@@ -2231,5 +2231,19 @@ class _PeopleDetailScreenState extends State<PeopleDetailScreen> {
 
     var dbHelper = DBHelper();
     dbHelper.updateBodyPerson(widget.people, employee);
+  }
+
+  String namePeople(String name) {
+    String finalName = '';
+    final tam = (MediaQuery.of(context).size.width) / 11;
+    if (name.length <= tam) {
+      finalName = name;
+    } else {
+      for (var i = 0; i < tam - 3; i++) {
+        finalName = finalName + name[i];
+      }
+      finalName = finalName + '...';
+    }
+    return finalName;
   }
 }
